@@ -212,6 +212,10 @@ section {
   transform: translate(-50%, -50%);
   z-index: -1;
 }
+#profession .profession-ellipse svg {
+  border-radius: 100%;
+  filter: blur(100px);
+}
 #profession .profession-title {
   display: flex;
   width: 100%;
@@ -561,8 +565,8 @@ section {
     font-size: 14px;
   }
   #profession .profession-ellipse {
+    width: 100%;
     overflow: hidden;
-    filter: blur(330px);
   }
   #profession .profession-title h1 {
     font-weight: 700;
@@ -570,7 +574,7 @@ section {
   }
   #profession .profession-container {
     flex-wrap: wrap;
-    gap: 1.5rem;
+    gap: 1rem;
     justify-content: center;
   }
   #profession .profession-container .profession-container_box {
@@ -584,7 +588,7 @@ section {
     align-items: center;
   }
   #community .community-container .community-container_title {
-    width: 50%;
+    max-width: 60%;
   }
   #community .community-container .community-container_title h1 {
     font-size: 32px;

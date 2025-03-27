@@ -218,6 +218,11 @@ section{
         left: 50%;
         transform: translate(-50%,-50%);
         z-index: -1;
+        svg{
+            border-radius: 100%;
+            filter: blur(100px);
+
+        }
     }
     .profession-title{
         display: flex;
@@ -598,9 +603,8 @@ section{
     }
     #profession{
         .profession-ellipse{
-            // display: none;
+            width: 100%;
             overflow: hidden;
-            filter: blur(330px);
         }
         .profession-title{
             h1{
@@ -610,7 +614,7 @@ section{
         }
         .profession-container{
             flex-wrap: wrap;
-            gap: 1.5rem;
+            gap: 1rem;
             justify-content: center;
             .profession-container_box{
                 width: 6rem;
@@ -623,7 +627,7 @@ section{
         .community-container{
             align-items: center;
             .community-container_title{
-                width: 50%;
+                max-width: 60%;
                 h1{
                     font-size: 32px;
                 }
