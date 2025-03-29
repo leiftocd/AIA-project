@@ -37,6 +37,7 @@ section {
   display: flex;
   flex-direction: column;
   position: relative;
+  padding: 10rem 0;
 }
 #home .home-ellipse {
   position: absolute;
@@ -67,11 +68,17 @@ section {
 #home .home-content .home-content_img {
   display: flex;
   align-items: center;
-  justify-content: center;
-  width: 100%;
+  width: 50%;
+  position: relative;
+}
+#home .home-content .home-content_img .aia {
+  position: absolute;
+  top: 50%;
+  right: -50%;
+  transform: translate(-95%, -50%);
 }
 #home .home-content .home-content_text {
-  width: 100%;
+  width: 50%;
   display: flex;
 }
 #home .home-content .home-content_text span {
@@ -85,7 +92,7 @@ section {
   height: 100%;
   display: flex;
   flex-direction: column;
-  gap: 5rem;
+  gap: 3rem;
 }
 #about .about-title {
   width: 100%;
@@ -100,11 +107,25 @@ section {
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 10rem;
+  gap: 3rem;
 }
 #about .about-container .about-container_box {
   display: flex;
   gap: 4.5rem;
+}
+#about .about-container .about-container_box .box-img {
+  display: flex;
+  width: 40rem;
+  height: 24rem;
+  padding: 3rem 2rem;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+  border-radius: 19.069px;
+  border: 1 solid #FFF;
+  background: linear-gradient(180deg, #5BFFF4 0%, #081120 100%);
+  -webkit-backdrop-filter: blur(3.3333334923px);
+          backdrop-filter: blur(3.3333334923px);
 }
 #about .about-container .about-container_box .box-content {
   display: flex;
@@ -115,7 +136,7 @@ section {
   font-weight: 700;
   font-size: 36px;
   line-height: 100%;
-  color: #50fbc7;
+  color: var(--green-color);
 }
 #about .about-container .about-container_box .box-content p {
   font-weight: 400;
@@ -191,7 +212,7 @@ section {
   font-weight: 700;
   font-size: 36px;
   line-height: 100%;
-  color: #50fbc7;
+  color: var(--green-color);
 }
 #introduction .introduction-content .introduction-content_box p {
   font-weight: 400;
@@ -278,9 +299,6 @@ section {
 #community .community-container .community-container_content .left-content .left-content_title {
   display: flex;
 }
-#community .community-container .community-container_content .left-content .left-content_title .title_img {
-  display: none;
-}
 #community .community-container .community-container_content .left-content .left-content_title span {
   font-weight: 700;
   font-size: 4em;
@@ -341,7 +359,7 @@ section {
   width: 110%;
   align-items: center;
   gap: 1rem;
-  background: linear-gradient(90deg, #fff 0%, #50fbc7 42.5%, #010f20 100%);
+  background: linear-gradient(90deg, #fff 0%, var(--green-color) 42.5%, #010f20 100%);
 }
 #community .community-container .community-container_content .right-content .right-content_price .average span {
   font-weight: 700;
@@ -378,53 +396,35 @@ section {
 }
 #footer .footer-content .footer-content_left span {
   font-weight: 700;
-  font-size: 4.8em;
+  font-size: 3.2em;
   text-transform: capitalize;
   color: var(--light-color);
   white-space: pre-line;
 }
-#footer .footer-content .footer-content_left p {
-  font-weight: 400;
-  font-size: 1.8em;
-  color: #e2daf0;
-  white-space: pre-line;
-}
-#footer .footer-content .footer-content_left .social {
-  display: flex;
-  gap: 2rem;
-}
 #footer .footer-content .footer-content_right {
   display: flex;
-  flex-direction: column;
-  gap: 2.4rem;
+  gap: 6rem;
 }
-#footer .footer-content .footer-content_right .getInTouch-btn {
-  border: 2px solid var(--green-color);
-  border-radius: 1rem;
-  background-color: unset;
-  padding: 1.6rem 2.8rem;
+#footer .footer-content .footer-content_right .social {
   display: flex;
-  align-items: center;
-  gap: 1.5rem;
-  cursor: pointer;
+  justify-content: space-around;
+  flex-direction: column;
 }
-#footer .footer-content .footer-content_right .getInTouch-btn .getInTouch-img {
-  width: 3rem;
-}
-#footer .footer-content .footer-content_right .getInTouch-btn .getInTouch-img img {
-  width: 100%;
-  height: 100%;
-  -o-object-fit: cover;
-     object-fit: cover;
-}
-#footer .footer-content .footer-content_right .getInTouch-btn span {
+#footer .footer-content .footer-content_right .social a {
+  text-decoration: none;
   color: var(--light-color);
-  font-family: var(--font-family);
-  font-weight: 700;
-  font-size: 20px;
+  display: flex;
+  gap: 2rem;
+  align-items: center;
 }
-#footer .footer-content .footer-content_right .qr-code {
-  text-align: end;
+#footer .footer-content .footer-content_right .social a span {
+  font-size: 20px;
+  font-weight: 500;
+}
+#footer .footer-content .footer-content_right .social a svg {
+  color: var(--green-color);
+  width: 3.2rem;
+  height: 3.2rem;
 }
 
 @media (max-width: 1440px) {
@@ -609,19 +609,21 @@ section {
   }
   #community .community-container .community-container_content .left-content {
     gap: 1.8rem;
+    justify-content: space-around;
   }
   #community .community-container .community-container_content .left-content .left-content_title {
     gap: 2rem;
   }
-  #community .community-container .community-container_content .left-content .left-content_title .title_img {
-    display: flex;
-  }
   #community .community-container .community-container_content .left-content .left-content_title span {
+    color: var(--green-color);
     font-size: 2em;
   }
   #community .community-container .community-container_content .left-content .bottom-left_content {
     gap: unset;
-    flex-direction: column;
+    justify-content: space-between;
+  }
+  #community .community-container .community-container_content .right-content .right-content_text {
+    justify-content: space-evenly;
   }
   #community .community-container .community-container_content .right-content .right-content_text .text-left h1,
   #community .community-container .community-container_content .right-content .right-content_text .text-right h1 {
@@ -637,7 +639,7 @@ section {
   }
   #community .community-container .community-container_content .right-content .right-content_price .average {
     width: 100%;
-    background: linear-gradient(90deg, #fff 0%, #50fbc7 42.5%, #010f20 101%);
+    background: linear-gradient(90deg, #fff 0%, var(--green-color) 42.5%, #010f20 101%);
   }
   #community .community-container .community-container_content .right-content .right-content_price .average span {
     font-size: 3.2em;
@@ -677,20 +679,8 @@ section {
   #footer .footer-content .footer-content_left p {
     font-size: 1.8em;
   }
-  #footer .footer-content .footer-content_left .social {
-    margin-top: 1.2rem;
-  }
   #footer .footer-content .footer-content_right {
     gap: 3.2rem;
     align-items: center;
-  }
-  #footer .footer-content .footer-content_right .getInTouch-btn {
-    padding: 0.8rem 2rem;
-  }
-  #footer .footer-content .footer-content_right .getInTouch-btn .getInTouch-img {
-    width: 2.4rem;
-  }
-  #footer .footer-content .footer-content_right .getInTouch-btn span {
-    font-size: 18px;
   }
 }/*# sourceMappingURL=styles.css.map */
