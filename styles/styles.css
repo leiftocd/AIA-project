@@ -1247,7 +1247,7 @@ section {
     min-width: 100%;
     font-size: 2.8em !important;
   }
-  #section-banner .banner-title {
+  #section-banner .banner .banner-title {
     height: 5rem;
   }
   #section-about {
