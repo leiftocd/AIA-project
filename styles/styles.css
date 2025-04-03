@@ -1394,7 +1394,7 @@ section {
     font-size: 1.8em !important;
   }
   #section-footer .footer .footer-content .footer-content_left {
-    padding: 0 2.2rem;
+    padding: 0;
   }
   #section-footer .footer .footer-content .footer-content_left span {
     font-size: 2em !important;
