@@ -1032,12 +1032,15 @@ section{
     #section-profession{
         .profession{
             padding: 0 2rem;
+            .profession-title{
+                padding: 0;
+            }
         }
     }
 }
 @media (max-width: 640px) {
     h1{
-        font-size: 4em !important;
+        font-size: 3.6em !important;
     }
     #section-banner{
         .banner{
@@ -1081,6 +1084,7 @@ section{
         }
     }
     #section-profession{
+        padding: 8rem 0;
         .profession{
             padding: 1rem;
             .profession-container{
@@ -1098,8 +1102,6 @@ section{
     }
     #section-about{
         .about{
-            .about-container{
-            }
             .about-title{
                 padding: 0;
             }
@@ -1157,10 +1159,13 @@ section{
                         }
                         .right-content_price{
                             gap: 1.5rem;
-                            .average{
-                            }
                         }
                     }
+                }
+            }
+            .community-img{
+                img{
+                    box-shadow: rgba(80, 251, 200, 0.15) 0px 30px 60px -12px inset, rgba(80, 251, 200, 0.2) 0px 18px 36px -18px inset;
                 }
             }
         }
@@ -1216,11 +1221,6 @@ section{
             display: flex;
             flex-direction: column;
             gap: 4rem;
-        .introduction-title{
-            h1{
-                font-size: 4em !important;
-            }
-        }
         .introduction-content{
             gap: 1rem;
             .introduction-content_box{
@@ -1256,13 +1256,6 @@ section{
     }
     #section-about{
         gap: 3rem;
-        .about-title{
-            h1{
-                font-weight: 700;
-                font-size: 32px;
-                text-align: center;
-            }
-        }
         .about-container{
             .about-container_box{
                 gap: 2rem;
@@ -1291,11 +1284,6 @@ section{
             display: flex;
             flex-direction: column;
             gap: 4rem;
-        .introduction-title{
-            h1{
-                font-size: 3.2em !important;
-            }
-        }
         .introduction-content{
             gap: 1vw;
             .introduction-content_box{
@@ -1317,12 +1305,6 @@ section{
                 width: 100%;
                 overflow: hidden;
             }
-            .profession-title{
-                h1{
-                    font-weight: 700;
-                    font-size: 3.2em;
-                }
-            }
             .profession-container{
                 justify-content: center;
                 .profession-container_box{
@@ -1336,12 +1318,6 @@ section{
         padding: 6rem 1.6rem;
         .community-container{
             align-items: center;
-            .community-container_title{
-                max-width: 60%;
-                h1{
-                    font-size: 32px;
-                }
-            }
             .community-container_content{
                 gap: 3rem;
                 padding: 0;

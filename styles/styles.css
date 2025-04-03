@@ -937,10 +937,13 @@ section {
   #section-profession .profession {
     padding: 0 2rem;
   }
+  #section-profession .profession .profession-title {
+    padding: 0;
+  }
 }
 @media (max-width: 640px) {
   h1 {
-    font-size: 4em !important;
+    font-size: 3.6em !important;
   }
   #section-banner .banner {
     gap: 8rem !important;
@@ -980,6 +983,9 @@ section {
     width: 100%;
     -o-object-fit: cover;
        object-fit: cover;
+  }
+  #section-profession {
+    padding: 8rem 0;
   }
   #section-profession .profession {
     padding: 1rem;
@@ -1045,6 +1051,9 @@ section {
   #section-community .community .community-container .community-container_content .right-content .right-content_price {
     gap: 1.5rem;
   }
+  #section-community .community .community-img img {
+    box-shadow: rgba(80, 251, 200, 0.15) 0px 30px 60px -12px inset, rgba(80, 251, 200, 0.2) 0px 18px 36px -18px inset;
+  }
   #section-footer {
     padding: 4rem 3rem 8rem 3rem;
   }
@@ -1097,9 +1106,6 @@ section {
     flex-direction: column;
     gap: 4rem;
   }
-  #section-introduction .introduction .introduction-title h1 {
-    font-size: 4em !important;
-  }
   #section-introduction .introduction .introduction-content {
     gap: 1rem;
   }
@@ -1128,11 +1134,6 @@ section {
   #section-about {
     gap: 3rem;
   }
-  #section-about .about-title h1 {
-    font-weight: 700;
-    font-size: 32px;
-    text-align: center;
-  }
   #section-about .about-container .about-container_box {
     gap: 2rem;
   }
@@ -1159,9 +1160,6 @@ section {
     flex-direction: column;
     gap: 4rem;
   }
-  #section-introduction .introduction .introduction-title h1 {
-    font-size: 3.2em !important;
-  }
   #section-introduction .introduction .introduction-content {
     gap: 1vw;
   }
@@ -1181,10 +1179,6 @@ section {
     width: 100%;
     overflow: hidden;
   }
-  #section-profession .profession .profession-title h1 {
-    font-weight: 700;
-    font-size: 3.2em;
-  }
   #section-profession .profession .profession-container {
     justify-content: center;
   }
@@ -1197,12 +1191,6 @@ section {
   }
   #section-community .community-container {
     align-items: center;
-  }
-  #section-community .community-container .community-container_title {
-    max-width: 60%;
-  }
-  #section-community .community-container .community-container_title h1 {
-    font-size: 32px;
   }
   #section-community .community-container .community-container_content {
     gap: 3rem;
