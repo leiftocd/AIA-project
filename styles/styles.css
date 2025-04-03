@@ -127,14 +127,21 @@ section {
   display: flex;
   flex-direction: column;
   gap: 3rem;
+  position: relative;
+  height: 50rem;
 }
 #section-about .about .about-container .about-container_box {
   display: flex;
+  align-items: center;
   gap: 4.5rem;
+  cursor: pointer;
+  opacity: 1;
+  position: absolute;
 }
 #section-about .about .about-container .about-container_box .box-img {
+  transition: all 0.4s ease-in-out;
   display: flex;
-  max-width: 40rem;
+  max-width: 25rem;
   width: 100%;
   height: 100%;
   max-height: 24rem;
@@ -142,11 +149,11 @@ section {
   justify-content: center;
   align-items: center;
   flex-shrink: 0;
+  border: 1px solid rgba(255, 255, 255, 0.3);
   border-radius: 19.069px;
-  border: 1 solid #FFF;
-  background: linear-gradient(180deg, #5BFFF4 0%, #081120 100%);
-  -webkit-backdrop-filter: blur(3.3333334923px);
-          backdrop-filter: blur(3.3333334923px);
+  background: #001621;
+  -webkit-backdrop-filter: blur(4px);
+          backdrop-filter: blur(4px);
 }
 #section-about .about .about-container .about-container_box .box-content {
   display: flex;
@@ -158,8 +165,49 @@ section {
   font-size: 36px;
   line-height: 100%;
   color: var(--green-color);
+  opacity: 0.6;
 }
 #section-about .about .about-container .about-container_box .box-content p {
+  display: none;
+}
+#section-about .about .about-container .about-container_box:nth-child(1) {
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 88;
+}
+#section-about .about .about-container .about-container_box:nth-child(2) {
+  top: 40%;
+  left: 0;
+  right: 0;
+  z-index: 99;
+}
+#section-about .about .about-container .about-container_box:nth-child(3) {
+  top: 60%;
+  left: 0;
+  right: 0;
+  z-index: 100 !important;
+}
+#section-about .about .about-container .active {
+  display: flex;
+  gap: 4.5rem;
+  transition: all ease-in-out 0.4s;
+  opacity: 1;
+  filter: unset;
+}
+#section-about .about .about-container .active .box-img {
+  max-width: 40rem;
+  width: 100%;
+  height: 100%;
+  max-height: 24rem;
+  border: 1 solid #FFF;
+  background: linear-gradient(180deg, #5BFFF4 0%, #081120 100%);
+}
+#section-about .about .about-container .active .box-content span {
+  opacity: 1;
+}
+#section-about .about .about-container .active .box-content p {
+  display: block;
   font-weight: 400;
   font-size: 24px;
   color: var(--light-color);
@@ -170,6 +218,7 @@ section {
 #section-introduction {
   max-width: 144rem;
   width: 100%;
+  margin-top: 10rem;
 }
 #section-introduction .introduction {
   display: flex;
@@ -537,6 +586,14 @@ section {
   margin: 0 auto;
 }
 
+@keyframes mymove {
+  from {
+    top: 0px;
+  }
+  to {
+    top: 200px;
+  }
+}
 @media (max-width: 1440px) {
   #section-banner {
     padding: 10rem 0;
