@@ -215,7 +215,6 @@ section{
         }
     }
 }
-
 #section-introduction{
     max-width: 144rem;
     width: 100%;
@@ -576,10 +575,6 @@ section{
     max-width: 124rem;
     margin: 0 auto;
 }
-@keyframes mymove {
-    from {top: 0px;}
-    to {top: 200px;}
-  }
 
 @media (max-width: 1440px){
     #section-banner{
@@ -1417,7 +1412,7 @@ section{
         }
     }
     #section-profession{
-        padding: 5rem 0;
+        padding: 4rem 0;
         .profession{
             padding: 0;
             .profession-ellipse{
@@ -1434,7 +1429,7 @@ section{
         }
     }
     #section-community{
-        padding: 6rem 1.5rem;
+        padding: 2rem 1.5rem;
         .community-container{
             align-items: center;
             .community-container_content{
