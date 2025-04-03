@@ -299,12 +299,14 @@ section{
         .profession-ellipse{
             position: absolute;
             top: 50%;
+            width: 100%;
             left: 0;
             right: 0;
             transform: translate(0,-50%);
             z-index: -1;
-            opacity: .8;
+            opacity: 1;
             svg{
+                height: 100%;
                 width: 100%;
                 border-radius: 100%;
                 filter: blur(100px);
@@ -1173,6 +1175,16 @@ section{
                     display: flex;
                 }
             }
+            .profession-ellipse{
+                .pc{
+                    display: none;
+                }
+                .mb{
+                    display: flex;
+                    width: 100%;
+                    height: 100%;
+                }
+            }
         }
     }
     #section-about{
@@ -1230,7 +1242,8 @@ section{
                         display: none;
                     }
                     .right-content{
-                        width: 85%;
+                        max-width: 85%;
+                        width: 100%;
                         gap: 3rem;
                         .right-content_text{
                             justify-content: center;
@@ -1452,6 +1465,7 @@ section{
                     }
                 }
                 .right-content{
+                    max-width: 100% !important;
                     .right-content_text{
                         justify-content: space-evenly;
                         .text-left,

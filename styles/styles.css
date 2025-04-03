@@ -308,13 +308,15 @@ section {
 #section-profession .profession .profession-ellipse {
   position: absolute;
   top: 50%;
+  width: 100%;
   left: 0;
   right: 0;
   transform: translate(0, -50%);
   z-index: -1;
-  opacity: 0.8;
+  opacity: 1;
 }
 #section-profession .profession .profession-ellipse svg {
+  height: 100%;
   width: 100%;
   border-radius: 100%;
   filter: blur(100px);
@@ -1070,6 +1072,14 @@ section {
   #section-profession .profession .profession-container .bottom-slide {
     display: flex;
   }
+  #section-profession .profession .profession-ellipse .pc {
+    display: none;
+  }
+  #section-profession .profession .profession-ellipse .mb {
+    display: flex;
+    width: 100%;
+    height: 100%;
+  }
   #section-about {
     padding: 0 1.5rem;
   }
@@ -1113,7 +1123,8 @@ section {
     display: none;
   }
   #section-community .community .community-container .community-container_content .right-content {
-    width: 85%;
+    max-width: 85%;
+    width: 100%;
     gap: 3rem;
   }
   #section-community .community .community-container .community-container_content .right-content .right-content_text {
@@ -1314,6 +1325,9 @@ section {
   #section-community .community-container .community-container_content .left-content .bottom-left_content {
     gap: unset;
     justify-content: space-between;
+  }
+  #section-community .community-container .community-container_content .right-content {
+    max-width: 100% !important;
   }
   #section-community .community-container .community-container_content .right-content .right-content_text {
     justify-content: space-evenly;
