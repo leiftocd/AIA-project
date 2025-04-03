@@ -155,18 +155,6 @@ section{
                     }
                 }
             }
-            .about-container_box:nth-child(2){
-    
-                flex-direction: row-reverse;
-                .box-content{
-                    display: flex;
-                    align-items: flex-end;
-                }
-                span{
-                    width: 100%;
-                    text-align: start;
-                }
-            }
         }
     }
 }
@@ -1044,7 +1032,7 @@ section{
     }
     #section-banner{
         .banner{
-            gap: 8rem !important;
+            gap: 6rem !important;
             .banner-ellipse{
                 top: 0;
                 bottom: 0;

@@ -166,17 +166,6 @@ section {
   white-space: pre-line;
   word-wrap: normal;
 }
-#section-about .about .about-container .about-container_box:nth-child(2) {
-  flex-direction: row-reverse;
-}
-#section-about .about .about-container .about-container_box:nth-child(2) .box-content {
-  display: flex;
-  align-items: flex-end;
-}
-#section-about .about .about-container .about-container_box:nth-child(2) span {
-  width: 100%;
-  text-align: start;
-}
 
 #section-introduction {
   max-width: 144rem;
@@ -946,7 +935,7 @@ section {
     font-size: 3.6em !important;
   }
   #section-banner .banner {
-    gap: 8rem !important;
+    gap: 6rem !important;
   }
   #section-banner .banner .banner-ellipse {
     top: 0;
