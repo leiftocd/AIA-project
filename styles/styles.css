@@ -26,7 +26,6 @@ html {
 body {
   display: flex;
   align-items: center;
-  justify-content: center;
   flex-direction: column;
   min-height: 100vh;
   background-color: var(--home-bg);
@@ -34,13 +33,11 @@ body {
 
 section {
   padding: 6rem 12rem;
-  width: 100%;
 }
 
 #section-banner {
-  width: 100%;
   max-height: 80rem;
-  padding: 8rem 0 0 0 !important;
+  padding: 6rem 0 0 0 !important;
 }
 #section-banner .banner {
   width: 100%;
@@ -91,9 +88,9 @@ section {
   width: 50%;
   display: flex;
   align-items: center;
-  height: 54.2rem;
+  max-height: 54.2rem;
   margin: 0 auto;
-  padding-bottom: 15rem;
+  padding-right: 5rem;
 }
 #section-banner .banner .banner-content .banner-content_text p {
   max-width: 80%;
@@ -103,6 +100,11 @@ section {
   text-align: start;
 }
 
+#section-about {
+  margin-top: 5rem;
+  max-width: 144rem;
+  width: 100%;
+}
 #section-about .about {
   width: 100%;
   height: 100%;
@@ -112,6 +114,7 @@ section {
 }
 #section-about .about .about-title {
   width: 100%;
+  padding-top: 4rem;
 }
 #section-about .about .about-title h1 {
   font-weight: 700;
@@ -133,7 +136,8 @@ section {
   display: flex;
   max-width: 40rem;
   width: 100%;
-  height: 24rem;
+  height: 100%;
+  max-height: 24rem;
   padding: 3rem 2rem;
   justify-content: center;
   align-items: center;
@@ -172,6 +176,11 @@ section {
 #section-about .about .about-container .about-container_box:nth-child(2) span {
   width: 100%;
   text-align: start;
+}
+
+#section-introduction {
+  max-width: 144rem;
+  width: 100%;
 }
 #section-introduction .introduction {
   display: flex;
@@ -259,6 +268,7 @@ section {
   right: 0;
   transform: translate(0, -50%);
   z-index: -1;
+  opacity: 0.8;
 }
 #section-profession .profession .profession-ellipse svg {
   width: 100%;
@@ -281,33 +291,49 @@ section {
 #section-profession .profession .profession-container {
   width: 100%;
   height: 100%;
+  overflow: hidden;
 }
-#section-profession .profession .profession-container .swiper {
+#section-profession .profession .profession-container .swiper,
+#section-profession .profession .profession-container .top-slide,
+#section-profession .profession .profession-container .bottom-slide {
   max-height: 8.8rem;
   width: 100%;
-  padding: 0.5rem 1rem;
   display: flex;
   align-items: center;
 }
-#section-profession .profession .profession-container .swiper .swiper-wrapper {
+#section-profession .profession .profession-container .swiper .swiper-wrapper,
+#section-profession .profession .profession-container .top-slide .swiper-wrapper,
+#section-profession .profession .profession-container .bottom-slide .swiper-wrapper {
   display: flex;
   width: 100%;
   align-items: center;
 }
-#section-profession .profession .profession-container .swiper .swiper-wrapper .swiper-slide {
+#section-profession .profession .profession-container .swiper .swiper-wrapper .swiper-slide,
+#section-profession .profession .profession-container .top-slide .swiper-wrapper .swiper-slide,
+#section-profession .profession .profession-container .bottom-slide .swiper-wrapper .swiper-slide {
   width: 100%;
   text-align: center;
   font-size: 18px;
   display: flex;
   align-items: center;
 }
-#section-profession .profession .profession-container .swiper .swiper-wrapper .swiper-slide img {
+#section-profession .profession .profession-container .swiper .swiper-wrapper .swiper-slide img,
+#section-profession .profession .profession-container .top-slide .swiper-wrapper .swiper-slide img,
+#section-profession .profession .profession-container .bottom-slide .swiper-wrapper .swiper-slide img {
   width: 100%;
   height: auto;
   -o-object-fit: cover;
      object-fit: cover;
 }
+#section-profession .profession .profession-container .bottom-slide,
+#section-profession .profession .profession-container .top-slide {
+  display: none;
+}
 
+#section-community {
+  max-width: 144rem;
+  width: 100%;
+}
 #section-community .community {
   display: flex;
   width: 100%;
@@ -335,7 +361,6 @@ section {
   display: flex;
   justify-content: space-between;
   width: 100%;
-  padding: 0 6rem;
 }
 #section-community .community .community-container .community-container_content .left-content {
   max-width: 100%;
@@ -420,13 +445,23 @@ section {
   font-style: italic;
   color: var(--dark-text);
 }
+#section-community .community .community-container .community-container_content .right-content .commun-text {
+  display: none;
+}
 #section-community .community .community-img {
   width: 100%;
   text-align: center;
 }
+#section-community .community .community-img img {
+  width: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
 
 #section-footer {
   padding: 6rem 12rem 10rem 12rem;
+  max-width: 144rem;
+  width: 100%;
 }
 #section-footer .footer {
   display: flex;
@@ -437,9 +472,14 @@ section {
 #section-footer .footer .footer-title {
   text-align: center;
   margin-top: 6rem;
+  height: 6rem;
 }
 #section-footer .footer .footer-title img {
   max-width: 100%;
+  width: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  height: 100%;
 }
 #section-footer .footer .footer-content {
   display: flex;
@@ -495,8 +535,12 @@ section {
 #section-footer .footer .footer-content .footer-content_right .social .x {
   padding: 8px 20px 8px 12px;
   border-radius: 24px;
-  border: 0.8px solid #50FBC7;
+  border: 1px solid #50FBC7;
   background: rgba(80, 251, 199, 0.08);
+}
+#section-footer .footer .footer-content .footer-content_right .social .x:hover {
+  background: #003835;
+  box-shadow: #50FBC7 0px 0 12px;
 }
 
 .about, .community, .introduction, .footer {
@@ -520,7 +564,9 @@ section {
   }
   #section-banner .banner .banner-content {
     padding: 0;
-    gap: 4rem;
+  }
+  #section-banner .banner .banner-content .banner-content_text {
+    padding-right: 0;
   }
   #section-banner .banner .banner-content .banner-content_text p {
     max-width: 90%;
@@ -562,7 +608,7 @@ section {
     padding-top: 5rem !important;
   }
   #section-banner .banner .banner-content .banner-content_text {
-    padding-bottom: 10rem;
+    padding-bottom: 5rem;
   }
   #section-banner .banner .banner-content .banner-content_text p {
     max-width: 90%;
@@ -571,26 +617,19 @@ section {
   #section-about {
     padding: 5rem 6rem;
   }
+  #section-about .about .about-container .about-container_box {
+    gap: 3.5rem;
+  }
   #section-about .about .about-container .about-container_box .box-img {
     max-width: 35rem;
   }
   #section-about .about .about-container .about-container_box .box-content {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
-  }
-  #section-about .about .about-container .about-container_box .box-content span {
-    font-weight: 700;
-    font-size: 3em;
-    line-height: 100%;
-    color: var(--green-color);
+    gap: 2rem;
   }
   #section-about .about .about-container .about-container_box .box-content p {
-    font-weight: 400;
-    font-size: 2em;
-    color: var(--light-color);
-    white-space: pre-line;
-    word-wrap: normal;
+    white-space: unset;
   }
   #section-introduction span {
     font-size: 3em !important;
@@ -606,6 +645,88 @@ section {
   }
   #section-profession .profession {
     padding: 0 6rem;
+  }
+  #section-community .community {
+    gap: 6rem;
+  }
+  #section-community .community .community-container {
+    gap: 5rem;
+  }
+  #section-community .community .community-container .community-container_title h1 {
+    font-size: 4.4em;
+  }
+  #section-community .community .community-container .community-container_content {
+    padding: 0 0;
+    justify-content: space-evenly;
+  }
+  #section-community .community .community-container .community-container_content .left-content {
+    gap: 3rem;
+  }
+  #section-community .community .community-container .community-container_content .left-content .left-content_title span {
+    font-size: 3em;
+  }
+  #section-community .community .community-container .community-container_content .left-content .bottom-left_content ul {
+    padding-left: 4rem;
+  }
+  #section-community .community .community-container .community-container_content .left-content .bottom-left_content ul li {
+    font-size: 2em;
+  }
+  #section-community .community .community-container .community-container_content .right-content {
+    display: flex;
+    flex-direction: column-reverse;
+    max-width: 100%;
+    gap: 2rem;
+  }
+  #section-community .community .community-container .community-container_content .right-content .right-content_text {
+    display: flex;
+    gap: 6rem;
+  }
+  #section-community .community .community-container .community-container_content .right-content .right-content_text .text-left,
+  #section-community .community .community-container .community-container_content .right-content .right-content_text .text-right {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  #section-community .community .community-container .community-container_content .right-content .right-content_text .text-left h1,
+  #section-community .community .community-container .community-container_content .right-content .right-content_text .text-right h1 {
+    font-weight: 700;
+    font-size: 4em !important;
+    color: var(--green-color);
+  }
+  #section-community .community .community-container .community-container_content .right-content .right-content_text .text-left span,
+  #section-community .community .community-container .community-container_content .right-content .right-content_text .text-right span {
+    font-weight: 700;
+    font-size: 3em;
+    color: var(--light-color);
+  }
+  #section-community .community .community-container .community-container_content .right-content .right-content_price {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  #section-community .community .community-container .community-container_content .right-content .right-content_price span {
+    font-weight: 700;
+    font-size: 3em;
+    color: var(--light-color);
+  }
+  #section-community .community .community-container .community-container_content .right-content .right-content_price .average {
+    padding-left: 1.5rem;
+    display: flex;
+    width: 100%;
+    align-items: center;
+    gap: 1rem;
+    background: linear-gradient(90deg, #fff 0%, var(--green-color) 42.5%, #010f20 100%);
+  }
+  #section-community .community .community-container .community-container_content .right-content .right-content_price .average span {
+    font-weight: 700;
+    font-size: 4em;
+    color: var(--dark-text);
+  }
+  #section-community .community .community-container .community-container_content .right-content .right-content_price .average h3 {
+    font-weight: 700;
+    font-size: 2em;
+    font-style: italic;
+    color: var(--dark-text);
   }
   #section-footer {
     padding: 5rem 5rem 10rem 5rem;
@@ -624,11 +745,40 @@ section {
   h1 {
     font-size: 4.4em !important;
   }
+  #section-banner .banner .banner-content .banner-content_text p {
+    font-size: 3.6rem;
+  }
+  #section-banner .banner .banner-title {
+    height: 6rem;
+  }
   #section-banner {
     padding: 4rem 0 0 0 !important;
   }
   #section-about {
-    padding: 0 6rem 4rem;
+    padding: 0 4rem 4rem;
+  }
+  #section-about .about .about-title {
+    width: 100%;
+  }
+  #section-about .about .about-title h1 {
+    font-weight: 700;
+    font-size: 5em;
+  }
+  #section-about .about .about-container .about-container_box {
+    gap: 3rem;
+  }
+  #section-about .about .about-container .about-container_box .box-img {
+    max-width: 30rem;
+    max-height: 20rem;
+  }
+  #section-about .about .about-container .about-container_box .box-img img {
+    max-width: 60%;
+  }
+  #section-about .about .about-container .about-container_box .box-content span {
+    font-size: 3em;
+  }
+  #section-about .about .about-container .about-container_box .box-content p {
+    font-size: 2em;
   }
   #section-introduction span {
     font-size: 2.8em !important;
@@ -639,69 +789,341 @@ section {
   #section-introduction .introduction .introduction-content .introduction-content_box {
     padding: 4rem 1.5rem;
   }
+  #section-community {
+    padding: 3rem;
+  }
+  #section-community .community .community-container {
+    gap: 3rem;
+  }
+  #section-community .community .community-container .community-container_content {
+    justify-content: space-between;
+  }
+  #section-community .community .community-container .community-container_content span {
+    font-size: 2.6em !important;
+  }
+  #section-community .community .community-container .community-container_content .left-content .bottom-left_content ul li {
+    font-size: 1.8em;
+  }
+  #section-community .community .community-container .community-container_content .right-content .right-content_price .average h3 {
+    font-size: 1.4em;
+  }
+  #section-community .community .community-container .community-container_content .right-content .right-content_price .average span {
+    font-size: 3.6em !important;
+  }
+  #section-community .community .community-container .community-container_content .right-content .right-content_text .text-left h1,
+  #section-community .community .community-container .community-container_content .right-content .right-content_text .text-right h1 {
+    font-size: 3.2em !important;
+  }
+  #section-profession {
+    padding: 8rem 0 10rem;
+  }
+  #section-profession .profession {
+    gap: 6rem;
+    padding: 0 3rem;
+  }
+  #section-profession .profession .profession-ellipse svg {
+    width: 100%;
+    border-radius: 100%;
+    filter: blur(100px);
+  }
+  #section-profession .profession .profession-title {
+    padding: 0 2rem;
+  }
+  #section-profession .profession .profession-container {
+    flex-direction: column;
+    gap: 2rem;
+  }
+  #section-profession .profession .profession-container .swiper,
+  #section-profession .profession .profession-container .top-slide,
+  #section-profession .profession .profession-container .bottom-slide {
+    width: 100%;
+    padding: 0.5rem 1rem;
+  }
+  #section-profession .profession .profession-container .swiper .swiper-wrapper .swiper-slide,
+  #section-profession .profession .profession-container .top-slide .swiper-wrapper .swiper-slide,
+  #section-profession .profession .profession-container .bottom-slide .swiper-wrapper .swiper-slide {
+    font-size: 18px;
+  }
+}
+@media (max-width: 768px) {
+  #section-banner .banner {
+    gap: 5rem;
+  }
+  #section-banner .banner .banner-content {
+    gap: 1rem;
+  }
+  #section-banner .banner .banner-content .banner-content_text {
+    padding-bottom: 2rem;
+  }
+  #section-banner .banner .banner-content .banner-content_text p {
+    font-size: 3.2rem;
+  }
+  #section-about {
+    padding: 0 2rem;
+  }
+  #section-about .about .about-container .about-container_box {
+    gap: 2rem;
+  }
+  #section-about .about .about-container .about-container_box .box-content {
+    gap: 1rem;
+  }
+  #section-about .about .about-container .about-container_box .box-content span {
+    font-size: 2.6em;
+  }
+  #section-about .about .about-container .about-container_box .box-content p {
+    font-size: 1.8em;
+  }
+  #section-about .about .about-container .about-container_box .box-img {
+    max-width: 20rem;
+    max-height: 16rem;
+  }
+  #section-community {
+    padding: 0 3rem;
+  }
   #section-community .community .community-container {
     gap: 4rem;
   }
+  #section-community .community .community-container .community-container_content {
+    justify-content: space-between;
+  }
   #section-community .community .community-container .community-container_content span {
+    font-size: 2.4em !important;
+  }
+  #section-community .community .community-container .community-container_content .left-content .bottom-left_content ul {
+    padding-left: 2rem;
+  }
+  #section-community .community .community-container .community-container_content .left-content .bottom-left_content ul li {
+    font-size: 1.6em;
+  }
+  #section-community .community .community-container .community-container_content .right-content .right-content_price .average h3 {
+    font-size: 1.4em;
+  }
+  #section-community .community .community-container .community-container_content .right-content .right-content_price .average span {
+    font-size: 3.2em !important;
+  }
+  #section-community .community .community-container .community-container_content .right-content .right-content_text .text-left h1,
+  #section-community .community .community-container .community-container_content .right-content .right-content_text .text-right h1 {
+    font-size: 3em !important;
+  }
+  #section-introduction {
+    padding: 8rem 2rem 4rem;
+  }
+  #section-introduction .introduction {
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
+  }
+  #section-introduction .introduction .introduction-title {
+    width: 100%;
+  }
+  #section-introduction .introduction .introduction-title h1 {
+    font-size: 4.4px;
+  }
+  #section-introduction .introduction .introduction-content {
+    gap: 1rem;
+  }
+  #section-introduction .introduction .introduction-content .introduction-content_box {
+    gap: 1rem;
+    padding: 4rem 1rem;
+    max-width: 40rem;
+    max-height: 38rem;
+  }
+  #section-introduction .introduction .introduction-content .introduction-content_box span {
+    font-size: 2.8em !important;
+  }
+  #section-introduction .introduction .introduction-content .introduction-content_box p {
+    font-size: 1.8em !important;
+  }
+  #section-profession .profession {
+    padding: 0 2rem;
+  }
+}
+@media (max-width: 640px) {
+  h1 {
+    font-size: 4em !important;
+  }
+  #section-banner .banner {
+    gap: 8rem !important;
+  }
+  #section-banner .banner .banner-ellipse {
+    top: 0;
+    bottom: 0;
+    right: 0;
+    border-radius: 491px;
+    opacity: 0.4;
+    background: linear-gradient(90deg, rgba(0, 85, 255, 0.8) 0%, rgba(0, 255, 111, 0.8) 100%);
+    filter: blur(160.8999938965px);
+  }
+  #section-banner .banner .banner-content {
+    flex-direction: column-reverse;
+    gap: 5rem;
+  }
+  #section-banner .banner .banner-content .banner-content_img {
+    max-width: 90% !important;
+    width: 100% !important;
+  }
+  #section-banner .banner .banner-content .banner-content_img img {
+    -o-object-fit: cover;
+       object-fit: cover;
+    width: 100%;
+    height: 100%;
+  }
+  #section-banner .banner .banner-content .banner-content_text {
+    max-width: 100% !important;
+    width: 100% !important;
+    padding: 0 0 0 5%;
+    align-items: unset !important;
+    height: 100% !important;
+  }
+  #section-banner .banner .banner-title img {
+    height: 100%;
+    width: 100%;
+    -o-object-fit: cover;
+       object-fit: cover;
+  }
+  #section-profession .profession {
+    padding: 1rem;
+  }
+  #section-profession .profession .profession-container {
+    gap: 0;
+    height: 100%;
+  }
+  #section-profession .profession .profession-container .swiper {
+    display: none;
+  }
+  #section-profession .profession .profession-container .top-slide,
+  #section-profession .profession .profession-container .bottom-slide {
+    display: flex;
+  }
+  #section-about .about .about-title {
+    padding: 0;
+  }
+  #section-community .community .community-container .community-container_title h1 {
     font-size: 3.6em !important;
+  }
+  #section-community .community .community-container .community-container_content {
+    justify-content: center;
+    width: 100%;
+  }
+  #section-community .community .community-container .community-container_content .left-content {
+    display: none;
+  }
+  #section-community .community .community-container .community-container_content .right-content {
+    width: 85%;
+    gap: 3rem;
+  }
+  #section-community .community .community-container .community-container_content .right-content .right-content_text {
+    justify-content: center;
+  }
+  #section-community .community .community-container .community-container_content .right-content .commun-text {
+    max-width: 100%;
+    gap: 3.2rem;
+    display: flex;
+    flex-direction: column;
+  }
+  #section-community .community .community-container .community-container_content .right-content .commun-text .left-content_title {
+    display: flex;
+  }
+  #section-community .community .community-container .community-container_content .right-content .commun-text .left-content_title span {
+    font-weight: 700;
+    font-size: 4em;
+    color: var(--light-color);
+  }
+  #section-community .community .community-container .community-container_content .right-content .commun-text .bottom-left_content {
+    display: flex;
+    gap: 2rem;
+    justify-content: space-between;
+  }
+  #section-community .community .community-container .community-container_content .right-content .commun-text .bottom-left_content ul {
+    padding-left: 4rem;
+  }
+  #section-community .community .community-container .community-container_content .right-content .commun-text .bottom-left_content ul li {
+    font-weight: 400;
+    font-size: 2em;
+    color: #e2daf0;
+  }
+  #section-community .community .community-container .community-container_content .right-content .right-content_price {
+    gap: 1.5rem;
+  }
+  #section-footer {
+    padding: 4rem 3rem 8rem 3rem;
+  }
+  #section-footer .footer {
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
+    border-top: 1px solid rgba(204, 204, 204, 0.425);
+  }
+  #section-footer .footer .footer-title {
+    text-align: center;
+    margin-top: 6rem;
+    height: 6rem;
+  }
+  #section-footer .footer .footer-content {
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
+    align-items: center;
+    justify-content: center;
+  }
+  #section-footer .footer .footer-content .footer-content_left,
+  #section-footer .footer .footer-content .footer-content_mid {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  #section-footer .footer .footer-content .footer-content_left span,
+  #section-footer .footer .footer-content .footer-content_mid span {
+    font-weight: 700;
+    font-size: 2.8em !important;
+    text-transform: capitalize;
+    color: var(--light-color);
+    text-align: center;
+  }
+  #section-footer .footer .footer-content .footer-content_right {
+    gap: 5rem;
+    flex-direction: column;
+    align-items: center;
+  }
+  #section-footer .footer .footer-content .footer-content_right .social {
+    gap: 1.8rem;
+  }
+  #section-introduction {
+    padding: 8rem 2rem 4rem;
+  }
+  #section-introduction .introduction {
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
+  }
+  #section-introduction .introduction .introduction-title h1 {
+    font-size: 4em !important;
+  }
+  #section-introduction .introduction .introduction-content {
+    gap: 1rem;
+  }
+  #section-introduction .introduction .introduction-content .introduction-content_box {
+    gap: 1.5rem;
+    padding: 4rem 1rem;
+  }
+  #section-introduction .introduction .introduction-content .introduction-content_box span {
+    font-size: 1.8em !important;
+  }
+  #section-introduction .introduction .introduction-content .introduction-content_box p {
+    font-size: 1.6em !important;
   }
 }
 @media (max-width: 450px) {
   section {
     padding: 4.8rem 1.6rem;
   }
-  #section-banner {
-    position: unset;
-    gap: 2rem;
+  #section-banner .banner .banner-content .banner-content_text {
+    padding: 0 5%;
   }
-  #section-banner .home-content {
-    flex-direction: column;
-    gap: 2rem;
-    padding: 0 1rem;
-  }
-  #section-banner .home-content .home-content_img {
-    max-width: 60%;
-  }
-  #section-banner .home-content .home-content_img img {
-    -o-object-fit: cover;
-       object-fit: cover;
-    width: 100%;
-    height: 100%;
-  }
-  #section-banner .home-content .home-content_text {
-    max-width: 100%;
-  }
-  #section-banner .home-content .home-content_text span {
-    width: 100%;
-    font-size: 32px;
-    white-space: unset;
-  }
-  #section-banner .home-title {
-    width: 100%;
-    height: 4rem;
-  }
-  #section-banner .home-title img {
-    -o-object-fit: cover;
-       object-fit: cover;
-    width: 100%;
-    height: 100%;
-  }
-  #section-banner .home-ellipse {
-    position: absolute;
-    right: 0rem;
-    left: 0rem;
-    bottom: 0rem;
-    top: 0rem;
-    z-index: -1;
-    border-radius: 100%;
-    fill: linear-gradient(90deg, #05f 0%, #00ff6f 100%);
-    filter: blur(100px);
-  }
-  #section-banner .home-ellipse img {
-    height: 100%;
-    width: 100%;
-    -o-object-fit: cover;
-       object-fit: cover;
+  #section-banner .banner .banner-content .banner-content_text p {
+    min-width: 100%;
+    font-size: 2.8em !important;
   }
   #section-about {
     gap: 3rem;
@@ -712,12 +1134,11 @@ section {
     text-align: center;
   }
   #section-about .about-container .about-container_box {
-    align-items: center;
     gap: 2rem;
   }
   #section-about .about-container .about-container_box .box-img {
-    width: 8rem;
-    height: 8rem;
+    max-width: 15rem !important;
+    max-height: 12rem !important;
   }
   #section-about .about-container .about-container_box .box-img img {
     height: 100%;
@@ -725,47 +1146,49 @@ section {
        object-fit: cover;
   }
   #section-about .about-container .about-container_box .box-content span {
-    font-weight: 700;
-    font-size: 2.4em;
+    font-size: 1.8em !important;
   }
   #section-about .about-container .about-container_box .box-content p {
-    font-weight: 400;
-    font-size: 1.6em;
-    white-space: normal;
+    font-size: 1.4em !important;
   }
-  #section-introduction .introduction-title h1 {
-    font-weight: 700;
-    font-size: 32px;
-    text-transform: capitalize;
-    text-align: center;
-    padding: 0 5rem;
+  #section-introduction {
+    padding: 6rem 2rem 4rem;
   }
-  #section-introduction .introduction-content .introduction-content_box {
-    width: 109px;
-    height: 280px;
+  #section-introduction .introduction {
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
   }
-  #section-introduction .introduction-content .introduction-content_box span {
-    font-weight: 700;
-    font-size: 16px;
+  #section-introduction .introduction .introduction-title h1 {
+    font-size: 3.2em !important;
   }
-  #section-introduction .introduction-content .introduction-content_box p {
-    font-weight: 500;
-    font-size: 14px;
+  #section-introduction .introduction .introduction-content {
+    gap: 1vw;
   }
-  #section-profession .profession-ellipse {
+  #section-introduction .introduction .introduction-content .introduction-content_box {
+    padding: 4rem 0.6rem;
+  }
+  #section-introduction .introduction .introduction-content .introduction-content_box span {
+    font-size: 1.5em !important;
+  }
+  #section-introduction .introduction .introduction-content .introduction-content_box p {
+    font-size: 1.4em !important;
+  }
+  #section-profession .profession {
+    padding: 0;
+  }
+  #section-profession .profession .profession-ellipse {
     width: 100%;
     overflow: hidden;
   }
-  #section-profession .profession-title h1 {
+  #section-profession .profession .profession-title h1 {
     font-weight: 700;
     font-size: 3.2em;
   }
-  #section-profession .profession-container {
-    flex-wrap: wrap;
-    gap: 1rem;
+  #section-profession .profession .profession-container {
     justify-content: center;
   }
-  #section-profession .profession-container .profession-container_box {
+  #section-profession .profession .profession-container .profession-container_box {
     width: 6rem;
     height: 6rem;
   }
@@ -832,34 +1255,32 @@ section {
        object-fit: cover;
   }
   #section-footer {
-    gap: 3.2rem;
+    padding: 4rem 1.6rem 6rem 1.6rem;
   }
-  #section-footer .footer-title {
-    width: 100%;
-    height: 4rem;
+  #section-footer .footer {
+    gap: 3rem;
+    border-top: 1px solid rgba(204, 204, 204, 0.425);
   }
-  #section-footer .footer-title img {
-    width: 100%;
-    height: 100%;
-    -o-object-fit: cover;
-       object-fit: cover;
+  #section-footer .footer .footer-title {
+    text-align: center;
+    height: 5rem;
   }
-  #section-footer .footer-content {
-    flex-direction: column;
-    gap: 3.2rem;
+  #section-footer .footer .footer-content {
+    gap: 3.4rem;
   }
-  #section-footer .footer-content .footer-content_left {
-    padding: 0;
-    gap: 2rem;
+  #section-footer .footer .footer-content .footer-content_right {
+    gap: 3.4rem;
   }
-  #section-footer .footer-content .footer-content_left span {
-    font-size: 2.8em;
+  #section-footer .footer .footer-content .footer-content_right .social {
+    gap: 1.8rem;
   }
-  #section-footer .footer-content .footer-content_left p {
-    font-size: 1.8em;
+  #section-footer .footer .footer-content .footer-content_right .social a span {
+    font-size: 1.8em !important;
   }
-  #section-footer .footer-content .footer-content_right {
-    gap: 3.2rem;
-    align-items: center;
+  #section-footer .footer .footer-content .footer-content_left {
+    padding: 0 2.2rem;
+  }
+  #section-footer .footer .footer-content .footer-content_left span {
+    font-size: 2em !important;
   }
 }/*# sourceMappingURL=styles.css.map */
