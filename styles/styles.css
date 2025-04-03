@@ -632,11 +632,6 @@ section {
   #section-profession .profession .profession-container .profession-title {
     padding: 0;
   }
-  #section-profession .profession .profession-container .profession-container_box {
-    height: 12rem;
-    border-radius: 50%;
-    background-color: var(--light-color);
-  }
   #section-community .community .community-container .community-container_content .right-content .right-content_price .average {
     width: 100%;
   }
@@ -1294,6 +1289,9 @@ section {
   }
   #section-profession {
     padding: 4rem 0;
+    justify-content: center;
+    display: flex;
+    align-items: center;
   }
   #section-profession .profession {
     padding: 0;
@@ -1304,10 +1302,6 @@ section {
   }
   #section-profession .profession .profession-container {
     justify-content: center;
-  }
-  #section-profession .profession .profession-container .profession-container_box {
-    width: 6rem;
-    height: 6rem;
   }
   #section-community {
     padding: 2rem 1.5rem;
