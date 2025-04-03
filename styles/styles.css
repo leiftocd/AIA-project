@@ -321,6 +321,9 @@ section {
   border-radius: 100%;
   filter: blur(100px);
 }
+#section-profession .profession .profession-ellipse .mb {
+  display: none;
+}
 #section-profession .profession .profession-title {
   display: flex;
   width: 100%;
