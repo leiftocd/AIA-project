@@ -188,6 +188,12 @@ section {
   right: 0;
   z-index: 100 !important;
 }
+#section-about .about .about-container .about-container_box .topItem1 {
+  top: 20%;
+}
+#section-about .about .about-container .about-container_box .topItem3 {
+  top: 80%;
+}
 #section-about .about .about-container .active {
   display: flex;
   gap: 4.5rem;
@@ -663,11 +669,15 @@ section {
   #section-about {
     padding: 5rem 6rem;
   }
+  #section-about .about .about-container {
+    height: 40rem;
+  }
   #section-about .about .about-container .about-container_box {
     gap: 3.5rem;
   }
   #section-about .about .about-container .about-container_box .box-img {
-    max-width: 35rem;
+    max-width: 20rem;
+    max-height: 20rem;
   }
   #section-about .about .about-container .about-container_box .box-content {
     display: flex;
@@ -676,6 +686,10 @@ section {
   }
   #section-about .about .about-container .about-container_box .box-content p {
     white-space: unset;
+  }
+  #section-about .about .about-container .active .box-img {
+    max-width: 35rem;
+    max-height: 20rem;
   }
   #section-introduction span {
     font-size: 3em !important;
@@ -810,21 +824,31 @@ section {
     font-weight: 700;
     font-size: 5em;
   }
+  #section-about .about .about-container {
+    max-height: 30rem;
+  }
   #section-about .about .about-container .about-container_box {
     gap: 3rem;
   }
   #section-about .about .about-container .about-container_box .box-img {
-    max-width: 30rem;
-    max-height: 20rem;
+    max-width: 18rem;
+    max-height: 15rem;
   }
   #section-about .about .about-container .about-container_box .box-img img {
-    max-width: 60%;
+    max-width: 70%;
   }
   #section-about .about .about-container .about-container_box .box-content span {
     font-size: 3em;
   }
   #section-about .about .about-container .about-container_box .box-content p {
     font-size: 2em;
+  }
+  #section-about .about .about-container .active .box-img {
+    max-width: 30rem;
+    max-height: 15rem;
+  }
+  #section-about .about .about-container .active .box-img img {
+    max-width: 50%;
   }
   #section-introduction span {
     font-size: 2.8em !important;
@@ -920,8 +944,15 @@ section {
     font-size: 1.8em;
   }
   #section-about .about .about-container .about-container_box .box-img {
-    max-width: 20rem;
+    max-width: 18rem;
     max-height: 16rem;
+  }
+  #section-about .about .about-container .active .box-img {
+    max-width: 25rem;
+    max-height: 15rem;
+  }
+  #section-about .about .about-container .active .box-img img {
+    max-width: 50%;
   }
   #section-community {
     padding: 0 3rem;
@@ -1047,8 +1078,37 @@ section {
   #section-profession .profession .profession-container .bottom-slide {
     display: flex;
   }
+  #section-about {
+    padding: 0 1.5rem;
+  }
   #section-about .about .about-title {
     padding: 0;
+  }
+  #section-about .about .about-container {
+    max-height: 25rem;
+  }
+  #section-about .about .about-container .about-container_box {
+    gap: 1.5rem;
+  }
+  #section-about .about .about-container .about-container_box .box-img {
+    max-width: 13rem;
+    max-height: 13rem;
+  }
+  #section-about .about .about-container .about-container_box .box-img img {
+    max-width: 70%;
+  }
+  #section-about .about .about-container .about-container_box .box-content span {
+    font-size: 2.4em;
+  }
+  #section-about .about .about-container .about-container_box .box-content p {
+    font-size: 1.6em;
+  }
+  #section-about .about .about-container .active .box-img {
+    max-width: 20rem;
+    max-height: 13rem;
+  }
+  #section-about .about .about-container .active .box-img img {
+    max-width: 50%;
   }
   #section-community .community .community-container .community-container_title h1 {
     font-size: 3.6em !important;
@@ -1145,7 +1205,7 @@ section {
     gap: 1.8rem;
   }
   #section-introduction {
-    padding: 8rem 2rem 4rem;
+    padding: 6rem 2rem 4rem;
   }
   #section-introduction .introduction {
     display: flex;
@@ -1180,26 +1240,28 @@ section {
   #section-about {
     gap: 3rem;
   }
-  #section-about .about-container .about-container_box {
-    gap: 2rem;
+  #section-about .about .about-container {
+    max-height: 23rem;
   }
-  #section-about .about-container .about-container_box .box-img {
-    max-width: 15rem !important;
-    max-height: 12rem !important;
+  #section-about .about .about-container .about-container_box .box-img {
+    max-width: 10rem;
+    max-height: 10rem;
   }
-  #section-about .about-container .about-container_box .box-img img {
-    height: 100%;
-    -o-object-fit: cover;
-       object-fit: cover;
+  #section-about .about .about-container .about-container_box .box-img img {
+    max-width: 70%;
   }
-  #section-about .about-container .about-container_box .box-content span {
-    font-size: 1.8em !important;
+  #section-about .about .about-container .about-container_box .box-content span {
+    font-size: 2em !important;
   }
-  #section-about .about-container .about-container_box .box-content p {
-    font-size: 1.4em !important;
+  #section-about .about .about-container .about-container_box .box-content p {
+    font-size: 1.2em !important;
+  }
+  #section-about .about .about-container .active .box-img {
+    max-width: 13rem !important;
+    max-height: 10rem;
   }
   #section-introduction {
-    padding: 6rem 2rem 4rem;
+    padding: 1rem 1.5rem 4rem;
   }
   #section-introduction .introduction {
     display: flex;
@@ -1218,6 +1280,9 @@ section {
   #section-introduction .introduction .introduction-content .introduction-content_box p {
     font-size: 1.4em !important;
   }
+  #section-profession {
+    padding: 5rem 0;
+  }
   #section-profession .profession {
     padding: 0;
   }
@@ -1233,7 +1298,7 @@ section {
     height: 6rem;
   }
   #section-community {
-    padding: 6rem 1.6rem;
+    padding: 6rem 1.5rem;
   }
   #section-community .community-container {
     align-items: center;
@@ -1289,7 +1354,7 @@ section {
        object-fit: cover;
   }
   #section-footer {
-    padding: 4rem 1.6rem 6rem 1.6rem;
+    padding: 4rem 1.5rem 6rem;
   }
   #section-footer .footer {
     gap: 3rem;
