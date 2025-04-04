@@ -16,10 +16,10 @@ document.addEventListener('DOMContentLoaded', () => {
             items[2].classList.add("active");
             items[2].style.top = "80%"; // Move item 3
             items[0].style.top = "20%"; // Ensure item 1 moves when item 3 is active
-        } else if (scrollPercent >= 0.65 && items[1]) {
+        } else if (scrollPercent >= 0.75 && items[1]) {
             items[1].classList.add("active");
             items[2].style.top = "80%"; // Keep moving item 3
-        } else if (scrollPercent >= 0.35 && items[0]) {
+        } else if (scrollPercent >= 0.33 && items[0]) {
             items[0].classList.add("active");
         } else if (items[0]) {
             items[0].classList.add("active");

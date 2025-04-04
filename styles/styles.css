@@ -83,7 +83,7 @@ section {
 }
 #section-banner .banner .banner-content .banner-content_img img {
   width: 100%;
-  max-width: 100%;
+  max-width: 80%;
   -o-object-fit: cover;
      object-fit: cover;
   animation: fromLeft 1s ease-in-out;
