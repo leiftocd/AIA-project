@@ -610,6 +610,7 @@ section {
 #section-footer .footer .footer-title {
   text-align: center;
   margin-top: 6rem;
+  height: 6rem;
 }
 #section-footer .footer .footer-title img {
   max-width: 100%;

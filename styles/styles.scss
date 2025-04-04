@@ -133,7 +133,7 @@ section{
                 opacity: 1;
                 position: absolute;
                 .box-img{
-                    transition: all .4s ease-in-out;
+                    transition: all .5s ease-in-out;
                     display: flex;
                     max-width: 25rem;
                     width: 100%;
@@ -195,7 +195,7 @@ section{
             .active{
                 display: flex;
                 gap: 4.5rem;
-                transition: all ease-in-out .4s;
+                transition: all ease-in-out .5s;
                 opacity: 1;
                 filter: unset;
                 .box-img{
