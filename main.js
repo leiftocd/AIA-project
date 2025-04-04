@@ -1,35 +1,38 @@
-
-
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener('DOMContentLoaded', () => {
     const items = document.querySelectorAll(".about-container_box");
-    // Set initial active state
-    items[0].classList.add("active");
-    let timeout; // Store timeout reference
-    function updateStyles() {
-        clearTimeout(timeout); // Clear any previous timeout
-        timeout = setTimeout(() => {
-            // Reset all item positions first
-            items.forEach(item => item.style.top = "");
-    
-            // If item 2 (index 1) is active, move item 3 (index 2) to top: 80%
-            if (items[1].classList.contains("active") && items[2]) {
-                items[2].style.top = "80%";
-            } 
-            // If item 3 (index 2) is active, move item 1 (index 0) to top: 20%
-            if (items[2].classList.contains("active") && items[0]) {
-                items[0].style.top = "20%";
-                items[2].style.top = "80%";
-            }
-        }, 200); // Adjust delay as needed
+    const sectionAbout = document.querySelector("#section-about");
+
+    function handleScroll() {
+        const sectionRect = sectionAbout.getBoundingClientRect();
+        const sectionHeight = sectionAbout.offsetHeight;
+        const scrollPosition = window.scrollY + window.innerHeight / 2; // Middle of viewport
+        const sectionTop = sectionRect.top + window.scrollY;
+
+        // Calculate scroll percentage
+        const scrollPercent = (scrollPosition - sectionTop) / sectionHeight;
+
+        // Reset styles
+        items.forEach(item => item.classList.remove("active"));
+        items.forEach(item => item.style.top = ""); 
+
+        if (scrollPercent >= 1 && items[2]) {
+            items[2].classList.add("active");
+            items[2].style.top = "80%"; // Move item 3
+            items[0].style.top = "20%"; // Ensure item 1 moves when item 3 is active
+        } else if (scrollPercent >= 0.75 && items[1]) {
+            items[1].classList.add("active");
+            items[2].style.top = "80%"; // Keep moving item 3
+        } else if (scrollPercent >= 0.5 && items[0]) {
+            items[0].classList.add("active");
+        } else if (items[0]) {
+            items[0].classList.add("active");
+        }
     }
-    // Add event listener to each item
-    items.forEach(item => {
-        item.addEventListener("mouseenter", () => {
-            clearTimeout(timeout); // Clear timeout on new hover
-            items.forEach(i => i.classList.remove("active"));
-            item.classList.add("active");
-    
-            updateStyles();
-        });
-    });
+
+    // Initial active state
+    items[0].classList.add("active");
+
+    // Add scroll listener for both mobile & desktop
+    window.addEventListener('scroll', handleScroll);
+    handleScroll(); // Initial call
 });
