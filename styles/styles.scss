@@ -349,7 +349,7 @@ section{
         }
         .profession-container{
             width: 100%;
-            .mb{
+            .mb-slide{
                 display: none;
             }
             .slider {
@@ -1168,6 +1168,9 @@ section{
     }
 }
 @media (max-width: 640px) {
+    .slider {
+        --width: 160px !important; /* 1440px / 6 = 240px per item */
+    }
     :root{
         --height: 50px;
     }
@@ -1222,7 +1225,7 @@ section{
             .profession-container{
                 gap: 2rem;
                 height: 100%;
-                .mb{
+                .mb-slide{
                     display: flex;
                     .list {
                         min-width: calc(var(--width) * var(--quantity));
@@ -1234,7 +1237,7 @@ section{
                             animation-delay: calc((13s / var(--quantity)) * (var(--position) - 1) - 13s) !important;
                             padding: 0 2rem;
                             img {
-                                width: 60%;
+                                width: 100%;
                                 height: auto;
                                 object-fit: cover;
                             }

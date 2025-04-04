@@ -361,7 +361,7 @@ section {
 #section-profession .profession .profession-container {
   width: 100%;
 }
-#section-profession .profession .profession-container .mb {
+#section-profession .profession .profession-container .mb-slide {
   display: none;
 }
 #section-profession .profession .profession-container .slider {
@@ -1071,6 +1071,9 @@ section {
   }
 }
 @media (max-width: 640px) {
+  .slider {
+    --width: 160px !important; /* 1440px / 6 = 240px per item */
+  }
   :root {
     --height: 50px;
   }
@@ -1126,13 +1129,13 @@ section {
     gap: 2rem;
     height: 100%;
   }
-  #section-profession .profession .profession-container .mb {
+  #section-profession .profession .profession-container .mb-slide {
     display: flex;
   }
-  #section-profession .profession .profession-container .mb .list {
+  #section-profession .profession .profession-container .mb-slide .list {
     min-width: calc(var(--width) * var(--quantity));
   }
-  #section-profession .profession .profession-container .mb .list .item {
+  #section-profession .profession .profession-container .mb-slide .list .item {
     width: var(--width);
     height: var(--height);
     animation: autoRun 13s linear infinite; /* Adjusted timing for 13 items */
@@ -1140,8 +1143,8 @@ section {
     animation-delay: calc(13s / var(--quantity) * (var(--position) - 1) - 13s) !important;
     padding: 0 2rem;
   }
-  #section-profession .profession .profession-container .mb .list .item img {
-    width: 60%;
+  #section-profession .profession .profession-container .mb-slide .list .item img {
+    width: 100%;
     height: auto;
     -o-object-fit: cover;
        object-fit: cover;
