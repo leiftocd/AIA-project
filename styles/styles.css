@@ -108,9 +108,6 @@ section {
   font-size: 5.6em;
   color: var(--light-color);
   text-align: start;
-  animation: scrollText linear;
-  animation-timeline: scroll();
-  animation-range-start: 0%;
 }
 
 #section-about {
@@ -418,10 +415,6 @@ section {
 }
 #section-community .community .community-container .community-container_title {
   width: 100%;
-  animation: appearBox linear;
-  animation-timeline: view();
-  animation-range: entry 0% cover 60%;
-  position: relative;
 }
 #section-community .community .community-container .community-container_title h1 {
   font-weight: 700;
@@ -472,7 +465,7 @@ section {
   animation: fromRight linear;
   position: relative;
   animation-timeline: view();
-  animation-range: entry 0% cover 40%;
+  animation-range: entry 0% cover 20%;
 }
 #section-community .community .community-container .community-container_content .right-content .right-content_text {
   display: flex;
@@ -652,11 +645,11 @@ section {
 @keyframes fromRight {
   from {
     opacity: 0;
-    right: -30%;
+    transform: translateX(50%);
   }
   to {
     opacity: 1;
-    right: 0;
+    transform: translateX(0%);
   }
 }
 @keyframes scrollPicture {
@@ -667,16 +660,6 @@ section {
   to {
     opacity: 1;
     transform: translateX(-100%);
-  }
-}
-@keyframes scrollText {
-  from {
-    opacity: 1;
-    transform: translateX(0%);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(100%);
   }
 }
 .slider:hover .item {
