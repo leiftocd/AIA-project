@@ -12,6 +12,9 @@
   --intro-bg: rgba(80, 251, 199, 0.24);
   --green-color: #50fbc7;
   --dark-text: #145567;
+  --width: 100px;
+  --height: 60px;
+  --quantity: 26;
 }
 
 text {
@@ -76,7 +79,6 @@ section {
   display: flex;
   align-items: center;
   width: 50%;
-  position: relative;
 }
 #section-banner .banner .banner-content .banner-content_img img {
   width: 100%;
@@ -91,6 +93,8 @@ section {
   max-height: 54.2rem;
   margin: 0 auto;
   padding-right: 5rem;
+  position: relative;
+  animation: fromLeft 1s ease-in-out;
 }
 #section-banner .banner .banner-content .banner-content_text p {
   max-width: 80%;
@@ -155,6 +159,10 @@ section {
   -webkit-backdrop-filter: blur(4px);
           backdrop-filter: blur(4px);
 }
+#section-about .about .about-container .about-container_box .box-img img {
+  opacity: 0.4;
+  filter: blur(1px);
+}
 #section-about .about .about-container .about-container_box .box-content {
   display: flex;
   flex-direction: column;
@@ -165,7 +173,7 @@ section {
   font-size: 36px;
   line-height: 100%;
   color: var(--green-color);
-  opacity: 0.6;
+  opacity: 0.3;
 }
 #section-about .about .about-container .about-container_box .box-content p {
   display: none;
@@ -209,6 +217,10 @@ section {
   border: 1 solid #FFF;
   background: linear-gradient(180deg, #5BFFF4 0%, #081120 100%);
 }
+#section-about .about .about-container .active .box-img img {
+  opacity: 1;
+  filter: blur(0);
+}
 #section-about .about .about-container .active .box-content span {
   opacity: 1;
 }
@@ -245,6 +257,10 @@ section {
   grid-template-columns: auto auto auto;
   gap: 2rem;
   justify-content: center;
+  animation: appearBox linear;
+  animation-timeline: view();
+  animation-range: entry 0% cover 30%;
+  position: relative;
 }
 #section-introduction .introduction .introduction-content .box1 {
   grid-area: 1/1;
@@ -277,6 +293,8 @@ section {
   padding: 8.4rem 1.5rem;
   max-width: 40rem;
   max-height: 38rem;
+  position: relative;
+  animation: scaleA linear 0.3s;
 }
 #section-introduction .introduction .introduction-content .introduction-content_box span {
   font-weight: 700;
@@ -339,44 +357,36 @@ section {
 }
 #section-profession .profession .profession-container {
   width: 100%;
-  height: 100%;
+}
+#section-profession .profession .profession-container .slider {
+  width: 100%;
+  height: var(--height);
   overflow: hidden;
 }
-#section-profession .profession .profession-container .swiper,
-#section-profession .profession .profession-container .top-slide,
-#section-profession .profession .profession-container .bottom-slide {
-  max-height: 8.8rem;
-  width: 100%;
-  display: flex;
-  align-items: center;
-}
-#section-profession .profession .profession-container .swiper .swiper-wrapper,
-#section-profession .profession .profession-container .top-slide .swiper-wrapper,
-#section-profession .profession .profession-container .bottom-slide .swiper-wrapper {
+#section-profession .profession .profession-container .slider .list {
   display: flex;
   width: 100%;
-  align-items: center;
+  min-width: calc(var(--width) * var(--quantity));
+  position: relative;
 }
-#section-profession .profession .profession-container .swiper .swiper-wrapper .swiper-slide,
-#section-profession .profession .profession-container .top-slide .swiper-wrapper .swiper-slide,
-#section-profession .profession .profession-container .bottom-slide .swiper-wrapper .swiper-slide {
-  width: 100%;
-  text-align: center;
-  font-size: 18px;
+#section-profession .profession .profession-container .slider .list .item {
   display: flex;
   align-items: center;
+  justify-content: center;
+  width: var(--width);
+  height: var(--height);
+  position: absolute;
+  left: 100%;
+  animation: autoRun 26s linear infinite; /* Adjusted timing for 26 items */
+  transition: filter 0.5s;
+  animation-delay: calc(26s / var(--quantity) * (var(--position) - 1) - 26s) !important;
+  padding: 0 4rem;
 }
-#section-profession .profession .profession-container .swiper .swiper-wrapper .swiper-slide img,
-#section-profession .profession .profession-container .top-slide .swiper-wrapper .swiper-slide img,
-#section-profession .profession .profession-container .bottom-slide .swiper-wrapper .swiper-slide img {
+#section-profession .profession .profession-container .slider .list .item img {
   width: 100%;
   height: auto;
   -o-object-fit: cover;
      object-fit: cover;
-}
-#section-profession .profession .profession-container .bottom-slide,
-#section-profession .profession .profession-container .top-slide {
-  display: none;
 }
 
 #section-community {
@@ -399,6 +409,10 @@ section {
 }
 #section-community .community .community-container .community-container_title {
   width: 100%;
+  animation: appearBox linear;
+  animation-timeline: view();
+  animation-range: entry 0% cover 60%;
+  position: relative;
 }
 #section-community .community .community-container .community-container_title h1 {
   font-weight: 700;
@@ -416,6 +430,10 @@ section {
   gap: 3.2rem;
   display: flex;
   flex-direction: column;
+  animation: fromLeft linear;
+  position: relative;
+  animation-timeline: view();
+  animation-range: entry 0% cover 60%;
 }
 #section-community .community .community-container .community-container_content .left-content .left-content_title {
   display: flex;
@@ -442,6 +460,10 @@ section {
   flex-direction: column-reverse;
   max-width: 100%;
   gap: 2rem;
+  animation: fromRight linear;
+  position: relative;
+  animation-timeline: view();
+  animation-range: entry 0% cover 40%;
 }
 #section-community .community .community-container .community-container_content .right-content .right-content_text {
   display: flex;
@@ -577,19 +599,10 @@ section {
   width: 3.2rem;
   height: 3.2rem;
 }
-#section-footer .footer .footer-content .footer-content_right .social .gmail,
-#section-footer .footer .footer-content .footer-content_right .social .telegram {
-  padding-left: 1.2rem;
-}
+#section-footer .footer .footer-content .footer-content_right .social .mail,
+#section-footer .footer .footer-content .footer-content_right .social .telegram,
 #section-footer .footer .footer-content .footer-content_right .social .x {
-  padding: 8px 20px 8px 12px;
-  border-radius: 24px;
-  border: 1px solid #50FBC7;
-  background: rgba(80, 251, 199, 0.08);
-}
-#section-footer .footer .footer-content .footer-content_right .social .x:hover {
-  background: #003835;
-  box-shadow: #50FBC7 0px 0 12px;
+  padding-left: 1.2rem;
 }
 
 .about, .community, .introduction, .footer {
@@ -597,7 +610,64 @@ section {
   margin: 0 auto;
 }
 
+@keyframes fromLeft {
+  from {
+    opacity: 0;
+    left: -5%;
+  }
+  to {
+    left: 0;
+    opacity: 1;
+  }
+}
+@keyframes appearBox {
+  from {
+    opacity: 0;
+    -webkit-clip-path: inset(100% 100% 0 0);
+            clip-path: inset(100% 100% 0 0);
+  }
+  to {
+    opacity: 1;
+    -webkit-clip-path: inset(0 0 0 0);
+            clip-path: inset(0 0 0 0);
+  }
+}
+@keyframes autoRun {
+  from {
+    left: 100%;
+  }
+  to {
+    left: calc(var(--width) * -1);
+  }
+}
+@keyframes scaleA {
+  from {
+    overflow: 0;
+    top: -10%;
+  }
+  to {
+    overflow: 0;
+    top: 0;
+  }
+}
+@keyframes fromRight {
+  from {
+    opacity: 0;
+    right: -30%;
+  }
+  to {
+    opacity: 1;
+    right: 0;
+  }
+}
+.slider:hover .item {
+  animation-play-state: paused !important;
+}
+
 @media (max-width: 1440px) {
+  .slider {
+    --width: 240px; /* 1440px / 6 = 240px per item */
+  }
   #section-banner {
     padding: 10rem 0;
   }
@@ -893,17 +963,6 @@ section {
   #section-profession .profession .profession-container {
     flex-direction: column;
     gap: 2rem;
-  }
-  #section-profession .profession .profession-container .swiper,
-  #section-profession .profession .profession-container .top-slide,
-  #section-profession .profession .profession-container .bottom-slide {
-    width: 100%;
-    padding: 0.5rem 1rem;
-  }
-  #section-profession .profession .profession-container .swiper .swiper-wrapper .swiper-slide,
-  #section-profession .profession .profession-container .top-slide .swiper-wrapper .swiper-slide,
-  #section-profession .profession .profession-container .bottom-slide .swiper-wrapper .swiper-slide {
-    font-size: 18px;
   }
 }
 @media (max-width: 768px) {

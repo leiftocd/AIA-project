@@ -11,6 +11,9 @@
     --intro-bg: rgba(80, 251, 199, 0.24);
     --green-color: #50fbc7;
     --dark-text: #145567;
+    --width: 100px;
+    --height: 60px;
+    --quantity: 26;
     
 }
 text{
@@ -67,7 +70,6 @@ section{
                 display: flex;
                 align-items: center;
                 width: 50%;
-                position: relative;
                 img{
                     width: 100%;
                     max-width: 100%;
@@ -81,6 +83,8 @@ section{
                 max-height: 54.2rem;
                 margin: 0 auto;
                 padding-right: 5rem;
+                position: relative;
+                animation: fromLeft 1s ease-in-out;
                 p{
                     max-width: 80%;
                     font-weight: 700;
@@ -91,7 +95,6 @@ section{
             }
         }
     }
-
 }
 #section-about{
     margin-top: 5rem;
@@ -142,6 +145,10 @@ section{
                     border-radius: 19.069px;
                     background: #001621;
                     backdrop-filter: blur(4px);
+                    img{
+                        opacity: .4;
+                        filter: blur(1px);
+                    }
                 }
                 .box-content{
                     display: flex;
@@ -152,7 +159,7 @@ section{
                         font-size: 36px;
                         line-height: 100%;
                         color: var(--green-color);
-                        opacity: .6;
+                        opacity: .3;
                     }   
                     p{
                         display: none;
@@ -196,6 +203,10 @@ section{
                     max-height: 24rem;
                     border: 1 solid #FFF;
                     background: linear-gradient(180deg, #5BFFF4 0%, #081120 100%);
+                    img{
+                        opacity: 1;
+                        filter: blur(0);
+                    }
                 }
                 .box-content{
                     span{
@@ -237,6 +248,10 @@ section{
             grid-template-columns: auto auto auto;
             gap: 2rem;
             justify-content: center;
+            animation: appearBox linear;
+            animation-timeline: view();
+            animation-range: entry 0%  cover 30%;
+            position: relative;
             .box1{
                 grid-area: 1/1;
             }
@@ -268,6 +283,8 @@ section{
                 padding: 8.4rem 1.5rem;
                 max-width: 40rem;
                 max-height: 38rem;
+                position: relative;
+                animation:  scaleA linear .3s;
                 span{
                     font-weight: 700;
                     font-size: 36px;
@@ -330,25 +347,27 @@ section{
         }
         .profession-container{
             width: 100%;
-            height: 100%;
-            overflow: hidden;
-            .swiper,
-            .top-slide, 
-            .bottom-slide{
-                max-height: 8.8rem;
+            .slider {
                 width: 100%;
-                display: flex;
-                align-items: center;
-                .swiper-wrapper {
+                height: var(--height);
+                overflow: hidden;
+                .list {
                     display: flex;
                     width: 100%;
-                    align-items: center;
-                    .swiper-slide {
-                        width: 100%;
-                        text-align: center;
-                        font-size: 18px;
+                    min-width: calc(var(--width) * var(--quantity));
+                    position: relative;
+                    .item {
                         display: flex;
                         align-items: center;
+                        justify-content: center;
+                        width: var(--width);
+                        height: var(--height);
+                        position: absolute;
+                        left: 100%;
+                        animation: autoRun 26s linear infinite; /* Adjusted timing for 26 items */
+                        transition: filter 0.5s;
+                        animation-delay: calc((26s / var(--quantity)) * (var(--position) - 1) - 26s) !important;
+                        padding: 0 4rem;
                         img {
                             width: 100%;
                             height: auto;
@@ -357,16 +376,12 @@ section{
                     }
                 }
             }
-            .bottom-slide,
-            .top-slide{
-                display: none;
-            }
-            
             
             
         }
     }
 }
+
 #section-community{
     max-width: 144rem;
     width: 100%;
@@ -384,6 +399,10 @@ section{
             gap: 6rem;
             .community-container_title{
                 width: 100%;
+                animation: appearBox linear;
+                animation-timeline: view();
+                animation-range: entry 0%  cover 60%;
+                position: relative;
                 h1{
                     font-weight: 700;
                     font-size: 60px;
@@ -401,6 +420,10 @@ section{
                     gap: 3.2rem;
                     display: flex;
                     flex-direction: column;
+                    animation: fromLeft linear;
+                    position: relative;
+                    animation-timeline: view();
+                    animation-range: entry 0%  cover 60%;
                     .left-content_title{
                         display: flex;
                         span{
@@ -427,6 +450,10 @@ section{
                     flex-direction: column-reverse;
                     max-width: 100%;
                     gap: 2rem;
+                    animation: fromRight linear;
+                    position: relative;
+                    animation-timeline: view();
+                    animation-range: entry 0%  cover 40%;
                     .right-content_text{
                         display: flex;
                         gap: 6rem;
@@ -556,19 +583,10 @@ section{
                             height: 3.2rem;
                         }
                     }
-                    .gmail,
-                    .telegram{
-                        padding-left: 1.2rem;
-                    }
+                    .mail,
+                    .telegram,
                     .x{
-                        padding: 8px 20px 8px 12px ;
-                        border-radius: 24px;
-                        border: 1px solid #50FBC7;
-                        background: rgba(80, 251, 199, 0.08);
-                        &:hover{
-                            background: #003835;
-                            box-shadow: #50FBC7 0px 0 12px;
-                        }
+                        padding-left: 1.2rem;
                     }
                 }
             }
@@ -579,8 +597,61 @@ section{
     max-width: 124rem;
     margin: 0 auto;
 }
-
+//animations
+@keyframes fromLeft {
+    from{
+        opacity: 0;
+        left: -5%;
+    }
+    to{
+        left: 0;
+        opacity: 1;
+    }
+}
+@keyframes appearBox{
+    from {
+        opacity: 0;
+        clip-path: inset(100% 100% 0 0);
+    }to{
+        opacity: 1;
+        clip-path: inset(0 0 0 0);
+    }
+}
+@keyframes autoRun {
+    from {
+        left: 100%;
+    }
+    to {
+        left: calc(var(--width) * -1);
+    }
+}
+@keyframes scaleA{
+    from{
+        overflow: 0;
+        top: -10%;
+    }to{
+        overflow: 0;
+        top: 0;
+    }
+}
+@keyframes fromRight{
+    from{
+        opacity: 0;
+        right: -30%;
+    }
+    to{
+        opacity: 1;
+        right: 0;
+    }
+}
+.slider:hover .item {
+    animation-play-state: paused !important;
+}
+//responsive
 @media (max-width: 1440px){
+    .slider {
+        --width: 240px; /* 1440px / 6 = 240px per item */
+    }
     #section-banner{
         padding: 10rem 0;
         .banner{
@@ -965,17 +1036,6 @@ section{
             .profession-container{
                 flex-direction: column;
                 gap: 2rem;
-                .swiper, 
-                .top-slide,
-                .bottom-slide {
-                    width: 100%;
-                    padding: .5rem 1rem;
-                    .swiper-wrapper {
-                        .swiper-slide {
-                            font-size: 18px;
-                        }
-                    }
-                }
             }
         }
     }

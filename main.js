@@ -2,15 +2,11 @@
 
 document.addEventListener("DOMContentLoaded", () => {
     const items = document.querySelectorAll(".about-container_box");
-
     // Set initial active state
     items[0].classList.add("active");
-    
     let timeout; // Store timeout reference
-    
     function updateStyles() {
         clearTimeout(timeout); // Clear any previous timeout
-    
         timeout = setTimeout(() => {
             // Reset all item positions first
             items.forEach(item => item.style.top = "");
@@ -19,7 +15,6 @@ document.addEventListener("DOMContentLoaded", () => {
             if (items[1].classList.contains("active") && items[2]) {
                 items[2].style.top = "80%";
             } 
-            
             // If item 3 (index 2) is active, move item 1 (index 0) to top: 20%
             if (items[2].classList.contains("active") && items[0]) {
                 items[0].style.top = "20%";
@@ -27,7 +22,6 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         }, 200); // Adjust delay as needed
     }
-    
     // Add event listener to each item
     items.forEach(item => {
         item.addEventListener("mouseenter", () => {
@@ -39,8 +33,6 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
     
-
-
   const swiper = new Swiper('.mySwiper', {
     spaceBetween: 40, // Space between slides
     loop: true, // Enable looping
@@ -53,8 +45,8 @@ document.addEventListener("DOMContentLoaded", () => {
         clickable: true,
     },
     autoplay: {
-        delay: 3000, // Auto-slide every 3 seconds
-        disableOnInteraction: false,
+        delay: 0, // Auto-slide every 3 seconds
+        disableOnInteraction: true,
     },
     breakpoints: {
         1440: { slidesPerView: 6 }, // 6 slides on 1440px and above
