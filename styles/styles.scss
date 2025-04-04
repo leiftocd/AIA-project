@@ -70,10 +70,16 @@ section{
                 display: flex;
                 align-items: center;
                 width: 50%;
+                animation: scrollPicture linear;
+                animation-timeline: scroll();
+                animation-range-start: 0%;
+                position: relative;
                 img{
                     width: 100%;
                     max-width: 100%;
                     object-fit: cover;
+                    animation: fromLeft 1s ease-in-out;
+                    position: relative;
                 }
             }
             .banner-content_text{
@@ -91,6 +97,9 @@ section{
                     font-size: 5.6em;
                     color: var(--light-color);
                     text-align: start;
+                    animation: scrollText linear;
+                    animation-timeline: scroll();
+                    animation-range-start: 0%;    
                 }
             }
         }
@@ -234,6 +243,7 @@ section{
         display: flex;
         flex-direction: column;
         gap: 4rem;
+        position: relative;
         .introduction-title{
             width: 100%;
             h1{
@@ -248,9 +258,6 @@ section{
             grid-template-columns: auto auto auto;
             gap: 2rem;
             justify-content: center;
-            animation: appearBox linear;
-            animation-timeline: view();
-            animation-range: entry 0%  cover 30%;
             position: relative;
             .box1{
                 grid-area: 1/1;
@@ -283,8 +290,10 @@ section{
                 padding: 8.4rem 1.5rem;
                 max-width: 40rem;
                 max-height: 38rem;
+                animation: fromLeft linear;
                 position: relative;
-                animation:  scaleA linear .3s;
+                animation-timeline: view();
+                animation-range: entry 0%  cover 30%;
                 span{
                     font-weight: 700;
                     font-size: 36px;
@@ -625,15 +634,6 @@ section{
         left: calc(var(--width) * -1);
     }
 }
-@keyframes scaleA{
-    from{
-        overflow: 0;
-        top: -10%;
-    }to{
-        overflow: 0;
-        top: 0;
-    }
-}
 @keyframes fromRight{
     from{
         opacity: 0;
@@ -644,6 +644,37 @@ section{
         right: 0;
     }
 }
+@keyframes scrollPicture{
+    from{
+        opacity: 1;
+        transform: translateX(0%);
+    }
+    to{
+        opacity: 1;
+        transform: translateX(-100%);
+    }
+}
+@keyframes scrollText{
+    from{
+        opacity: 1;
+        transform: translateX(0%);
+    }
+    to{
+        opacity: 1;
+        transform: translateX(100%);
+    }
+}
+// @keyframes moveUp{
+//     from{
+//         opacity: 0;
+//         bottom: -30%;
+//     }
+//     to{
+//         opacity: 1;
+//         bottom: 0;
+//     }
+// }
+
 .slider:hover .item {
     animation-play-state: paused !important;
 }
@@ -776,9 +807,7 @@ section{
             font-size: 2em !important;
         }
         .introduction {
-    
             .introduction-content {
-    
                 .introduction-content_box {
                     padding: 5rem 1.5rem;
                 }
@@ -955,7 +984,6 @@ section{
                     }
                 }
             }
-            
         }
     }
     #section-introduction{
@@ -966,9 +994,7 @@ section{
             font-size: 1.8em !important;
         }
         .introduction {
-    
             .introduction-content {
-    
                 .introduction-content_box {
                     padding: 4rem 1.5rem;
                 }

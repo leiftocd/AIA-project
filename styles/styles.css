@@ -79,12 +79,18 @@ section {
   display: flex;
   align-items: center;
   width: 50%;
+  animation: scrollPicture linear;
+  animation-timeline: scroll();
+  animation-range-start: 0%;
+  position: relative;
 }
 #section-banner .banner .banner-content .banner-content_img img {
   width: 100%;
   max-width: 100%;
   -o-object-fit: cover;
      object-fit: cover;
+  animation: fromLeft 1s ease-in-out;
+  position: relative;
 }
 #section-banner .banner .banner-content .banner-content_text {
   width: 50%;
@@ -102,6 +108,9 @@ section {
   font-size: 5.6em;
   color: var(--light-color);
   text-align: start;
+  animation: scrollText linear;
+  animation-timeline: scroll();
+  animation-range-start: 0%;
 }
 
 #section-about {
@@ -242,6 +251,7 @@ section {
   display: flex;
   flex-direction: column;
   gap: 4rem;
+  position: relative;
 }
 #section-introduction .introduction .introduction-title {
   width: 100%;
@@ -257,9 +267,6 @@ section {
   grid-template-columns: auto auto auto;
   gap: 2rem;
   justify-content: center;
-  animation: appearBox linear;
-  animation-timeline: view();
-  animation-range: entry 0% cover 30%;
   position: relative;
 }
 #section-introduction .introduction .introduction-content .box1 {
@@ -293,8 +300,10 @@ section {
   padding: 8.4rem 1.5rem;
   max-width: 40rem;
   max-height: 38rem;
+  animation: fromLeft linear;
   position: relative;
-  animation: scaleA linear 0.3s;
+  animation-timeline: view();
+  animation-range: entry 0% cover 30%;
 }
 #section-introduction .introduction .introduction-content .introduction-content_box span {
   font-weight: 700;
@@ -640,16 +649,6 @@ section {
     left: calc(var(--width) * -1);
   }
 }
-@keyframes scaleA {
-  from {
-    overflow: 0;
-    top: -10%;
-  }
-  to {
-    overflow: 0;
-    top: 0;
-  }
-}
 @keyframes fromRight {
   from {
     opacity: 0;
@@ -658,6 +657,26 @@ section {
   to {
     opacity: 1;
     right: 0;
+  }
+}
+@keyframes scrollPicture {
+  from {
+    opacity: 1;
+    transform: translateX(0%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-100%);
+  }
+}
+@keyframes scrollText {
+  from {
+    opacity: 1;
+    transform: translateX(0%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(100%);
   }
 }
 .slider:hover .item {
