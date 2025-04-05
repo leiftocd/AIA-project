@@ -12,11 +12,11 @@ document.addEventListener('DOMContentLoaded', () => {
         items.forEach(item => item.classList.remove("active"));
         items.forEach(item => item.style.top = ""); 
 
-        if (scrollPercent >= 2 && items[2]) {
+        if (scrollPercent >= 1 && items[2]) {
             items[2].classList.add("active");
             items[2].style.top = "80%"; // Move item 3
             items[0].style.top = "20%"; // Ensure item 1 moves when item 3 is active
-        } else if (scrollPercent >= 0.80 && items[1]) {
+        } else if (scrollPercent >= 0.40 && items[1]) {
             items[1].classList.add("active");
             items[2].style.top = "80%"; // Keep moving item 3
         } else if (scrollPercent >= 0 && items[0]) {
