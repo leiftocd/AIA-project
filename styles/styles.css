@@ -146,7 +146,7 @@ section {
   position: absolute;
 }
 #section-about .about .about-container .about-container_box .box-img {
-  transition: all 0.3s ease-in-out;
+  transition: all 0.7s ease-in-out;
   display: flex;
   max-width: 25rem;
   width: 100%;
@@ -205,7 +205,7 @@ section {
 #section-about .about .about-container .active {
   display: flex;
   gap: 4.5rem;
-  transition: all ease-in-out 0.3s;
+  transition: all ease-in-out 0.7s;
   opacity: 1;
   filter: unset;
 }
