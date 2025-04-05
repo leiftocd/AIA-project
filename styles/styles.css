@@ -1222,6 +1222,7 @@ section {
   #section-profession .profession .profession-container {
     gap: 2rem;
     height: 100%;
+    padding: 0 1.5rem;
   }
   #section-profession .profession .profession-container .mb-slide,
   #section-profession .profession .profession-container .mb-slide2 {
