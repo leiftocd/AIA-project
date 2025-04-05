@@ -1352,6 +1352,9 @@ section {
     padding: 0 1.5rem;
     margin: 5rem 0;
   }
+  #section-about .about {
+    gap: 6rem;
+  }
   #section-about .about .about-title {
     padding: 0;
   }
