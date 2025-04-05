@@ -146,7 +146,7 @@ section {
   position: absolute;
 }
 #section-about .about .about-container .about-container_box .box-img {
-  transition: all 0.4s ease-in-out;
+  transition: all 0.3s ease-in-out;
   display: flex;
   max-width: 25rem;
   width: 100%;
@@ -161,9 +161,9 @@ section {
   background: #001621;
   -webkit-backdrop-filter: blur(4px);
           backdrop-filter: blur(4px);
+  opacity: 0.1;
 }
 #section-about .about .about-container .about-container_box .box-img img {
-  opacity: 0.4;
   filter: blur(1px);
 }
 #section-about .about .about-container .about-container_box .box-content {
@@ -176,7 +176,7 @@ section {
   font-size: 36px;
   line-height: 100%;
   color: var(--green-color);
-  opacity: 0.3;
+  opacity: 0.1;
 }
 #section-about .about .about-container .about-container_box .box-content p {
   display: none;
@@ -208,7 +208,7 @@ section {
 #section-about .about .about-container .active {
   display: flex;
   gap: 4.5rem;
-  transition: all ease-in-out 0.4s;
+  transition: all ease-in-out 0.3s;
   opacity: 1;
   filter: unset;
 }
@@ -219,9 +219,9 @@ section {
   max-height: 24rem;
   border: 1 solid #FFF;
   background: linear-gradient(180deg, #5BFFF4 0%, #081120 100%);
+  opacity: 1;
 }
 #section-about .about .about-container .active .box-img img {
-  opacity: 1;
   filter: blur(0);
 }
 #section-about .about .about-container .active .box-content span {

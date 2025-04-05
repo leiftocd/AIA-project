@@ -133,7 +133,7 @@ section{
                 opacity: 1;
                 position: absolute;
                 .box-img{
-                    transition: all .5s ease-in-out;
+                    transition: all .3s ease-in-out;
                     display: flex;
                     max-width: 25rem;
                     width: 100%;
@@ -147,8 +147,8 @@ section{
                     border-radius: 19.069px;
                     background: #001621;
                     backdrop-filter: blur(4px);
+                    opacity: .1;
                     img{
-                        opacity: .4;
                         filter: blur(1px);
                     }
                 }
@@ -161,7 +161,7 @@ section{
                         font-size: 36px;
                         line-height: 100%;
                         color: var(--green-color);
-                        opacity: .3;
+                        opacity: .1;
                     }   
                     p{
                         display: none;
@@ -195,7 +195,7 @@ section{
             .active{
                 display: flex;
                 gap: 4.5rem;
-                transition: all ease-in-out .5s;
+                transition: all ease-in-out .3s;
                 opacity: 1;
                 filter: unset;
                 .box-img{
@@ -205,8 +205,8 @@ section{
                     max-height: 24rem;
                     border: 1 solid #FFF;
                     background: linear-gradient(180deg, #5BFFF4 0%, #081120 100%);
+                    opacity: 1;
                     img{
-                        opacity: 1;
                         filter: blur(0);
                     }
                 }
