@@ -163,9 +163,6 @@ section {
           backdrop-filter: blur(4px);
   opacity: 0.1;
 }
-#section-about .about .about-container .about-container_box .box-img img {
-  filter: blur(1px);
-}
 #section-about .about .about-container .about-container_box .box-content {
   display: flex;
   flex-direction: column;
@@ -221,13 +218,15 @@ section {
   background: linear-gradient(180deg, #5BFFF4 0%, #081120 100%);
   opacity: 1;
 }
-#section-about .about .about-container .active .box-img img {
-  filter: blur(0);
+#section-about .about .about-container .active .box-content {
+  transition: all ease-in-out 0.4s;
 }
 #section-about .about .about-container .active .box-content span {
   opacity: 1;
+  transition: all linear 0.7s;
 }
 #section-about .about .about-container .active .box-content p {
+  transition: all linear 0.7s;
   display: block;
   font-weight: 400;
   font-size: 24px;

@@ -148,9 +148,6 @@ section{
                     background: #001621;
                     backdrop-filter: blur(4px);
                     opacity: .1;
-                    img{
-                        filter: blur(1px);
-                    }
                 }
                 .box-content{
                     display: flex;
@@ -206,15 +203,15 @@ section{
                     border: 1 solid #FFF;
                     background: linear-gradient(180deg, #5BFFF4 0%, #081120 100%);
                     opacity: 1;
-                    img{
-                        filter: blur(0);
-                    }
                 }
                 .box-content{
+                    transition: all ease-in-out .4s;
                     span{
                         opacity: 1;
+                        transition: all linear .7s;
                     }
                     p{
+                        transition: all linear .7s;
                         display: block;
                         font-weight: 400;
                         font-size: 24px;
