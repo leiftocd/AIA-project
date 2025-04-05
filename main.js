@@ -1,34 +1,40 @@
 document.addEventListener('DOMContentLoaded', () => {
     const items = document.querySelectorAll(".about-container_box");
     const sectionAbout = document.querySelector("#section-about");
-    function handleScroll() {
-        const sectionRect = sectionAbout.getBoundingClientRect();
+
+    if (!sectionAbout || items.length === 0) return;
+
+    const handleScroll = () => {
+        const sectionTop = sectionAbout.offsetTop;
         const sectionHeight = sectionAbout.offsetHeight;
-        const scrollPosition = window.scrollY + window.innerHeight / 2; // Middle of viewport
-        const sectionTop = sectionRect.top + window.scrollY;
-        // Calculate scroll percentage
-        const scrollPercent = (scrollPosition - sectionTop) / sectionHeight;
-        // Reset styles
-        items.forEach(item => item.classList.remove("active"));
-        items.forEach(item => item.style.top = ""); 
+        const scrollMid = window.scrollY + window.innerHeight / 2;
+
+        const scrollPercent = (scrollMid - sectionTop) / sectionHeight;
+
+        // Reset all items
+        items.forEach((item, index) => {
+            item.classList.remove("active", "hidden");
+            item.style.top = "";
+        });
 
         if (scrollPercent >= 1 && items[2]) {
+            items[0].classList.add("hidden");
             items[2].classList.add("active");
-            items[2].style.top = "80%"; // Move item 3
-            items[0].style.top = "20%"; // Ensure item 1 moves when item 3 is active
-        } else if (scrollPercent >= 0.40 && items[1]) {
+            items[2].style.top = "80%";
+            items[0].style.top = "20%";
+        } else if (scrollPercent >= 0.4 && items[1]) {
             items[1].classList.add("active");
-            items[2].style.top = "80%"; // Keep moving item 3
+            items[2].style.top = "80%";
         } else if (scrollPercent >= 0 && items[0]) {
             items[0].classList.add("active");
-        } else if (items[0]) {
+            items[2].classList.add("hidden");
+        } else {
             items[0].classList.add("active");
         }
-    }
-    // Initial active state
+    };
+
     items[0].classList.add("active");
 
-    // Add scroll listener for both mobile & desktop
-    window.addEventListener('scroll', handleScroll);
-    handleScroll(); // Initial call
+    window.addEventListener("scroll", handleScroll);
+    handleScroll(); // Trigger once on load
 });
