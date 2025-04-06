@@ -96,7 +96,7 @@ section {
   height: 11rem;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: end;
 }
 #section-banner .banner .banner-title .banner-title_img img {
   width: 100%;
