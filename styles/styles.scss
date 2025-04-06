@@ -30,8 +30,7 @@ section{
     padding: 6rem 12rem;
 }
 #section-banner{
-    max-height: 80rem;
-    padding: 6rem 0 0 0!important;
+    padding: unset;
     .banner{
         width: 100%;
         display: flex;
@@ -88,7 +87,6 @@ section{
                 align-items: center;
                 justify-content: end;
                 img{
-                    width: 100%;
                     object-fit: contain;
                     height: 100%;
                 }
@@ -804,7 +802,8 @@ section{
         --width: 240px; /* 1440px / 6 = 240px per item */
     }
     #section-banner{
-        padding: 10rem 0;
+        margin: 0 0 4rem 0;
+        padding: 2rem 0;
         .banner{
             .banner-ellipse{
                 right: 20rem;
@@ -871,7 +870,6 @@ section{
         padding: 6rem;
     }
     #section-banner{
-        padding-top: 5rem !important;
         .banner{
             .banner-content{
                 .banner-content_text{
@@ -1076,9 +1074,6 @@ section{
             }
         }
 
-    }
-    #section-banner{
-        padding: 4rem 0 0 0 !important;
     }
     #section-about{
         padding: 0 4rem 4rem;
