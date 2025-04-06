@@ -1,4 +1,3 @@
-@charset "UTF-8";
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&family=Roboto:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap");
 * {
   padding: 0;
@@ -168,7 +167,7 @@ section {
   margin-top: 8rem;
   max-width: 144rem;
   width: 100%;
-  height: 75vh;
+  height: 60vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -178,7 +177,7 @@ section {
   height: 100%;
   display: flex;
   flex-direction: column;
-  gap: 8rem; /* Đây là khoảng cách giữa title và container */
+  gap: 8rem;
 }
 #section-about .about .about-title {
   width: 100%;
@@ -197,8 +196,6 @@ section {
   position: relative;
   scroll-behavior: smooth;
   padding-right: 1rem;
-  /* Giảm khoảng cách giữa các box trong container */
-  gap: 10px; /* Giảm khoảng cách giữa các box xuống 10px */
 }
 #section-about .about .about-container .about-container_box {
   position: relative;
@@ -206,13 +203,15 @@ section {
   align-items: center;
   gap: 4.5rem;
   opacity: 0;
-  transform: translateY(40px); /* Start from below */
+  transform: translateY(-40px); /* Start from below */
   transition: opacity 1.5s linear, transform 1.5s linear;
   pointer-events: none;
   min-height: 100%;
   flex-shrink: 0;
 }
 #section-about .about .about-container .about-container_box .box-img {
+  height: 100%;
+  width: 100%;
   max-width: 25rem;
   max-height: 24rem;
   padding: 3rem 2rem;
@@ -253,7 +252,7 @@ section {
 #section-introduction {
   max-width: 144rem;
   width: 100%;
-  margin-top: 10rem;
+  margin-top: 5rem;
 }
 #section-introduction .introduction {
   display: flex;
@@ -819,6 +818,15 @@ section {
     gap: 10.3rem;
     justify-content: unset;
   }
+  #section-about {
+    margin-top: 8rem;
+    max-width: 144rem;
+    width: 100%;
+    height: 67vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 }
 @media (max-width: 1200px) {
   h1 {
@@ -991,9 +999,6 @@ section {
   #section-banner .banner .banner-title .banner-title_img {
     height: 8rem;
   }
-  #section-about {
-    padding: 0 4rem 4rem;
-  }
   #section-about .about .about-title {
     width: 100%;
   }
@@ -1021,7 +1026,7 @@ section {
     font-size: 2em;
   }
   #section-about .about .about-container .active .box-img {
-    max-width: 30rem;
+    max-width: 20rem;
     max-height: 15rem;
   }
   #section-about .about .about-container .active .box-img img {
@@ -1129,7 +1134,7 @@ section {
     max-height: 16rem;
   }
   #section-about .about .about-container .active .box-img {
-    max-width: 25rem;
+    max-width: 18rem;
     max-height: 15rem;
   }
   #section-about .about .about-container .active .box-img img {
@@ -1274,9 +1279,10 @@ section {
   }
   #section-about {
     padding: 0 1.5rem;
-    margin: 3rem 0;
+    max-height: 60vh;
   }
   #section-about .about {
+    margin: 6rem auto 0;
     gap: 6rem;
   }
   #section-about .about .about-title {
@@ -1302,7 +1308,7 @@ section {
     font-size: 1.6em;
   }
   #section-about .about .about-container .active .box-img {
-    max-width: 20rem;
+    max-width: 15rem;
     max-height: 13rem;
   }
   #section-about .about .about-container .active .box-img img {
@@ -1403,7 +1409,8 @@ section {
     gap: 1.8rem;
   }
   #section-introduction {
-    padding: 6rem 2rem 4rem;
+    padding: 0rem 2rem 4rem;
+    margin-top: 0;
   }
   #section-introduction .introduction {
     display: flex;
