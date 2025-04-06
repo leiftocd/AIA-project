@@ -1220,6 +1220,7 @@ section {
   }
   #section-banner .banner {
     gap: 6rem !important;
+    margin: 3rem auto 0;
   }
   #section-banner .banner .banner-ellipse {
     top: 0;
