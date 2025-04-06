@@ -1333,9 +1333,9 @@ section {
   #section-profession .profession .profession-container .mb-slide .list .item img,
   #section-profession .profession .profession-container .mb-slide2 .list .item img {
     width: 100%;
-    height: auto;
-    -o-object-fit: cover;
-       object-fit: cover;
+    height: 100%;
+    -o-object-fit: contain;
+       object-fit: contain;
   }
   #section-profession .profession .profession-container .pc {
     display: none;
