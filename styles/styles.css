@@ -1,3 +1,4 @@
+@charset "UTF-8";
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&family=Roboto:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap");
 * {
   padding: 0;
@@ -35,8 +36,29 @@ section {
   padding: 6rem 12rem;
 }
 
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey;
+  border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #145567;
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #b30000;
+}
+
 #section-banner {
-  padding: unset;
+  padding: 2rem 0;
 }
 #section-banner .banner {
   width: 100%;
@@ -108,6 +130,7 @@ section {
 #section-banner .banner .banner-content .banner-content_img {
   display: flex;
   align-items: center;
+  justify-content: center;
   width: 50%;
   animation: scrollPicture linear;
   animation-timeline: scroll();
@@ -126,6 +149,7 @@ section {
   width: 50%;
   display: flex;
   align-items: center;
+  justify-content: center;
   max-height: 54.2rem;
   margin: 0 auto;
   padding-right: 5rem;
@@ -141,16 +165,20 @@ section {
 }
 
 #section-about {
-  margin-top: 5rem;
+  margin-top: 8rem;
   max-width: 144rem;
   width: 100%;
+  height: 75vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 #section-about .about {
   width: 100%;
   height: 100%;
   display: flex;
   flex-direction: column;
-  gap: 8rem;
+  gap: 8rem; /* Đây là khoảng cách giữa title và container */
 }
 #section-about .about .about-title {
   width: 100%;
@@ -164,36 +192,38 @@ section {
 }
 #section-about .about .about-container {
   width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 3rem;
+  height: 100%;
+  overflow-y: scroll;
   position: relative;
-  height: 50rem;
+  scroll-behavior: smooth;
+  padding-right: 1rem;
+  /* Giảm khoảng cách giữa các box trong container */
+  gap: 10px; /* Giảm khoảng cách giữa các box xuống 10px */
 }
 #section-about .about .about-container .about-container_box {
+  position: relative;
   display: flex;
   align-items: center;
   gap: 4.5rem;
-  cursor: pointer;
-  opacity: 0.2;
-  position: absolute;
+  opacity: 0;
+  transform: translateY(40px); /* Start from below */
+  transition: opacity 1.5s linear, transform 1.5s linear;
+  pointer-events: none;
+  min-height: 100%;
+  flex-shrink: 0;
 }
 #section-about .about .about-container .about-container_box .box-img {
-  transition: all 0.6s linear;
-  display: flex;
   max-width: 25rem;
-  width: 100%;
-  height: 100%;
   max-height: 24rem;
   padding: 3rem 2rem;
-  justify-content: center;
-  align-items: center;
-  flex-shrink: 0;
-  border: 1px solid rgba(255, 255, 255, 0.3);
   border-radius: 19.069px;
   background: #001621;
   -webkit-backdrop-filter: blur(4px);
           backdrop-filter: blur(4px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 #section-about .about .about-container .about-container_box .box-content {
   display: flex;
@@ -203,68 +233,21 @@ section {
 #section-about .about .about-container .about-container_box .box-content span {
   font-weight: 700;
   font-size: 36px;
-  line-height: 100%;
   color: var(--green-color);
 }
 #section-about .about .about-container .about-container_box .box-content p {
-  transition: all linear 0.7s;
-  display: block;
-  font-weight: 400;
   font-size: 24px;
-  white-space: pre-line;
-  word-wrap: normal;
   color: var(--light-color);
 }
-#section-about .about .about-container .about-container_box:nth-child(1) {
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 88;
-}
-#section-about .about .about-container .about-container_box:nth-child(2) {
-  top: 40%;
-  left: 0;
-  right: 0;
-  z-index: 99;
-}
-#section-about .about .about-container .about-container_box:nth-child(3) {
-  top: 60%;
-  left: 0;
-  right: 0;
-  z-index: 100 !important;
-}
-#section-about .about .about-container .about-container_box .topItem1 {
-  top: 20%;
-}
-#section-about .about .about-container .about-container_box .topItem3 {
-  top: 80%;
-}
-#section-about .about .about-container .active {
-  display: flex;
-  gap: 4.5rem;
-  transition: all linear 0.6s;
+#section-about .about .about-container .about-container_box.active {
   opacity: 1;
-  filter: unset;
+  transform: translateY(0px); /* Normal position */
+  pointer-events: auto;
 }
-#section-about .about .about-container .active .box-img {
-  max-width: 40rem;
-  width: 100%;
-  height: 100%;
-  max-height: 24rem;
-  border: 1 solid #FFF;
-  background: linear-gradient(180deg, #5BFFF4 0%, #081120 100%);
-}
-#section-about .about .about-container .active .box-content {
-  transition: all ease-in-out 0.4s;
-}
-#section-about .about .about-container .active .box-content span {
-  transition: all linear 0.7s;
-}
-#section-about .about .about-container .active .box-content p {
-  color: var(--light-color);
-}
-#section-about .about .about-container .hidden {
-  opacity: 0.03 !important;
+#section-about .about .about-container .about-container_box.hidden {
+  opacity: 0;
+  transform: translateY(-30px); /* Hidden position */
+  pointer-events: none;
 }
 
 #section-introduction {
@@ -354,7 +337,7 @@ section {
   max-width: 144rem;
   display: flex;
   flex-direction: column;
-  gap: 6rem;
+  gap: 8rem;
   width: 100%;
 }
 #section-profession .profession .profession-ellipse {
@@ -391,41 +374,41 @@ section {
 }
 #section-profession .profession .profession-container {
   width: 100%;
+  position: relative;
 }
-#section-profession .profession .profession-container .mb-slide,
-#section-profession .profession .profession-container .mb-slide2 {
-  display: none;
-}
-#section-profession .profession .profession-container .slider {
-  width: 100%;
-  height: var(--height);
-  overflow: hidden;
-}
-#section-profession .profession .profession-container .slider .list {
+#section-profession .profession .profession-container .list {
   display: flex;
   width: 100%;
-  min-width: calc(var(--width) * var(--quantity));
-  position: relative;
-  height: 100%;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 3vw;
 }
-#section-profession .profession .profession-container .slider .list .item {
-  height: var(--height);
+#section-profession .profession .profession-container .list .item {
+  max-width: 20%;
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: var(--width);
-  position: absolute;
-  left: 100%;
-  animation: autoRun 52s linear infinite; /* Adjusted timing for 26 items */
-  transition: filter 0.5s;
-  animation-delay: calc(52s / var(--quantity) * (var(--position) - 2) - 52s) !important;
-  padding: 0 2rem;
+  height: 6.4vw;
+  cursor: pointer;
+  position: relative;
 }
-#section-profession .profession .profession-container .slider .list .item img {
-  width: 100%;
-  height: auto;
+#section-profession .profession .profession-container .list .item img {
+  width: 14vw;
   -o-object-fit: cover;
      object-fit: cover;
+  filter: grayscale(100%);
+}
+#section-profession .profession .profession-container .list .item:hover {
+  border-radius: 3rem;
+  transition: all 0.3s linear;
+  transform: scale(1.05);
+  background: rgba(0, 0, 0, 0.05);
+  box-shadow: rgba(80, 251, 200, 0.226) 0px 1px 4px 4px;
+}
+#section-profession .profession .profession-container .list .item:hover img {
+  filter: grayscale(0);
 }
 
 #section-community {
@@ -558,7 +541,7 @@ section {
   width: 100%;
   text-align: center;
   position: relative;
-  background-color: rgba(0, 22, 33, 0.0078431373);
+  background-color: rgba(0, 22, 33, 0.008);
 }
 #section-community .community .community-img img {
   width: 100%;
@@ -764,22 +747,6 @@ section {
             clip-path: inset(0 0 0 0);
   }
 }
-@keyframes autoRun {
-  from {
-    left: 100%;
-  }
-  to {
-    left: calc(var(--width) * -2);
-  }
-}
-@keyframes autoRunM {
-  from {
-    left: 100%;
-  }
-  to {
-    left: calc(var(--width) * -2);
-  }
-}
 @keyframes fromRight {
   from {
     opacity: 0;
@@ -810,17 +777,9 @@ section {
     transform: translateY(0);
   }
 }
-.slider:hover .item {
-  animation-play-state: paused !important;
-}
-
 @media (max-width: 1440px) {
-  .slider {
-    --width: 240px; /* 1440px / 6 = 240px per item */
-  }
   #section-banner {
     margin: 0 0 4rem 0;
-    padding: 2rem 0;
   }
   #section-banner .banner .banner-ellipse {
     right: 20rem;
@@ -1245,14 +1204,14 @@ section {
   }
 }
 @media (max-width: 640px) {
-  .slider {
-    --width: 160px !important; /* 1440px / 6 = 240px per item */
-  }
   :root {
     --height: 50px;
   }
   h1 {
     font-size: 3.6em !important;
+  }
+  #section-banner {
+    padding: 4rem 0;
   }
   #section-banner .banner {
     gap: 6rem !important;
@@ -1291,47 +1250,18 @@ section {
     padding: 6rem 0;
   }
   #section-profession .profession {
-    padding: 1rem;
+    padding: 1rem 0;
   }
-  #section-profession .profession .profession-container {
+  #section-profession .profession .profession-container .list {
+    margin-top: 8vw;
     gap: 2rem;
-    height: 100%;
-    padding: 0 1.5rem;
+    padding: 5vw;
   }
-  #section-profession .profession .profession-container .mb-slide,
-  #section-profession .profession .profession-container .mb-slide2 {
-    display: flex;
+  #section-profession .profession .profession-container .list .item {
+    width: 25%;
   }
-  #section-profession .profession .profession-container .mb-slide .list,
-  #section-profession .profession .profession-container .mb-slide2 .list {
-    display: flex;
-    width: 100%;
-    min-width: calc(var(--width) * var(--quantity));
-    position: relative;
-  }
-  #section-profession .profession .profession-container .mb-slide .list .item,
-  #section-profession .profession .profession-container .mb-slide2 .list .item {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: var(--width);
-    height: var(--height);
-    position: absolute;
-    left: 100%;
-    animation: autoRunM 26s linear infinite; /* Adjusted timing for 26 items */
-    transition: filter 0.5s;
-    animation-delay: calc(26s / var(--quantity) * (var(--position) - 2) - 26s) !important;
-    padding: 0 2rem;
-  }
-  #section-profession .profession .profession-container .mb-slide .list .item img,
-  #section-profession .profession .profession-container .mb-slide2 .list .item img {
-    width: 100%;
-    height: 100%;
-    -o-object-fit: contain;
-       object-fit: contain;
-  }
-  #section-profession .profession .profession-container .pc {
-    display: none;
+  #section-profession .profession .profession-container .list .item img {
+    width: 14.5vw;
   }
   #section-profession .profession .profession-ellipse .pc {
     display: none;

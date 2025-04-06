@@ -1,40 +1,27 @@
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener("DOMContentLoaded", () => {
+    const container = document.querySelector(".about-container");
     const items = document.querySelectorAll(".about-container_box");
-    const sectionAbout = document.querySelector("#section-about");
-
-    if (!sectionAbout || items.length === 0) return;
-
+  
     const handleScroll = () => {
-        const sectionTop = sectionAbout.offsetTop;
-        const sectionHeight = sectionAbout.offsetHeight;
-        const scrollMid = window.scrollY + window.innerHeight / 2;
-
-        const scrollPercent = (scrollMid - sectionTop) / sectionHeight;
-
-        // Reset all items
-        items.forEach((item, index) => {
-            item.classList.remove("active", "hidden");
-            item.style.top = "";
-        });
-
-        if (scrollPercent >= 1 && items[2]) {
-            items[0].classList.add("hidden");
-            items[2].classList.add("active");
-            items[2].style.top = "80%";
-            items[0].style.top = "20%";
-        } else if (scrollPercent >= 0.4 && items[1]) {
-            items[1].classList.add("active");
-            items[2].style.top = "80%";
-        } else if (scrollPercent >= 0 && items[0]) {
-            items[0].classList.add("active");
-            items[2].classList.add("hidden");
-        } else {
-            items[0].classList.add("active");
+      const scrollTop = container.scrollTop;
+      const scrollHeight = container.scrollHeight - container.clientHeight;
+      const percent = scrollTop / scrollHeight;
+      const activeIndex = Math.min(
+        Math.floor(percent * items.length),
+        items.length - 1
+      );
+  
+      items.forEach((item, index) => {
+        item.classList.remove("active", "hidden");
+  
+        if (index === activeIndex) {
+          item.classList.add("active");
+        } else if (index < activeIndex) {
+          item.classList.add("hidden");
         }
+      });
     };
-
-    items[0].classList.add("active");
-
-    window.addEventListener("scroll", handleScroll);
+  
+    container.addEventListener("scroll", handleScroll);
     handleScroll(); // Trigger once on load
-});
+  });
