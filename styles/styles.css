@@ -560,7 +560,7 @@ section {
   width: 100%;
   text-align: center;
   position: relative;
-  background-color: var(--home-bg);
+  background-color: rgba(0, 22, 33, 0.0078431373);
 }
 #section-community .community .community-img img {
   width: 100%;
@@ -1432,9 +1432,6 @@ section {
   }
   #section-community .community .community-container .community-container_content .right-content .right-content_price {
     gap: 1.5rem;
-  }
-  #section-community .community .community-img > img {
-    box-shadow: rgba(80, 251, 200, 0.15) 0px 30px 60px -12px inset, rgba(80, 251, 200, 0.2) 0px 18px 36px -18px inset;
   }
   #section-community .community .community-img .location img {
     width: 50%;

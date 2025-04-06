@@ -545,7 +545,7 @@ section{
             width: 100%;
             text-align: center;
             position: relative;
-            background-color: var(--home-bg);
+            background-color: #00162102;
             img{
                 width: 100%;
                 object-fit: cover;
@@ -1561,9 +1561,6 @@ section{
                 }
             }
             .community-img{
-                > img{
-                    box-shadow: rgba(80, 251, 200, 0.15) 0px 30px 60px -12px inset, rgba(80, 251, 200, 0.2) 0px 18px 36px -18px inset;
-                }
                 .location{
                     img{
                         width: 50%;
