@@ -394,7 +394,7 @@ section{
                     position: relative;
                     height: 100%;
                     .item {
-                        height: 100%;
+                        height: var(--height);
                         display: flex;
                         align-items: center;
                         justify-content: center;
@@ -404,11 +404,11 @@ section{
                         animation: autoRun 52s linear infinite; /* Adjusted timing for 26 items */
                         transition: filter 0.5s;
                         animation-delay: calc((52s / var(--quantity)) * (var(--position) - 2) - 52s) !important;
-                        padding: 0 1rem;
+                        padding: 0 2rem;
                         img {
                             width: 100%;
-                            object-fit: contain;
                             height: 100%;
+                            object-fit: contain;
                         }
                     }
                 }
