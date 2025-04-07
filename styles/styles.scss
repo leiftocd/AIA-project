@@ -861,14 +861,6 @@ section{
             justify-content: unset;
         }
     }
-    #section-about{
-        margin-top: 8rem;
-        max-width: 144rem;
-        width: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
 }
 @media (max-width: 1200px){
     h1{
@@ -889,7 +881,6 @@ section{
                 }
             }
         }
-    
     }
     #section-about{
         padding: 5rem 6rem;
@@ -910,7 +901,6 @@ section{
                             white-space: unset;
                         }
                     }
-                
                 }
                 .active{
                     .box-img{

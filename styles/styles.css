@@ -860,14 +860,6 @@ section {
     gap: 10.3rem;
     justify-content: unset;
   }
-  #section-about {
-    margin-top: 8rem;
-    max-width: 144rem;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
 }
 @media (max-width: 1200px) {
   h1 {
