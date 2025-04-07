@@ -1,3 +1,4 @@
+@charset "UTF-8";
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&family=Roboto:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap");
 * {
   padding: 0;
@@ -58,6 +59,7 @@ section {
 
 #section-banner {
   padding: 2rem 0;
+  margin-bottom: 12rem;
 }
 #section-banner .banner {
   width: 100%;
@@ -164,24 +166,28 @@ section {
 }
 
 #section-about {
-  margin-top: 8rem;
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
   max-width: 144rem;
   width: 100%;
-  height: 60vh;
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 6rem 12rem;
+  transition: all 0.3s ease;
 }
 #section-about .about {
   width: 100%;
   height: 100%;
   display: flex;
   flex-direction: column;
-  gap: 8rem;
 }
 #section-about .about .about-title {
   width: 100%;
-  padding-top: 4rem;
+  position: sticky;
+  top: 0;
+  z-index: 10;
 }
 #section-about .about .about-title h1 {
   font-weight: 700;
@@ -190,39 +196,44 @@ section {
   color: var(--light-color);
 }
 #section-about .about .about-container {
+  position: relative;
   width: 100%;
   height: 100%;
-  overflow-y: scroll;
-  position: relative;
-  scroll-behavior: smooth;
-  padding-right: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
 }
 #section-about .about .about-container .about-container_box {
-  position: relative;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 50%;
   display: flex;
   align-items: center;
   gap: 4.5rem;
+  cursor: pointer;
   opacity: 0;
-  transform: translateY(-40px); /* Start from below */
-  transition: opacity 1.5s linear, transform 1.5s linear;
+  transform: translateY(40px);
+  transition: opacity 1s ease, transform 1s ease; /* Tăng lên 1s */
   pointer-events: none;
-  min-height: 100%;
-  flex-shrink: 0;
 }
 #section-about .about .about-container .about-container_box .box-img {
-  height: 100%;
-  width: 100%;
+  transition: all 0.8s ease; /* Tăng lên 0.8s */
+  display: flex;
   max-width: 25rem;
+  width: 100%;
+  height: 100%;
   max-height: 24rem;
   padding: 3rem 2rem;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+  border: 1px solid rgba(255, 255, 255, 0.3);
   border-radius: 19.069px;
   background: #001621;
   -webkit-backdrop-filter: blur(4px);
           backdrop-filter: blur(4px);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 #section-about .about .about-container .about-container_box .box-content {
   display: flex;
@@ -232,33 +243,57 @@ section {
 #section-about .about .about-container .about-container_box .box-content span {
   font-weight: 700;
   font-size: 36px;
+  line-height: 100%;
   color: var(--green-color);
 }
 #section-about .about .about-container .about-container_box .box-content p {
+  transition: all 0.8s ease; /* Tăng lên 0.8s */
+  display: block;
+  font-weight: 400;
   font-size: 24px;
+  white-space: pre-line;
+  word-wrap: normal;
   color: var(--light-color);
 }
-#section-about .about .about-container .about-container_box.active {
+#section-about .about .about-container .about-container_box:nth-child(1) {
+  top: 0;
+  z-index: 88;
+}
+#section-about .about .about-container .about-container_box:nth-child(2) {
+  top: 20%;
+  z-index: 99;
+}
+#section-about .about .about-container .about-container_box:nth-child(3) {
+  top: 40%;
+  z-index: 100 !important;
+}
+#section-about .about .about-container .active {
   opacity: 1;
-  transform: translateY(0px); /* Normal position */
+  transform: translateY(0);
+  transition: opacity 1s ease, transform 1s ease; /* Tăng lên 1s */
   pointer-events: auto;
 }
-#section-about .about .about-container .about-container_box.hidden {
-  opacity: 0;
-  transform: translateY(-30px); /* Hidden position */
+#section-about .about .about-container .active .box-img {
+  max-width: 40rem;
+  border: 1px solid #FFF;
+  background: linear-gradient(180deg, #5BFFF4 0%, #081120 100%);
+}
+#section-about .about .about-container .hidden {
+  opacity: 0 !important;
   pointer-events: none;
 }
 
 #section-introduction {
   max-width: 144rem;
   width: 100%;
-  margin-top: 5rem;
+  transition: 0.5s all ease-in-out;
 }
 #section-introduction .introduction {
   display: flex;
   flex-direction: column;
   gap: 3rem;
   position: relative;
+  margin-bottom: 5rem;
 }
 #section-introduction .introduction .introduction-title {
   width: 100%;
@@ -822,7 +857,6 @@ section {
     margin-top: 8rem;
     max-width: 144rem;
     width: 100%;
-    height: 67vh;
     display: flex;
     justify-content: center;
     align-items: center;
