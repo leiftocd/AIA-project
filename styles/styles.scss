@@ -44,11 +44,6 @@ section{
     background: #145567; 
     border-radius: 10px;
   }
-  
-  /* Handle on hover */
-  ::-webkit-scrollbar-thumb:hover {
-    background: #b30000; 
-  }
 
 #section-banner{
     padding: 2rem 0;
@@ -164,7 +159,7 @@ section{
     justify-content: center;
     align-items: center;
     padding: 4rem 12rem 0;
-    transition: all 0.5s ease;
+    transition: all 1s ease;
 
     .about {
         width: 100%;
@@ -205,7 +200,7 @@ section{
                 cursor: pointer;
                 opacity: 0;
                 transform: translateY(40px);
-                transition: opacity 1s linear, transform 1.2s linear; /* Tăng lên 1s */
+                transition: opacity 1.2s linear, transform 1.5s linear; /* Tăng lên 1s */
                 pointer-events: none;
 
                 .box-img {
@@ -256,7 +251,7 @@ section{
             .active {
                 opacity: 1;
                 transform: translateY(0);
-                transition: opacity 1s linear, transform 1.2s linear; /* Tăng lên 1s */
+                transition: opacity 1.2s linear, transform 1.5s linear; /* Tăng lên 1s */
                 pointer-events: auto;
 
                 .box-img {
