@@ -163,7 +163,7 @@ section{
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 6rem 12rem;
+    padding: 4rem 12rem 0;
     transition: all 0.3s ease;
 
     .about {
@@ -742,6 +742,12 @@ section{
     max-width: 124rem;
     margin: 6rem auto;
 }
+#section-banner,
+#section-introduction{
+    transition: opacity 0.3s ease;
+    height: auto; /* Đảm bảo chiều cao không bị mất đột ngột */
+    position: relative;
+}
 //animations
 @keyframes fromLeft {
     from{
@@ -889,11 +895,10 @@ section{
         padding: 5rem 6rem;
         .about{
             .about-container{
-                height: 40rem;
                 .about-container_box{
                     gap: 3.5rem;
                     .box-img{
-                        max-width: 20rem;
+                        max-width: 22rem;
                         max-height: 20rem;
 
                     }
@@ -1087,7 +1092,6 @@ section{
                 }
             }
             .about-container{
-                max-height: 30rem;
                 .about-container_box{
                     gap: 3rem;
                     .box-img{
@@ -1108,7 +1112,7 @@ section{
                 }
                 .active{
                     .box-img{
-                        max-width: 20rem;
+                        max-width: 25rem;
                         max-height: 15rem;
                         img{
                             max-width: 50%;
@@ -1261,7 +1265,7 @@ section{
                 }
                 .active{
                     .box-img{
-                        max-width: 18rem;
+                        max-width: 22rem;
                         max-height: 15rem;
                         img{
                             max-width: 50%;

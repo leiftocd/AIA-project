@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
     let currentBox = 0;
     let inAbout = false;
     let lastScrollTime = 0;
-    const throttleDelay = 700; // Giữ 700ms
+    const throttleDelay = 500; // Giới hạn 500ms giữa các lần cuộn
 
     // Hàm hiển thị box
     const showBox = (index) => {
@@ -63,12 +63,15 @@ document.addEventListener("DOMContentLoaded", () => {
                 if (currentBox < boxes.length - 1) {
                     currentBox++;
                     showBox(currentBox);
-                    // Không dùng scrollTo ở đây để tránh nhảy
+                    window.scrollTo({
+                        top: section.offsetTop,
+                        behavior: "smooth",
+                    });
                 } else if (currentBox === boxes.length - 1) {
                     toggleSections(false); // Hiện lại banner và introduction
                     inAbout = false;
                     window.scrollTo({
-                        top: section.offsetTop + section.offsetHeight * 1.5,
+                        top: section.offsetTop + section.offsetHeight,
                         behavior: "smooth",
                     });
                 }
@@ -76,18 +79,21 @@ document.addEventListener("DOMContentLoaded", () => {
                 if (currentBox > 0) {
                     currentBox--;
                     showBox(currentBox);
-                    // Không dùng scrollTo ở đây để tránh nhảy
+                    window.scrollTo({
+                        top: section.offsetTop,
+                        behavior: "smooth",
+                    });
                 } else {
                     toggleSections(false); // Hiện lại banner và introduction
                     inAbout = false;
                     window.scrollTo({
-                        top: section.offsetTop - window.innerHeight * 1.5,
+                        top: section.offsetTop - window.innerHeight,
                         behavior: "smooth",
                     });
                 }
             }
-        } else if (e.deltaY < 0 && sectionTop > 0 && sectionTop <= window.innerHeight * 1.5) {
-            // Cuộn lên từ dưới để focus vào about
+        } else if (e.deltaY < 0 && sectionTop > window.innerHeight && window.scrollY > 0) {
+            // Chỉ cho phép vào about từ dưới khi section about nằm dưới viewport và chưa ở đỉnh trang
             e.preventDefault();
             toggleSections(true);
             inAbout = true;
@@ -98,6 +104,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 behavior: "smooth",
             });
         }
+        // Nếu đã ở đỉnh trang (scrollY === 0), không làm gì khi tiếp tục scroll lên
     }, throttleDelay), { passive: false });
 
     // Xử lý scroll để đồng bộ trạng thái
