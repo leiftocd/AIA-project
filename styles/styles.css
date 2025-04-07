@@ -1165,8 +1165,8 @@ section {
     font-size: 1.8em;
   }
   #section-about .about .about-container .about-container_box .box-img {
-    max-width: 18rem;
-    max-height: 16rem;
+    max-width: 16rem;
+    max-height: 15rem;
   }
   #section-about .about .about-container .active .box-img {
     max-width: 22rem;
@@ -1344,7 +1344,7 @@ section {
     font-size: 1.6em;
   }
   #section-about .about .about-container .active .box-img {
-    max-width: 15rem;
+    max-width: 18rem;
     max-height: 13rem;
   }
   #section-about .about .about-container .active .box-img img {
