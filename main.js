@@ -114,7 +114,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }, throttleDelay), { passive: false });
 
-    // Xử lý touch cho điện thoại
+    // Xử lý touch cho mobile
     let touchStartY = 0;
     let touchEndY = 0;
 

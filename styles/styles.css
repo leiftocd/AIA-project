@@ -175,7 +175,7 @@ section {
   justify-content: center;
   align-items: center;
   padding: 4rem 12rem 0;
-  transition: all 0.3s ease;
+  transition: all 0.5s ease;
 }
 #section-about .about {
   width: 100%;
@@ -215,7 +215,7 @@ section {
   cursor: pointer;
   opacity: 0;
   transform: translateY(40px);
-  transition: opacity 1s ease, transform 1s ease; /* Tăng lên 1s */
+  transition: opacity 1s linear, transform 1.2s linear; /* Tăng lên 1s */
   pointer-events: none;
 }
 #section-about .about .about-container .about-container_box .box-img {
@@ -270,7 +270,7 @@ section {
 #section-about .about .about-container .active {
   opacity: 1;
   transform: translateY(0);
-  transition: opacity 1s ease, transform 1s ease; /* Tăng lên 1s */
+  transition: opacity 1s linear, transform 1.2s linear; /* Tăng lên 1s */
   pointer-events: auto;
 }
 #section-about .about .about-container .active .box-img {
