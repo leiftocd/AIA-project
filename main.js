@@ -2,8 +2,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const section = document.querySelector("#section-about");
     const boxes = document.querySelectorAll(".about-container_box");
     const introduceSection = document.querySelector("#section-introduction");
-    const bannerSection = document.querySelector("#section-banner");
-
     let currentBox = 0;
     let inAbout = false;
     let lastScrollTime = 0;
@@ -27,10 +25,8 @@ document.addEventListener("DOMContentLoaded", () => {
         return rect.top <= window.innerHeight * 0.5 && rect.bottom >= window.innerHeight * 0.5;
     };
 
-    // Ẩn/hiện banner và introduction
+    // Ẩn/hiện introduction
     const toggleSections = (isInAbout) => {
-        bannerSection.style.opacity = isInAbout ? 0 : 1;
-        bannerSection.style.visibility = isInAbout ? "hidden" : "visible";
         introduceSection.style.opacity = isInAbout ? 0 : 1;
         introduceSection.style.visibility = isInAbout ? "hidden" : "visible";
     };
@@ -55,9 +51,21 @@ document.addEventListener("DOMContentLoaded", () => {
         const sectionBottom = section.getBoundingClientRect().bottom;
         inAbout = isInViewport(section);
 
-        if (inAbout || (e.deltaY > 0 && sectionTop < window.innerHeight && sectionTop >= 0)) {
+        if (e.deltaY > 0 && sectionTop < window.innerHeight && sectionTop >= 0 && !inAbout) {
+            // Khi cuộn xuống từ trên (banner) vào about
             e.preventDefault();
-            toggleSections(true); // Ẩn banner và introduction khi focus vào about
+            toggleSections(true);
+            inAbout = true;
+            currentBox = 0; // Reset về box 1
+            showBox(currentBox);
+            window.scrollTo({
+                top: section.offsetTop,
+                behavior: "smooth",
+            });
+        } else if (inAbout) {
+            // Khi đã trong section about
+            e.preventDefault();
+            toggleSections(true);
 
             if (e.deltaY > 0) { // Cuộn xuống
                 if (currentBox < boxes.length - 1) {
@@ -68,7 +76,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         behavior: "smooth",
                     });
                 } else if (currentBox === boxes.length - 1) {
-                    toggleSections(false); // Hiện lại banner và introduction
+                    toggleSections(false);
                     inAbout = false;
                     window.scrollTo({
                         top: section.offsetTop + section.offsetHeight,
@@ -84,7 +92,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         behavior: "smooth",
                     });
                 } else {
-                    toggleSections(false); // Hiện lại banner và introduction
+                    toggleSections(false);
                     inAbout = false;
                     window.scrollTo({
                         top: section.offsetTop - window.innerHeight,
@@ -97,7 +105,7 @@ document.addEventListener("DOMContentLoaded", () => {
             e.preventDefault();
             toggleSections(true);
             inAbout = true;
-            currentBox = 0; // Reset về box đầu tiên
+            currentBox = 0; // Reset về box 1
             showBox(currentBox);
             window.scrollTo({
                 top: section.offsetTop,
