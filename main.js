@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
     let currentBox = 0;
     let inAbout = false;
     let lastScrollTime = 0;
-    const throttleDelay = 500; // Giới hạn 500ms giữa các lần cuộn
+    const throttleDelay = 500; // Giới hạn 500ms giữa các lần cuộn/vuốt
 
     // Hàm hiển thị box
     const showBox = (index) => {
@@ -45,7 +45,7 @@ document.addEventListener("DOMContentLoaded", () => {
         };
     };
 
-    // Xử lý wheel với throttle
+    // Xử lý wheel cho máy tính
     window.addEventListener("wheel", throttle((e) => {
         const sectionTop = section.getBoundingClientRect().top;
         const sectionBottom = section.getBoundingClientRect().bottom;
@@ -101,7 +101,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
             }
         } else if (e.deltaY < 0 && sectionTop > window.innerHeight && window.scrollY > 0) {
-            // Chỉ cho phép vào about từ dưới khi section about nằm dưới viewport và chưa ở đỉnh trang
+            // Chỉ cho phép vào about từ dưới khi section about nằm dưới viewport
             e.preventDefault();
             toggleSections(true);
             inAbout = true;
@@ -112,7 +112,85 @@ document.addEventListener("DOMContentLoaded", () => {
                 behavior: "smooth",
             });
         }
-        // Nếu đã ở đỉnh trang (scrollY === 0), không làm gì khi tiếp tục scroll lên
+    }, throttleDelay), { passive: false });
+
+    // Xử lý touch cho điện thoại
+    let touchStartY = 0;
+    let touchEndY = 0;
+
+    window.addEventListener("touchstart", (e) => {
+        touchStartY = e.touches[0].clientY;
+    }, { passive: true });
+
+    window.addEventListener("touchmove", throttle((e) => {
+        touchEndY = e.touches[0].clientY;
+        const deltaY = touchStartY - touchEndY; // Vuốt lên: deltaY > 0, vuốt xuống: deltaY < 0
+        const sectionTop = section.getBoundingClientRect().top;
+        const sectionBottom = section.getBoundingClientRect().bottom;
+        inAbout = isInViewport(section);
+
+        if (deltaY > 0 && sectionTop < window.innerHeight && sectionTop >= 0 && !inAbout) {
+            // Vuốt lên từ trên (banner) vào about
+            e.preventDefault();
+            toggleSections(true);
+            inAbout = true;
+            currentBox = 0; // Reset về box 1
+            showBox(currentBox);
+            window.scrollTo({
+                top: section.offsetTop,
+                behavior: "smooth",
+            });
+        } else if (inAbout) {
+            // Khi đã trong section about
+            e.preventDefault();
+            toggleSections(true);
+
+            if (deltaY > 0) { // Vuốt lên (tương đương cuộn xuống)
+                if (currentBox < boxes.length - 1) {
+                    currentBox++;
+                    showBox(currentBox);
+                    window.scrollTo({
+                        top: section.offsetTop,
+                        behavior: "smooth",
+                    });
+                } else if (currentBox === boxes.length - 1) {
+                    toggleSections(false);
+                    inAbout = false;
+                    window.scrollTo({
+                        top: section.offsetTop + section.offsetHeight,
+                        behavior: "smooth",
+                    });
+                }
+            } else if (deltaY < 0) { // Vuốt xuống (tương đương cuộn lên)
+                if (currentBox > 0) {
+                    currentBox--;
+                    showBox(currentBox);
+                    window.scrollTo({
+                        top: section.offsetTop,
+                        behavior: "smooth",
+                    });
+                } else {
+                    toggleSections(false);
+                    inAbout = false;
+                    window.scrollTo({
+                        top: section.offsetTop - window.innerHeight,
+                        behavior: "smooth",
+                    });
+                }
+            }
+        } else if (deltaY < 0 && sectionTop > window.innerHeight && window.scrollY > 0) {
+            // Vuốt xuống từ dưới để vào about
+            e.preventDefault();
+            toggleSections(true);
+            inAbout = true;
+            currentBox = 0; // Reset về box 1
+            showBox(currentBox);
+            window.scrollTo({
+                top: section.offsetTop,
+                behavior: "smooth",
+            });
+        }
+        touchStartY = touchEndY; // Cập nhật điểm bắt đầu cho lần vuốt tiếp theo
     }, throttleDelay), { passive: false });
 
     // Xử lý scroll để đồng bộ trạng thái
