@@ -6,8 +6,8 @@ document.addEventListener("DOMContentLoaded", () => {
     let inAbout = false;
     let lastScrollTime = 0;
     let scrollCount = 0; // Đếm số lần scroll trong about
-    const throttleDelay = /Mobi|Android/i.test(navigator.userAgent) ? 300 : 500; // Tăng delay cho mobile
-    const touchThreshold = 100; // Tăng ngưỡng vuốt lên 100px
+    const throttleDelay = /Mobi|Android/i.test(navigator.userAgent) ? 200 : 500;
+    const touchThreshold = 30;
     let touchStartY = 0;
     let touchEndY = 0;
 
@@ -47,6 +47,7 @@ document.addEventListener("DOMContentLoaded", () => {
         inAbout = isInViewport(section);
 
         if (e.deltaY > 0 && sectionTop < window.innerHeight && sectionTop >= 0 && !inAbout) {
+            // Vào about từ trên
             e.preventDefault();
             toggleSections(true);
             inAbout = true;
@@ -67,6 +68,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     currentBox = 2; // Box 3
                     showBox(currentBox);
                 } else if (scrollCount >= 4) {
+                    // Thoát about sau 4 lần scroll
                     toggleSections(false);
                     inAbout = false;
                     window.scrollTo({ top: section.offsetTop + section.offsetHeight, behavior: "smooth" });
@@ -90,7 +92,7 @@ document.addEventListener("DOMContentLoaded", () => {
     window.addEventListener("touchmove", throttle((e) => {
         touchEndY = e.touches[0].clientY;
         const deltaY = touchStartY - touchEndY;
-        if (Math.abs(deltaY) < touchThreshold) return; // Bỏ qua nếu vuốt không đủ xa
+        if (Math.abs(deltaY) < touchThreshold) return;
 
         const sectionTop = section.getBoundingClientRect().top;
         inAbout = isInViewport(section);
@@ -108,7 +110,7 @@ document.addEventListener("DOMContentLoaded", () => {
             e.preventDefault();
             toggleSections(true);
 
-            if (deltaY > touchThreshold) { // Vuốt lên (scroll xuống)
+            if (deltaY > 0) { // Vuốt lên (scroll xuống)
                 scrollCount++;
                 if (scrollCount === 1) {
                     currentBox = 1; // Box 2
@@ -117,20 +119,20 @@ document.addEventListener("DOMContentLoaded", () => {
                     currentBox = 2; // Box 3
                     showBox(currentBox);
                 } else if (scrollCount >= 4) {
-                    // Thoát about sau 4 lần vuốt
+                    // Thoát about sau 4 lần scroll
                     toggleSections(false);
                     inAbout = false;
                     window.scrollTo({ top: section.offsetTop + section.offsetHeight, behavior: "smooth" });
                 }
                 window.scrollTo({ top: section.offsetTop, behavior: "smooth" });
-            } else if (deltaY < -touchThreshold) { // Vuốt xuống (scroll lên)
+            } else if (deltaY < 0) { // Vuốt xuống (scroll lên)
                 scrollCount = 0;
                 toggleSections(false);
                 inAbout = false;
                 window.scrollTo({ top: section.offsetTop - window.innerHeight, behavior: "smooth" });
             }
         }
-        touchStartY = touchEndY; // Cập nhật lại điểm bắt đầu
+        touchStartY = touchEndY;
     }, throttleDelay), { passive: false });
 
     window.addEventListener("touchend", () => {
