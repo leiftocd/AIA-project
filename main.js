@@ -36,7 +36,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const touchEndY = e.touches[0].clientY;
         const deltaY = touchStartY - touchEndY;
 
-        // Chỉ cần có deltaY (vuốt lên hoặc xuống) là tính, không cần ngưỡng
+        // Tính mọi vuốt (nhẹ hay mạnh) miễn là có thay đổi
         if (deltaY === 0) return;
 
         inAbout = isInViewport(section);
@@ -54,7 +54,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 if (scrollCount === 1) currentBox = 1; // Box 2
                 else if (scrollCount === 2) currentBox = 2; // Box 3
                 else if (scrollCount >= 4) {
-                    // Thoát xuống introduction sau khi đủ 4 lần vuốt
                     inAbout = false;
                     toggleSections(false);
                     window.scrollTo({ top: introduceSection.offsetTop, behavior: "smooth" });
@@ -63,14 +62,21 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
                 showBox(currentBox);
                 window.scrollTo({ top: section.offsetTop, behavior: "smooth" });
-            } else if (deltaY < 0 && scrollCount === 0) { // Vuốt xuống, chỉ thoát khi ở mốc 0
-                inAbout = false;
-                toggleSections(false);
-                window.scrollTo({ top: section.offsetTop - window.innerHeight, behavior: "smooth" });
+            } else if (deltaY < 0) { // Vuốt xuống
+                if (scrollCount === 0) { // Chỉ thoát khi ở box 1
+                    inAbout = false;
+                    toggleSections(false);
+                    window.scrollTo({ top: section.offsetTop - window.innerHeight, behavior: "smooth" });
+                }
+                // Nếu scrollCount > 0, không làm gì khi vuốt xuống
             }
         }
         touchStartY = touchEndY;
     }, { passive: false });
+
+    window.addEventListener("touchend", () => {
+        touchStartY = 0;
+    }, { passive: true });
 
     window.addEventListener("scroll", () => {
         inAbout = isInViewport(section);
