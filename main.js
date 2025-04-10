@@ -2,33 +2,40 @@ document.addEventListener("DOMContentLoaded", () => {
     const section = document.querySelector("#section-about");
     const boxes = document.querySelectorAll(".about-container_box");
     const introduceSection = document.querySelector("#section-introduction");
-    let currentBox = 0; // Bắt đầu từ box 1 (index 0)
+    let currentBox = 0;
     let inAbout = false;
     let lastScrollTime = 0;
-    let scrollCount = 0; // Đếm số lần scroll trong about
-    const throttleDelay = /Mobi|Android/i.test(navigator.userAgent) ? 300 : 500;
-    const touchThreshold = 100; // Ngưỡng vuốt
+    const throttleDelay = 500;
     let touchStartY = 0;
     let touchEndY = 0;
 
+    // Hàm hiển thị box
     const showBox = (index) => {
         boxes.forEach((box, i) => {
             box.classList.remove("active", "hidden");
-            if (i === index) box.classList.add("active");
-            else if (i < index) box.classList.add("hidden");
+            if (i === index) {
+                box.classList.add("active");
+            } else if (i < index) {
+                box.classList.add("hidden");
+            }
         });
     };
-
+    // Kiểm tra section trong viewport
     const isInViewport = (el) => {
         const rect = el.getBoundingClientRect();
         return rect.top <= window.innerHeight * 0.5 && rect.bottom >= window.innerHeight * 0.5;
     };
 
+    // Ẩn/hiện introduction
     const toggleSections = (isInAbout) => {
         introduceSection.style.opacity = isInAbout ? 0 : 1;
         introduceSection.style.visibility = isInAbout ? "hidden" : "visible";
     };
 
+    // Hiển thị box đầu tiên
+    showBox(currentBox);
+
+    // Throttle function
     const throttle = (func, delay) => {
         return (...args) => {
             const now = Date.now();
@@ -39,53 +46,74 @@ document.addEventListener("DOMContentLoaded", () => {
         };
     };
 
-    showBox(currentBox); // Hiển thị box 1 ban đầu
-
-    // Wheel events (desktop)
+    // Xử lý wheel cho máy tính (giữ nguyên source ban đầu)
     window.addEventListener("wheel", throttle((e) => {
         const sectionTop = section.getBoundingClientRect().top;
         inAbout = isInViewport(section);
 
         if (e.deltaY > 0 && sectionTop < window.innerHeight && sectionTop >= 0 && !inAbout) {
-            // Vào about từ trên
             e.preventDefault();
             toggleSections(true);
             inAbout = true;
             currentBox = 0;
-            scrollCount = 0;
             showBox(currentBox);
-            window.scrollTo({ top: section.offsetTop, behavior: "smooth" });
+            window.scrollTo({
+                top: section.offsetTop,
+                behavior: "smooth",
+            });
         } else if (inAbout) {
             e.preventDefault();
             toggleSections(true);
 
-            if (e.deltaY > 0) { // Scroll xuống
-                scrollCount++;
-                if (scrollCount === 1) {
-                    currentBox = 1; // Box 2
+            if (e.deltaY > 0) { // Cuộn xuống
+                if (currentBox < boxes.length - 1) {
+                    currentBox++;
                     showBox(currentBox);
-                } else if (scrollCount === 2) {
-                    currentBox = 2; // Box 3
-                    showBox(currentBox);
-                } else if (scrollCount >= 4) {
-                    // Thoát about và cuộn đến introduction
+                    window.scrollTo({
+                        top: section.offsetTop,
+                        behavior: "smooth",
+                    });
+                } else if (currentBox === boxes.length - 1) {
                     toggleSections(false);
                     inAbout = false;
-                    window.scrollTo({ top: introduceSection.offsetTop, behavior: "smooth" });
+                    window.scrollTo({
+                        top: section.offsetTop + section.offsetHeight,
+                        behavior: "smooth",
+                    });
                 }
-                if (scrollCount < 4) {
-                    window.scrollTo({ top: section.offsetTop, behavior: "smooth" });
+            } else if (e.deltaY < 0) { // Cuộn lên
+                if (currentBox > 0) {
+                    currentBox--;
+                    showBox(currentBox);
+                    window.scrollTo({
+                        top: section.offsetTop,
+                        behavior: "smooth",
+                    });
+                } else {
+                    toggleSections(false);
+                    inAbout = false;
+                    window.scrollTo({
+                        top: section.offsetTop - window.innerHeight,
+                        behavior: "smooth",
+                    });
                 }
-            } else if (e.deltaY < 0) { // Scroll lên
-                scrollCount = 0;
-                toggleSections(false);
-                inAbout = false;
-                window.scrollTo({ top: section.offsetTop - window.innerHeight, behavior: "smooth" });
             }
+        } else if (e.deltaY < 0 && sectionTop > window.innerHeight && window.scrollY > 0) {
+            e.preventDefault();
+            toggleSections(true);
+            inAbout = true;
+            currentBox = 0;
+            showBox(currentBox);
+            window.scrollTo({
+                top: section.offsetTop,
+                behavior: "smooth",
+            });
         }
     }, throttleDelay), { passive: false });
 
-    // Touch events (mobile)
+    // Touch events (mobile) - Chỉnh sửa
+    let scrollCount = 0; // Đếm số lần vuốt trong about
+
     window.addEventListener("touchstart", (e) => {
         touchStartY = e.touches[0].clientY;
         if (isInViewport(section)) e.preventDefault();
@@ -94,13 +122,11 @@ document.addEventListener("DOMContentLoaded", () => {
     window.addEventListener("touchmove", throttle((e) => {
         touchEndY = e.touches[0].clientY;
         const deltaY = touchStartY - touchEndY;
-        if (Math.abs(deltaY) < touchThreshold) return;
-
         const sectionTop = section.getBoundingClientRect().top;
         inAbout = isInViewport(section);
 
         if (deltaY > 0 && sectionTop < window.innerHeight && sectionTop >= 0 && !inAbout) {
-            // Vào about từ trên
+            // Từ banner vuốt xuống vào about
             e.preventDefault();
             toggleSections(true);
             inAbout = true;
@@ -112,7 +138,7 @@ document.addEventListener("DOMContentLoaded", () => {
             e.preventDefault();
             toggleSections(true);
 
-            if (deltaY > touchThreshold) { // Vuốt lên (scroll xuống)
+            if (deltaY > 0) { // Vuốt xuống (tăng scrollCount)
                 scrollCount++;
                 if (scrollCount === 1) {
                     currentBox = 1; // Box 2
@@ -120,17 +146,16 @@ document.addEventListener("DOMContentLoaded", () => {
                 } else if (scrollCount === 2) {
                     currentBox = 2; // Box 3
                     showBox(currentBox);
-                } else if (scrollCount >= 4) {
-                    // Thoát about và cuộn đến introduction
+                } else if (scrollCount >= 4) { // 4 lần để thoát xuống introduction
                     toggleSections(false);
                     inAbout = false;
                     window.scrollTo({ top: introduceSection.offsetTop, behavior: "smooth" });
+                    scrollCount = 0;
                 }
                 if (scrollCount < 4) {
                     window.scrollTo({ top: section.offsetTop, behavior: "smooth" });
                 }
-            } else if (deltaY < -touchThreshold) { // Vuốt xuống (scroll lên)
-                scrollCount = 0;
+            } else if (deltaY < 0 && scrollCount === 0) { // Vuốt lên, chỉ thoát khi ở box 1
                 toggleSections(false);
                 inAbout = false;
                 window.scrollTo({ top: section.offsetTop - window.innerHeight, behavior: "smooth" });
