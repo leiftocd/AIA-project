@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
     let inAbout = false;
     let lastScrollTime = 0;
     let scrollCount = 0; // Đếm số lần scroll trong about
-    const throttleDelay = /Mobi|Android/i.test(navigator.userAgent) ? 200 : 300;
+    const throttleDelay = /Mobi|Android/i.test(navigator.userAgent) ? 100 : 200;
     const touchThreshold = 0; // Ngưỡng vuốt
     let touchStartY = 0;
     let touchEndY = 0;
@@ -95,12 +95,12 @@ document.addEventListener("DOMContentLoaded", () => {
         touchEndY = e.touches[0].clientY;
         const deltaY = touchStartY - touchEndY;
         if (Math.abs(deltaY) < touchThreshold) return;
-
+    
         const sectionTop = section.getBoundingClientRect().top;
         inAbout = isInViewport(section);
-
-        if (deltaY > 0 && sectionTop < window.innerHeight && sectionTop >= 0 && !inAbout) {
-            // Vào about từ trên
+    
+        if (deltaY > 0 && sectionTop < window.innerHeight && sectionTop >= 300 && !inAbout) {
+            // Vào about từ trên (CHỈ VÀO KHI CÁCH ĐỈNH ≥ 150PX)
             e.preventDefault();
             toggleSections(true);
             inAbout = true;
@@ -111,7 +111,7 @@ document.addEventListener("DOMContentLoaded", () => {
         } else if (inAbout) {
             e.preventDefault();
             toggleSections(true);
-
+    
             if (deltaY > touchThreshold) { // Vuốt lên (scroll xuống)
                 scrollCount++;
                 if (scrollCount === 1) {
