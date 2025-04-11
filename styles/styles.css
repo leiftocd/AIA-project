@@ -30,14 +30,17 @@ body {
   flex-direction: column;
   min-height: 100vh;
   background-color: var(--home-bg);
+  -webkit-overflow-scrolling: touch; /* Cuộn mượt trên iOS */
 }
 
 section {
   padding: 6rem 12rem;
+  -webkit-overflow-scrolling: touch; /* Cuộn mượt trên iOS */
 }
 
 ::-webkit-scrollbar {
   width: 10px;
+  -webkit-overflow-scrolling: touch; /* Cuộn mượt trên iOS */
 }
 
 /* Track */
@@ -170,7 +173,7 @@ section {
   justify-content: center;
   align-items: center;
   padding: 4rem 12rem 0;
-  transition: all 1s ease;
+  transition: all 0.5s ease;
 }
 #section-about .about {
   width: 100%;

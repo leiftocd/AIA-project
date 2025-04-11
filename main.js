@@ -41,7 +41,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     showBox(currentBox); // Hiển thị box 1 ban đầu
 
-    // Wheel events (desktop)
+    // (desktop)
     window.addEventListener("wheel", throttle((e) => {
         const sectionTop = section.getBoundingClientRect().top;
         inAbout = isInViewport(section);
@@ -85,7 +85,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }, throttleDelay), { passive: false });
 
-    // Touch events (mobile)
+    // (mobile)
     window.addEventListener("touchstart", (e) => {
         touchStartY = e.touches[0].clientY;
         if (isInViewport(section)) e.preventDefault();
@@ -100,7 +100,6 @@ document.addEventListener("DOMContentLoaded", () => {
         inAbout = isInViewport(section);
     
         if (deltaY > 0 && sectionTop < window.innerHeight && sectionTop >= 300 && !inAbout) {
-            // Vào about từ trên (CHỈ VÀO KHI CÁCH ĐỈNH ≥ 150PX)
             e.preventDefault();
             toggleSections(true);
             inAbout = true;
