@@ -283,6 +283,8 @@ section {
 
 #section-introduction {
   max-width: 144rem;
+  opacity: 0;
+  visibility: hidden;
   width: 100%;
   transition: 0.5s all ease-in-out;
 }
