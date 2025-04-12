@@ -18,6 +18,7 @@ text{
 html{
     font-family: var(--font-family);
     font-size: 62.5%;
+    scroll-behavior: smooth;
 }
 body{
     display: flex;
@@ -163,12 +164,21 @@ section{
     align-items: center;
     padding: 4rem 12rem 0;
     transition: all .5s ease;
+    .fullscreen {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        z-index: 9999;
+        background: white;
+        overflow: hidden;
+      }
     .about {
         width: 100%;
         height: 100%;
         display: flex;
         flex-direction: column;
-
         .about-title {
             width: 100%;
             position: sticky;
@@ -202,11 +212,11 @@ section{
                 cursor: pointer;
                 opacity: 0;
                 transform: translateY(40px);
-                transition: opacity 1.2s linear, transform 1.5s linear; /* Tăng lên 1s */
+                transition: opacity 1.2s ease-in-out, transform 1.5s linear; /* Tăng lên 1s */
                 pointer-events: none;
-
+                justify-content: center;
                 .box-img {
-                    transition: all 0.8s ease; /* Tăng lên 0.8s */
+                    transition: all 0.8s linear;
                     display: flex;
                     max-width: 25rem;
                     width: 100%;
@@ -1417,7 +1427,8 @@ section{
     #section-profession{
         padding: 6rem 0;
         .profession{
-            padding: 1rem 0 ;
+            padding: 1rem 0;
+            gap: 0 !important;
             .profession-container{
                 .list{
                     margin-top: 8vw;
@@ -1475,6 +1486,8 @@ section{
                             font-size: 1.6em;
                         }
                     }
+                    &:nth-child(2) { top: 30%;}
+                    &:nth-child(3) { top: 60% !important;}
                 }
                 .active{
                     .box-img{
@@ -1597,7 +1610,7 @@ section{
                     
     }
     #section-introduction{
-        padding: 0rem 2rem 4rem;
+        padding: 4rem 2rem 4rem;
         margin-top: 0;
         .introduction{
             display: flex;
@@ -1673,6 +1686,8 @@ section{
                             font-size: 1.2em !important;
                         }
                     }
+                    &:nth-child(2) { top: 30%; z-index: 99; }
+                    &:nth-child(3) { top: 60%; z-index: 100 !important; }
                 }
                 .active{
                     .box-img{
