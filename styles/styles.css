@@ -1,4 +1,9 @@
-
+/*
+* Prefixed by:
+* PostCSS: v7.0.29,
+* Autoprefixer: v9.7.6
+* Browsers: last 4 version
+*/
 
 @charset "UTF-8";
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&family=Roboto:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap");
@@ -2229,7 +2234,6 @@ section {
   }
   #section-introduction,
   #section-banner {
-    height: 91vh !important;
     margin: 0 !important;
     padding: 0 1.5rem !important;
   }
