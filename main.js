@@ -1,186 +1,173 @@
 document.addEventListener("DOMContentLoaded", () => {
-  if ("scrollRestoration" in history) {
-    history.scrollRestoration = "manual";
-}
-requestAnimationFrame(() => {
-    window.scrollTo(0, 0);
-});
+    if ("scrollRestoration" in history) history.scrollRestoration = "manual";
+    requestAnimationFrame(() => window.scrollTo(0, 0));
 
-  const section = document.querySelector("#section-about");
-  const boxes = document.querySelectorAll(".about-container_box");
-  const introduceSection = document.querySelector("#section-introduction");
+    const section = document.querySelector("#section-about");
+    const boxes = document.querySelectorAll(".about-container_box");
+    const introduceSection = document.querySelector("#section-introduction");
+    const fadeSections = document.querySelectorAll(".fade-section");
 
-  let currentBox = 0;
-  let scrollCount = 0;
-  let isAnimating = false;
-  let touchStartY = 0;
-  let aboutMode = "none"; // "none", "in", "entering", "exiting"
-  let maxReachedBox = 0;
+    let currentBox = 0;
+    let isAnimating = false;
+    let touchStartY = 0;
+    let touchEndY = 0;
+    let aboutMode = "none";
+    let maxReachedBox = 0;
+    let lastScrollTime = 0;
 
-  const isMobile = /Mobi|Android/i.test(navigator.userAgent);
-  const throttleDelay = isMobile ? 100 : 200;
+    const isMobile = /Mobi|Android/i.test(navigator.userAgent);
+    const throttleDelay = isMobile ? 100 : 200;
+    const extraScrollMobile = isMobile ? 1 : 0;
+    const scrollThreshold = 5;
 
-  const lock = () => {
-      isAnimating = true;
-      setTimeout(() => isAnimating = false, throttleDelay + 200);
-  };
+    const lock = () => {
+        isAnimating = true;
+        setTimeout(() => isAnimating = false, throttleDelay + 150);
+    };
 
-  const showBox = (index) => {
-      boxes.forEach((box, i) => {
-          box.classList.remove("active", "hidden");
+    const showBox = (index) => {
+        boxes.forEach((box, i) => {
+            box.classList.remove("active", "hidden");
+            if (i === index) box.classList.add("active");
+            else if (i < index) box.classList.add("hidden");
+        });
+        maxReachedBox = Math.max(maxReachedBox, index);
+    };
 
-          if (i === index) {
-              box.classList.add("active");
-          } else if (i < index) {
-              box.classList.add("hidden");
-          } else {
-              box.classList.remove("active", "hidden");
-          }
-      });
+    const scrollTo = (position) => {
+        window.scrollTo({ top: position, behavior: "smooth" });
+    };
 
-      if (index > maxReachedBox) {
-          maxReachedBox = index;
-      }
-  };
-  const scrollTo = (position) => {
-      window.scrollTo({ top: position, behavior: "smooth" });
-  };
+    const toggleSections = (showAbout) => {
+        fadeSections.forEach(sec => sec.classList.toggle("hidden", showAbout));
+    };
 
-  const enterAbout = (fromBelow = false) => {
-      if (aboutMode !== "none") return;
-      aboutMode = "entering";
-      toggleSections(true);
+    const enterAbout = (fromBelow = false) => {
+        if (aboutMode !== "none") return;
+        aboutMode = "entering";
+        toggleSections(true);
+        section.classList.add("fullscreen");
 
-      section.classList.add("fullscreen");
+        const scrollbarOffset = window.innerWidth - document.documentElement.clientWidth;
+        Object.assign(document.body.style, {
+            overflow: "hidden",
+            paddingRight: `${scrollbarOffset}px`,
+            touchAction: "none"
+        });
 
-      const scrollBarWidth = window.innerWidth - document.documentElement.clientWidth;
-      document.body.style.overflow = "hidden";
-      document.body.style.paddingRight = `${scrollBarWidth}px`;
+        currentBox = fromBelow && maxReachedBox === boxes.length - 1 ? boxes.length - 1 : 0;
+        showBox(currentBox);
+        scrollTo(section.offsetTop);
+        lock();
 
-      lock();
+        setTimeout(() => aboutMode = "in", 400);
+    };
 
-      currentBox = fromBelow && maxReachedBox === boxes.length - 1 ? boxes.length - 1 : 0;
+    const exitAbout = (toTop = false) => {
+        if (aboutMode !== "in") return;
+        aboutMode = "exiting";
+        toggleSections(false);
+        section.classList.remove("fullscreen");
 
-      showBox(currentBox);
+        Object.assign(document.body.style, {
+            overflow: "",
+            paddingRight: "",
+            touchAction: ""
+        });
 
-      scrollTo(section.offsetTop);
+        scrollTo(toTop ? section.offsetTop - window.innerHeight : introduceSection.offsetTop);
+        lock();
 
-      setTimeout(() => {
-          aboutMode = "in";
-      }, 500);
-  };
+        setTimeout(() => aboutMode = "none", 500);
+    };
 
-  const exitAbout = (toTop = false) => {
-      if (aboutMode !== "in") return;
-      aboutMode = "exiting";
-      toggleSections(false);
+    const handleScroll = (direction) => {
+        if (isAnimating) return;
 
-      section.classList.remove("fullscreen");
-      document.body.style.overflow = "";
-      document.body.style.paddingRight = "";
+        const now = Date.now();
+        if (now - lastScrollTime < throttleDelay) return;
+        lastScrollTime = now;
 
-      lock();
-      scrollTo(toTop
-          ? section.offsetTop - window.innerHeight
-          : introduceSection.offsetTop
-      );
-      setTimeout(() => {
-          aboutMode = "none";
-      }, 500);
-  };
+        const sectionTop = section.getBoundingClientRect().top;
+        const sectionBottom = section.getBoundingClientRect().bottom;
+        const winH = window.innerHeight;
+        const enteringFromTop = direction === "down" && sectionTop < winH && sectionTop >= 0;
+        const enteringFromBottom = direction === "up" && sectionBottom > 0 && sectionBottom <= winH;
 
-  const handleScroll = (direction) => {
-      if (isAnimating) return;
-
-      const sectionTop = section.getBoundingClientRect().top;
-      const sectionBottom = section.getBoundingClientRect().bottom;
-      const windowHeight = window.innerHeight;
-
-      const enteringFromTop = direction === "down" && sectionTop < windowHeight && sectionTop >= 0;
-      const enteringFromBottom = direction === "up" && sectionBottom > 0 && sectionBottom <= windowHeight;
-
-      if (aboutMode === "none") {
-          if (enteringFromTop) {
-              enterAbout(false);
-          } else if (enteringFromBottom) {
-              enterAbout(true);
-          }
-      } else if (aboutMode === "in") {
-          if (direction === "down") {
-              if (currentBox < boxes.length - 1) {
-                  currentBox++;
-                  showBox(currentBox);
-
-                  if (currentBox >= 1) {
-                      boxes[0].classList.add("hidden");
-                  }
-
-                  lock();
-                  scrollTo(section.offsetTop);
+        if (aboutMode === "none") {
+            if (enteringFromTop) enterAbout(false);
+            else if (enteringFromBottom) enterAbout(true);
+        } else if (aboutMode === "in") {
+            const maxBoxIndex = boxes.length - 1 + extraScrollMobile;
+            if (direction === "down") {
+                if (currentBox < maxBoxIndex) {
+                    currentBox++;
+                    if (currentBox <= boxes.length - 1) showBox(currentBox);
+                    lock();
+                    scrollTo(section.offsetTop);
                 } else {
-                    const maxScrollCount = isMobile ? 3 : 2;
-                    if (scrollCount >= maxScrollCount) {
-                        exitAbout(false);
-                    } else {
-                        scrollCount++;
-                        lock();
-                        scrollTo(section.offsetTop);
-                    }
+                    exitAbout(false);
                 }
-          } else if (direction === "up") {
-              if (currentBox > 0) {
-                  currentBox--;
-                  showBox(currentBox);
-                  lock();
-                  scrollTo(section.offsetTop);
-              } else {
-                  exitAbout(true);
-              }
-          }
-      }
-  };
+            } else if (direction === "up") {
+                if (currentBox > 0) {
+                    currentBox--;
+                    if (currentBox < boxes.length) showBox(currentBox);
+                    lock();
+                    scrollTo(section.offsetTop);
+                } else {
+                    exitAbout(true);
+                }
+            }
+        }
+    };
 
-  const throttle = (fn, delay) => {
-      let lastCall = 0;
-      return (...args) => {
-          const now = Date.now();
-          if (now - lastCall >= delay) {
-              lastCall = now;
-              fn(...args);
-          }
-      };
-  };
+    const throttle = (fn, delay) => {
+        let lastCall = 0;
+        return (...args) => {
+            const now = Date.now();
+            if (now - lastCall >= delay) {
+                lastCall = now;
+                fn(...args);
+            }
+        };
+    };
 
-  window.addEventListener("wheel", throttle((e) => {
-      const direction = e.deltaY > 0 ? "down" : "up";
-      handleScroll(direction);
-      if (aboutMode !== "none" || e.deltaY < 0) e.preventDefault();
-  }, throttleDelay), { passive: false });
+    // Wheel (desktop)
+    window.addEventListener("wheel", throttle(e => {
+        const dir = e.deltaY > 0 ? "down" : "up";
+        handleScroll(dir);
+        if (aboutMode !== "none" || e.deltaY < 0) e.preventDefault();
+    }, throttleDelay), { passive: false });
 
-  window.addEventListener("touchstart", (e) => {
-      touchStartY = e.touches[0].clientY;
-  }, { passive: true });
+    // Touch (mobile)
+    window.addEventListener("touchstart", e => {
+        touchStartY = e.touches[0].clientY;
+        touchEndY = touchStartY;
+    }, { passive: true });
 
-  window.addEventListener("touchmove", throttle((e) => {
-      const touchCurrentY = e.touches[0].clientY;
-      const deltaY = touchStartY - touchCurrentY;
-      const direction = deltaY > 10 ? "down" : deltaY < -10 ? "up" : null;
+    window.addEventListener("touchmove", throttle(e => {
+        touchEndY = e.touches[0].clientY;
+        const deltaY = touchStartY - touchEndY;
+        const dir = deltaY > scrollThreshold ? "down" : deltaY < -scrollThreshold ? "up" : null;
+        if (dir) {
+            handleScroll(dir);
+            touchStartY = touchEndY;
+            e.preventDefault();
+        }
+    }, throttleDelay), { passive: false });
 
-      if (direction) {
-          handleScroll(direction);
-          touchStartY = touchCurrentY;
-          e.preventDefault();
-      }
-  }, throttleDelay), { passive: false });
+    window.addEventListener("touchend", () => {
+        const deltaY = touchStartY - touchEndY;
+        const dir = deltaY > scrollThreshold ? "down" : deltaY < -scrollThreshold ? "up" : null;
+        if (dir) handleScroll(dir);
+    });
 
-  window.addEventListener("scroll", () => {
-      const sectionMid = section.getBoundingClientRect().top <= window.innerHeight / 2 &&
-                         section.getBoundingClientRect().bottom >= window.innerHeight / 2;
-      toggleSections(sectionMid);
-  });
-  const toggleSections = (showAbout) => {
-    introduceSection.style.opacity = showAbout ? 0 : 1;
-    introduceSection.style.visibility = showAbout ? "hidden" : "visible";
-};
-  showBox(currentBox);
+    // Watch scroll (toggle fade sections)
+    window.addEventListener("scroll", () => {
+        const midVisible = section.getBoundingClientRect().top <= window.innerHeight / 2 &&
+            section.getBoundingClientRect().bottom >= window.innerHeight / 2;
+        toggleSections(midVisible);
+    });
+
+    showBox(currentBox);
 });

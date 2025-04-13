@@ -23,15 +23,26 @@ html{
 body{
     display: flex;
     align-items: center;
+    scroll-behavior: smooth;
     flex-direction: column;
     min-height: 100vh;
     background-color: var(--home-bg);
     -webkit-overflow-scrolling: touch; /* Cuộn mượt trên iOS */
 }
 section{
+    transition: opacity 0.5s linear;
     padding: 6rem 12rem;
     -webkit-overflow-scrolling: touch; /* Cuộn mượt trên iOS */
 }
+.fade-section {
+    transition: opacity 0.6s ease, visibility 0.6s ease;
+  }
+  
+  .fade-section.hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
 ::-webkit-scrollbar {
     width: 10px;
     -webkit-overflow-scrolling: touch; /* Cuộn mượt trên iOS */
@@ -155,7 +166,11 @@ section{
 }
 #section-about {
     position: relative;
+    animation: fromBot linear;
+    animation-timeline: view();
+    animation-range: entry 0%  cover 30%;
     height: 100vh;
+    scroll-behavior: smooth;
     overflow: hidden;
     max-width: 144rem;
     width: 100%;
@@ -212,7 +227,7 @@ section{
                 cursor: pointer;
                 opacity: 0;
                 transform: translateY(40px);
-                transition: opacity 1.2s ease-in-out, transform 1.5s linear; /* Tăng lên 1s */
+                transition: opacity 1s ease-in-out, transform 1s linear; /* Tăng lên 1s */
                 pointer-events: none;
                 justify-content: center;
                 .box-img {
@@ -263,8 +278,9 @@ section{
             .active {
                 opacity: 1;
                 transform: translateY(0);
-                transition: opacity 1.2s linear, transform 1.5s linear; /* Tăng lên 1s */
+                transition: opacity 1s linear, transform 1s linear; /* Tăng lên 1s */
                 pointer-events: auto;
+                overflow: hidden;
 
                 .box-img {
                     max-width: 40rem;
@@ -280,13 +296,17 @@ section{
         }
     }
 }
-  
 #section-introduction{
+    scroll-behavior: smooth;
     max-width: 144rem;
-    opacity: 0;
-    visibility: hidden;
+    opacity: 1;
+    visibility: visible;
     width: 100%;
-    transition: .5s all ease-in-out;
+    transition: 1s all ease-in-out;
+    position: relative;
+    animation: fromBot linear;
+    animation-timeline: view();
+    animation-range: entry 0%  cover 60%;
     .introduction{
         display: flex;
         flex-direction: column;
@@ -339,10 +359,6 @@ section{
                 padding: 6.4rem 1.5rem;
                 max-width: 40rem;
                 max-height: 38rem;
-                animation: fromLeft linear;
-                position: relative;
-                animation-timeline: view();
-                animation-range: entry 0%  cover 30%;
                 span{
                     font-weight: 700;
                     font-size: 36px;
@@ -360,6 +376,9 @@ section{
 }
 #section-profession{
     position: relative;
+    animation: fromBot linear;
+    animation-timeline: view();
+    animation-range: entry 0%  cover 40%;
     padding: 10rem 0;
     width: 100%;
     display: flex;
@@ -428,7 +447,7 @@ section{
                         img{
                             width: 80%;
                             object-fit: cover;
-                            filter: grayscale(100%);
+                            filter: grayscale(90%);
                         }
                         &:hover{
                             transition: all .3s linear;
@@ -513,7 +532,7 @@ section{
                     animation: fromRight linear;
                     position: relative;
                     animation-timeline: view();
-                    animation-range: entry 0%  cover 10%;
+                    animation-range: entry 0%  cover 40%;
                     .right-content_text{
                         display: flex;
                         gap: 6rem;
@@ -771,6 +790,20 @@ section{
         opacity: 1;
     }
 }
+@keyframes fromBot {
+    0%{
+        opacity: 0;
+        bottom: -15%;
+    }
+    40%{
+        bottom: -10;
+        opacity: 0;
+    }
+    100%{
+        bottom: 0;
+        opacity: 1;
+    }
+}
 @keyframes appearBox{
     from {
         opacity: 0;
@@ -855,7 +888,6 @@ section{
                             img{
                                 width: 70%;
                                 object-fit: cover;
-                                filter: grayscale(100%);
                             }
                         }
                     }
@@ -1460,7 +1492,6 @@ section{
     }
     #section-about{
         padding: 0 1.5rem;
-        max-height: 60vh;
         .about{
             margin: 6rem auto 0;
             gap: 6rem;
@@ -1633,6 +1664,7 @@ section{
     }
 }
 @media (max-width: 450px){
+
     section{
         padding: 4.8rem 1.6rem;
     }
@@ -1668,8 +1700,9 @@ section{
     #section-about{
         .about{
             .about-container{
-                max-height: 23rem;
+                // max-height: 23rem;
                 margin-top: 4rem;
+                height: 100vh;
                 .about-container_box{
                     .box-img{
                         max-width: 10rem;
@@ -1861,5 +1894,23 @@ section{
         }
                     
     }
+    #section-about{
+        height: 100vh;
+        margin: 0 !important;
+        padding: 0 !important;
+        .about{
+            padding: 0 1.5rem;
+        }
+    }
+    
+    #section-introduction,
+    #section-banner
+    {
+        height: 91vh !important;
+        margin: 0 !important;
+        padding: 0 1.5rem !important;
+    }
+    h1{
+        padding: 1rem 0 0 0 !important;
+    }
 }
-
