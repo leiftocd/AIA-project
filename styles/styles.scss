@@ -18,19 +18,31 @@ text{
 html{
     font-family: var(--font-family);
     font-size: 62.5%;
+    scroll-behavior: smooth;
 }
 body{
     display: flex;
     align-items: center;
+    scroll-behavior: smooth;
     flex-direction: column;
     min-height: 100vh;
     background-color: var(--home-bg);
     -webkit-overflow-scrolling: touch; /* Cuộn mượt trên iOS */
 }
 section{
+    transition: opacity 0.5s linear;
     padding: 6rem 12rem;
     -webkit-overflow-scrolling: touch; /* Cuộn mượt trên iOS */
 }
+.fade-section {
+    transition: opacity 0.6s ease, visibility 0.6s ease;
+  }
+  
+  .fade-section.hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
 ::-webkit-scrollbar {
     width: 10px;
     -webkit-overflow-scrolling: touch; /* Cuộn mượt trên iOS */
@@ -157,7 +169,11 @@ section{
     animation-timeline: view();
     animation-range: entry 0%  cover 30%;
     position: relative;
+    animation: fromBot linear;
+    animation-timeline: view();
+    animation-range: entry 0%  cover 30%;
     height: 100vh;
+    scroll-behavior: smooth;
     overflow: hidden;
     max-width: 144rem;
     width: 100%;
@@ -166,6 +182,16 @@ section{
     align-items: center;
     padding: 4rem 12rem 0;
     transition: all .5s ease;
+    .fullscreen {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        z-index: 9999;
+        background: white;
+        overflow: hidden;
+      }
     .about {
         width: 100%;
         height: 100%;
@@ -204,12 +230,19 @@ section{
                 gap: 4.5rem;
                 cursor: pointer;
                 opacity: 0;
+<<<<<<< HEAD
                 pointer-events: none;
                 transform: translateY(0);
                 transition: opacity 1.2s linear, transform 1s linear; /* Tăng lên 1s */
                 pointer-events: auto;
+=======
+                transform: translateY(40px);
+                transition: opacity 1s ease-in-out, transform 1s linear; /* Tăng lên 1s */
+                pointer-events: none;
+                justify-content: center;
+>>>>>>> 4307c030872ee985e053ae70ef0c1f67e2610fb9
                 .box-img {
-                    transition: all 0.8s ease; /* Tăng lên 0.8s */
+                    transition: all 0.8s linear;
                     display: flex;
                     max-width: 25rem;
                     width: 100%;
@@ -249,6 +282,7 @@ section{
                 }
  
                 &:nth-child(1) { top: 0; z-index: 88; }
+<<<<<<< HEAD
                 &:nth-child(2) { top: 10%; z-index: 99; }
                 &:nth-child(3) { top: 20%; z-index: 100 !important; }
                 }
@@ -258,19 +292,49 @@ section{
                         border: 1px solid #FFF;
                         background: linear-gradient(180deg, #5BFFF4 0%, #081120 100%);
                     }
+=======
+                &:nth-child(2) { top: 20%; z-index: 99; }
+                &:nth-child(3) { top: 40%; z-index: 100 !important; }
+            }
+
+            .active {
+                opacity: 1;
+                transform: translateY(0);
+                transition: opacity 1s linear, transform 1s linear; /* Tăng lên 1s */
+                pointer-events: auto;
+                overflow: hidden;
+
+                .box-img {
+                    max-width: 40rem;
+                    border: 1px solid #FFF;
+                    background: linear-gradient(180deg, #5BFFF4 0%, #081120 100%);
+>>>>>>> 4307c030872ee985e053ae70ef0c1f67e2610fb9
                 }
         }
     }
 }
-  
 #section-introduction{
+<<<<<<< HEAD
     position: relative;
     animation: ashow linear;
     animation-timeline: view();
     animation-range: entry 0%  cover 30%;
+=======
+    scroll-behavior: smooth;
+>>>>>>> 4307c030872ee985e053ae70ef0c1f67e2610fb9
     max-width: 144rem;
+    opacity: 1;
+    visibility: visible;
     width: 100%;
+<<<<<<< HEAD
     transition: .5s all ease-in-out;
+=======
+    transition: 1s all ease-in-out;
+    position: relative;
+    animation: fromBot linear;
+    animation-timeline: view();
+    animation-range: entry 0%  cover 60%;
+>>>>>>> 4307c030872ee985e053ae70ef0c1f67e2610fb9
     .introduction{
         display: flex;
         flex-direction: column;
@@ -323,10 +387,6 @@ section{
                 padding: 6.4rem 1.5rem;
                 max-width: 40rem;
                 max-height: 38rem;
-                animation: fromLeft linear;
-                position: relative;
-                animation-timeline: view();
-                animation-range: entry 0%  cover 30%;
                 span{
                     font-weight: 700;
                     font-size: 36px;
@@ -344,9 +404,15 @@ section{
 }
 #section-profession{
     position: relative;
+<<<<<<< HEAD
     animation: ashow linear;
     animation-timeline: view();
     animation-range: entry 0%  cover 30%;
+=======
+    animation: fromBot linear;
+    animation-timeline: view();
+    animation-range: entry 0%  cover 40%;
+>>>>>>> 4307c030872ee985e053ae70ef0c1f67e2610fb9
     padding: 10rem 0;
     width: 100%;
     display: flex;
@@ -415,7 +481,7 @@ section{
                         img{
                             width: 80%;
                             object-fit: cover;
-                            filter: grayscale(100%);
+                            filter: grayscale(90%);
                         }
                         &:hover{
                             transition: all .3s linear;
@@ -504,7 +570,11 @@ section{
                     animation: fromRight linear;
                     position: relative;
                     animation-timeline: view();
+<<<<<<< HEAD
                     animation-range: entry 0%  cover 20%;
+=======
+                    animation-range: entry 0%  cover 40%;
+>>>>>>> 4307c030872ee985e053ae70ef0c1f67e2610fb9
                     .right-content_text{
                         display: flex;
                         gap: 6rem;
@@ -766,6 +836,20 @@ section{
         opacity: 1;
     }
 }
+@keyframes fromBot {
+    0%{
+        opacity: 0;
+        bottom: -15%;
+    }
+    40%{
+        bottom: -10;
+        opacity: 0;
+    }
+    100%{
+        bottom: 0;
+        opacity: 1;
+    }
+}
 @keyframes appearBox{
     from {
         opacity: 0;
@@ -864,7 +948,6 @@ section{
                             img{
                                 width: 70%;
                                 object-fit: cover;
-                                filter: grayscale(100%);
                             }
                         }
                     }
@@ -1436,8 +1519,13 @@ section{
     #section-profession{
         padding: 6rem 0;
         .profession{
+<<<<<<< HEAD
             gap: 2rem;
             padding: 1rem 0 ;
+=======
+            padding: 1rem 0;
+            gap: 0 !important;
+>>>>>>> 4307c030872ee985e053ae70ef0c1f67e2610fb9
             .profession-container{
                 .list{
                     margin-top: 8vw;
@@ -1494,12 +1582,17 @@ section{
                             font-size: 1.6em;
                         }
                     }
+<<<<<<< HEAD
                     &:nth-child(2){
                         top: 25%;
                     }
                     &:nth-child(3){
                         top: 50%;
                     }
+=======
+                    &:nth-child(2) { top: 30%;}
+                    &:nth-child(3) { top: 60% !important;}
+>>>>>>> 4307c030872ee985e053ae70ef0c1f67e2610fb9
                 }
                 .active{
                     .box-img{
@@ -1625,7 +1718,7 @@ section{
                     
     }
     #section-introduction{
-        padding: 0rem 2rem 4rem;
+        padding: 4rem 2rem 4rem;
         margin-top: 0;
         height: 95vh;
         .introduction{
@@ -1649,6 +1742,7 @@ section{
     }
 }
 @media (max-width: 450px){
+
     section{
         padding: 4.8rem 1.6rem;
     }
@@ -1684,8 +1778,9 @@ section{
     #section-about{
         .about{
             .about-container{
-                max-height: 23rem;
+                // max-height: 23rem;
                 margin-top: 4rem;
+                height: 100vh;
                 .about-container_box{
                     .box-img{
                         max-width: 10rem;
@@ -1702,6 +1797,8 @@ section{
                             font-size: 1.2em !important;
                         }
                     }
+                    &:nth-child(2) { top: 30%; z-index: 99; }
+                    &:nth-child(3) { top: 60%; z-index: 100 !important; }
                 }
                 .active{
                     .box-img{
@@ -1875,5 +1972,22 @@ section{
         }
                     
     }
+    #section-about{
+        height: 100vh;
+        margin: 0 !important;
+        padding: 0 !important;
+        .about{
+            padding: 0 1.5rem;
+        }
+    }
+    
+    #section-introduction,
+    #section-banner
+    {
+        margin: 0 !important;
+        padding: 0 1.5rem !important;
+    }
+    h1{
+        padding: 1rem 0 0 0 !important;
+    }
 }
-
