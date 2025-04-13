@@ -230,17 +230,10 @@ section{
                 gap: 4.5rem;
                 cursor: pointer;
                 opacity: 0;
-<<<<<<< HEAD
                 pointer-events: none;
                 transform: translateY(0);
                 transition: opacity 1.2s linear, transform 1s linear; /* Tăng lên 1s */
                 pointer-events: auto;
-=======
-                transform: translateY(40px);
-                transition: opacity 1s ease-in-out, transform 1s linear; /* Tăng lên 1s */
-                pointer-events: none;
-                justify-content: center;
->>>>>>> 4307c030872ee985e053ae70ef0c1f67e2610fb9
                 .box-img {
                     transition: all 0.8s linear;
                     display: flex;
@@ -282,59 +275,30 @@ section{
                 }
  
                 &:nth-child(1) { top: 0; z-index: 88; }
-<<<<<<< HEAD
                 &:nth-child(2) { top: 10%; z-index: 99; }
                 &:nth-child(3) { top: 20%; z-index: 100 !important; }
                 }
                 .active{
+                    opacity: 1;
                     .box-img{
                         max-width: 40rem;
                         border: 1px solid #FFF;
                         background: linear-gradient(180deg, #5BFFF4 0%, #081120 100%);
                     }
-=======
-                &:nth-child(2) { top: 20%; z-index: 99; }
-                &:nth-child(3) { top: 40%; z-index: 100 !important; }
-            }
-
-            .active {
-                opacity: 1;
-                transform: translateY(0);
-                transition: opacity 1s linear, transform 1s linear; /* Tăng lên 1s */
-                pointer-events: auto;
-                overflow: hidden;
-
-                .box-img {
-                    max-width: 40rem;
-                    border: 1px solid #FFF;
-                    background: linear-gradient(180deg, #5BFFF4 0%, #081120 100%);
->>>>>>> 4307c030872ee985e053ae70ef0c1f67e2610fb9
                 }
         }
     }
 }
 #section-introduction{
-<<<<<<< HEAD
     position: relative;
     animation: ashow linear;
     animation-timeline: view();
     animation-range: entry 0%  cover 30%;
-=======
-    scroll-behavior: smooth;
->>>>>>> 4307c030872ee985e053ae70ef0c1f67e2610fb9
     max-width: 144rem;
     opacity: 1;
     visibility: visible;
     width: 100%;
-<<<<<<< HEAD
     transition: .5s all ease-in-out;
-=======
-    transition: 1s all ease-in-out;
-    position: relative;
-    animation: fromBot linear;
-    animation-timeline: view();
-    animation-range: entry 0%  cover 60%;
->>>>>>> 4307c030872ee985e053ae70ef0c1f67e2610fb9
     .introduction{
         display: flex;
         flex-direction: column;
@@ -404,15 +368,9 @@ section{
 }
 #section-profession{
     position: relative;
-<<<<<<< HEAD
     animation: ashow linear;
     animation-timeline: view();
     animation-range: entry 0%  cover 30%;
-=======
-    animation: fromBot linear;
-    animation-timeline: view();
-    animation-range: entry 0%  cover 40%;
->>>>>>> 4307c030872ee985e053ae70ef0c1f67e2610fb9
     padding: 10rem 0;
     width: 100%;
     display: flex;
@@ -570,11 +528,7 @@ section{
                     animation: fromRight linear;
                     position: relative;
                     animation-timeline: view();
-<<<<<<< HEAD
                     animation-range: entry 0%  cover 20%;
-=======
-                    animation-range: entry 0%  cover 40%;
->>>>>>> 4307c030872ee985e053ae70ef0c1f67e2610fb9
                     .right-content_text{
                         display: flex;
                         gap: 6rem;
@@ -1519,13 +1473,8 @@ section{
     #section-profession{
         padding: 6rem 0;
         .profession{
-<<<<<<< HEAD
             gap: 2rem;
             padding: 1rem 0 ;
-=======
-            padding: 1rem 0;
-            gap: 0 !important;
->>>>>>> 4307c030872ee985e053ae70ef0c1f67e2610fb9
             .profession-container{
                 .list{
                     margin-top: 8vw;
@@ -1582,17 +1531,12 @@ section{
                             font-size: 1.6em;
                         }
                     }
-<<<<<<< HEAD
                     &:nth-child(2){
                         top: 25%;
                     }
                     &:nth-child(3){
                         top: 50%;
                     }
-=======
-                    &:nth-child(2) { top: 30%;}
-                    &:nth-child(3) { top: 60% !important;}
->>>>>>> 4307c030872ee985e053ae70ef0c1f67e2610fb9
                 }
                 .active{
                     .box-img{
