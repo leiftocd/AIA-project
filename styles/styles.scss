@@ -153,6 +153,9 @@ section{
     }
 }
 #section-about {
+    animation: ashow linear;
+    animation-timeline: view();
+    animation-range: entry 0%  cover 30%;
     position: relative;
     height: 100vh;
     overflow: hidden;
@@ -168,7 +171,6 @@ section{
         height: 100%;
         display: flex;
         flex-direction: column;
-
         .about-title {
             width: 100%;
             position: sticky;
@@ -189,8 +191,9 @@ section{
             display: flex;
             flex-direction: column;
             gap: 3rem;
-
             .about-container_box {
+                transition: transform 0.5s ease, opacity 0.3s ease;
+                will-change: transform, opacity;
                 position: absolute;
                 top: 0;
                 left: 0;
@@ -201,10 +204,10 @@ section{
                 gap: 4.5rem;
                 cursor: pointer;
                 opacity: 0;
-                transform: translateY(40px);
-                transition: opacity 1.2s linear, transform 1.5s linear; /* Tăng lên 1s */
                 pointer-events: none;
-
+                transform: translateY(0);
+                transition: opacity 1.2s linear, transform 1s linear; /* Tăng lên 1s */
+                pointer-events: auto;
                 .box-img {
                     transition: all 0.8s ease; /* Tăng lên 0.8s */
                     display: flex;
@@ -218,8 +221,8 @@ section{
                     flex-shrink: 0;
                     border: 1px solid rgba(255, 255, 255, 0.3);
                     border-radius: 19.069px;
-                    background: #001621;
                     backdrop-filter: blur(4px);
+                    background: #001621;
                 }
 
                 .box-content {
@@ -235,7 +238,7 @@ section{
                     }
 
                     p {
-                        transition: all 0.8s ease; /* Tăng lên 0.8s */
+                        transition: all 0.8s ease;
                         display: block;
                         font-weight: 400;
                         font-size: 24px;
@@ -244,37 +247,29 @@ section{
                         color: var(--light-color);
                     }
                 }
-
+ 
                 &:nth-child(1) { top: 0; z-index: 88; }
-                &:nth-child(2) { top: 20%; z-index: 99; }
-                &:nth-child(3) { top: 40%; z-index: 100 !important; }
-            }
-
-            .active {
-                opacity: 1;
-                transform: translateY(0);
-                transition: opacity 1.2s linear, transform 1.5s linear; /* Tăng lên 1s */
-                pointer-events: auto;
-
-                .box-img {
-                    max-width: 40rem;
-                    border: 1px solid #FFF;
-                    background: linear-gradient(180deg, #5BFFF4 0%, #081120 100%);
+                &:nth-child(2) { top: 10%; z-index: 99; }
+                &:nth-child(3) { top: 20%; z-index: 100 !important; }
                 }
-            }
-
-            .hidden {
-                opacity: 0 !important;
-                pointer-events: none;
-            }
+                .active{
+                    .box-img{
+                        max-width: 40rem;
+                        border: 1px solid #FFF;
+                        background: linear-gradient(180deg, #5BFFF4 0%, #081120 100%);
+                    }
+                }
         }
     }
 }
   
 #section-introduction{
+    position: relative;
+    animation: ashow linear;
+    animation-timeline: view();
+    animation-range: entry 0%  cover 30%;
     max-width: 144rem;
     width: 100%;
-    visibility: hidden;
     transition: .5s all ease-in-out;
     .introduction{
         display: flex;
@@ -349,6 +344,9 @@ section{
 }
 #section-profession{
     position: relative;
+    animation: ashow linear;
+    animation-timeline: view();
+    animation-range: entry 0%  cover 30%;
     padding: 10rem 0;
     width: 100%;
     display: flex;
@@ -437,6 +435,10 @@ section{
 }
 #section-community{
     max-width: 144rem;
+    position: relative;
+    animation: ashow linear;
+    animation-timeline: view();
+    animation-range: entry 0%  cover 20%;
     width: 100%;
     .community{
         display: flex;
@@ -502,7 +504,7 @@ section{
                     animation: fromRight linear;
                     position: relative;
                     animation-timeline: view();
-                    animation-range: entry 0%  cover 10%;
+                    animation-range: entry 0%  cover 20%;
                     .right-content_text{
                         display: flex;
                         gap: 6rem;
@@ -633,6 +635,10 @@ section{
     }
 }
 #section-footer{
+    position: relative;
+    animation: ashow linear;
+    animation-timeline: view();
+    animation-range: entry 0%  cover 20%;
     padding: 6rem 12rem 10rem 12rem;
     max-width: 144rem;
     width: 100%;
@@ -798,6 +804,20 @@ section{
     }to{
         opacity: 1;
         // top: 7%;
+        transform: translateY(0);
+    }
+}
+@keyframes ashow{
+    0%{
+        opacity: 0;
+        transform: translateY(20%);
+    }
+    50%{
+        opacity: 0;
+        transform: translateY(10%);
+    }
+    100%{
+        opacity: 1;
         transform: translateY(0);
     }
 }
@@ -1378,7 +1398,7 @@ section{
         font-size: 3.6em !important;
     }
     #section-banner{
-        padding: 4rem 0;
+        padding: 1rem 0 4rem;
         .banner{
             gap: 6rem !important;
             margin: 3rem auto 0;
@@ -1416,11 +1436,12 @@ section{
     #section-profession{
         padding: 6rem 0;
         .profession{
+            gap: 2rem;
             padding: 1rem 0 ;
             .profession-container{
                 .list{
                     margin-top: 8vw;
-                    gap: 2rem;
+                    gap: 1.3rem;
                     padding: 5vw;
                     .item{
                         width: 25%;
@@ -1448,10 +1469,9 @@ section{
     }
     #section-about{
         padding: 0 1.5rem;
-        max-height: 60vh;
         .about{
             margin: 6rem auto 0;
-            gap: 6rem;
+            gap: 4rem;
             .about-title{
                 padding: 0;
             }
@@ -1460,8 +1480,8 @@ section{
                 .about-container_box{
                     gap: 1.5rem;
                     .box-img{
-                        max-width: 13rem;
-                        max-height: 13rem;
+                        max-width: 15rem;
+                        max-height: 12rem;
                         img{
                             max-width: 70%;
                         }
@@ -1474,11 +1494,17 @@ section{
                             font-size: 1.6em;
                         }
                     }
+                    &:nth-child(2){
+                        top: 25%;
+                    }
+                    &:nth-child(3){
+                        top: 50%;
+                    }
                 }
                 .active{
                     .box-img{
-                        max-width: 18rem;
-                        max-height: 13rem;
+                        max-width: 20rem;
+                        max-height: 15rem;
                         img{
                             max-width: 50%;
                         }
@@ -1506,6 +1532,9 @@ section{
                         max-width: 85%;
                         width: 100%;
                         gap: 3rem;
+                        animation: ashow linear;
+                        animation-range: entry 0%  cover 40%;
+
                         .right-content_text{
                             justify-content: center;
                         }
@@ -1598,6 +1627,7 @@ section{
     #section-introduction{
         padding: 0rem 2rem 4rem;
         margin-top: 0;
+        height: 95vh;
         .introduction{
             display: flex;
             flex-direction: column;
@@ -1803,7 +1833,7 @@ section{
  
     }
     #section-footer{
-        padding: 4rem 1.5rem 5rem;
+        padding: 4rem 1.5rem 3rem;
         .footer{
             gap: 3rem;
             border-top: 1px solid rgba(204, 204, 204, 0.425);
