@@ -7,6 +7,11 @@
         <link rel="apple-touch-icon" sizes="180x180" href="/assets/image/logo/apple-touch-icon.png" />
         <title>AIA Labs</title>
         <link rel="stylesheet" href="./styles/styles.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/lettering.js/0.7.0/jquery.lettering.min.js"></script>
+        <script src="https://unpkg.com/gsap@3/dist/gsap.min.js"></script>
+        <script src="https://unpkg.com/gsap@3/dist/ScrollTrigger.min.js"></script> 
+        <script src="https://unpkg.com/splitting/dist/splitting.min.js"></script> 
     />
 </head>
     <body>
@@ -29,9 +34,7 @@
                         <img src="./assets/image/chatbot.png" alt="chatbot" loading="lazy">
                     </div>
                     <div class="banner-content_text" id="banner-text">
-                        <p class="appearText">Empowering Web3
-                            Brands with Next-Level 
-                            Community Growth</p>
+                        <p class="typed-text">Empowering Web3 Brands with Next-Level Community Growth</p>
                     </div>
                 </div>
             </div>
@@ -47,12 +50,8 @@
                             <img src="./assets/image/about.png" alt="about" loading="lazy">
                         </div>
                         <div class="box-content">
-                            <span class="appearText">About us</span>
-                            <p class="appearText">
-                                We are the bridge between Web3 projects and key 
-                                Asian & Middle Eastern markets, helping brands 
-                                navigate complexities and maximize impact.
-                            </p>
+                            <h4 class="appearText">About us</h4>
+                            <p id="about-text1" class="typed-text">We are the bridge between Web3 projects and key Asian & Middle Eastern markets, helping brands navigate complexities and maximize impact.</p>
                         </div>
                     </div>
                     <div class="about-container_box box2">
@@ -60,12 +59,8 @@
                             <img src="./assets/image/mission.png" alt="mission" loading="lazy">
                         </div>
                         <div class="box-content">
-                            <span class="appearText">Mission</span>
-                            <p class="appearText">
-                                Crush barriers, expand fast—AIA Labs 
-                                ensures Web3 enterprises win in Asian and 
-                                the Middle East market.    
-                            </p>
+                            <h4 class="appearText">Mission</h4>
+                            <p id="about-text2" class="typed-text">Crush barriers, expand fast—AIA Labs ensures Web3 enterprises win in Asian and the Middle East market.</p>
                         </div>
                     </div>
                     <div class="about-container_box box3">
@@ -73,11 +68,8 @@
                             <img src="./assets/image/vision.png" alt="vision" loading="lazy">
                         </div>
                         <div class="box-content">
-                            <span class="appearText">Vision</span>
-                            <p class="appearText">Our mission is to lead the Web3 revolution, 
-                                ensuring seamless adoption and business success 
-                                through cutting-edge marketing strategies.
-                            </p>
+                            <h4 class="appearText">Vision</h4>
+                            <p id="about-text3" class="typed-text">Our mission is to lead the Web3 revolution, ensuring seamless adoption and business success through cutting-edge marketing strategies.</p>
                         </div>
                     </div>
                 </div>
@@ -97,7 +89,7 @@
                                 <h2 class="appearText">Go-to-Market Execution</h2>
                             </div>
                             <div class="box-intro_desc">
-                                <p class="appearText">Deploy strategic, results-driven approaches for sustainable market penetration.</p>    
+                                <p id="intro-text1" class="typed-text">Deploy strategic, results-driven approaches for sustainable market penetration.</p>    
 
                             </div>
                             <div class="box-intro_img">
@@ -109,7 +101,7 @@
                                 <h2 class="appearText">Strategic Content Creation</h2>
                             </div>
                             <div class="box-intro_desc">
-                                <p class="appearText">Establish your brand as a Web3 leader with compelling, data-driven storytelling.</p>    
+                                <p id="intro-text2" class="typed-text">Establish your brand as a Web3 leader with compelling, data-driven storytelling.</p>    
                             </div>
                             <div class="box-intro_img">
                                 <img src="./assets/image/intro/2.png" alt="" loading="lazy">
@@ -120,7 +112,7 @@
                                 <h2 class="appearText">Targeted Media Outreach</h2>
                             </div>
                             <div class="box-intro_desc">
-                                <p class="appearText">Amplify your brand’s reach through precision media distribution strategies.</p>    
+                                <p id="intro-text3" class="typed-text">Amplify your brand's reach through precision media distribution strategies.</p>    
                             </div>
                             <div class="box-intro_img">
                                 <img src="./assets/image/intro/3.png" alt="" loading="lazy">
@@ -133,7 +125,7 @@
                                 <h2 class="appearText">Influencer & KOL Partnerships</h2>
                             </div>
                             <div class="box-intro_desc">
-                                <p class="appearText">Leverage trusted voices in the Web3 space to drive engagement and credibility.</p> 
+                                <p id="intro-text4" class="typed-text">Leverage trusted voices in the Web3 space to drive engagement and credibility.</p> 
                             </div>
                             <div class="box-intro_img">
                                 <img src="./assets/image/intro/4.png" alt="" loading="lazy">
@@ -144,7 +136,7 @@
                                 <h2 class="appearText">Community Growth & Engagement</h2>
                             </div>
                             <div class="box-intro_desc">
-                                <p class="appearText">Build and sustain vibrant Web3 communities with tested growth tactics.</p>    
+                                <p id="intro-text5" class="typed-text">Build and sustain vibrant Web3 communities with tested growth tactics.</p>    
 
                             </div>
                             <div class="box-intro_img">
@@ -156,7 +148,7 @@
                                 <h2 class="appearText">KOL Funding Acceleration</h2>
                             </div>
                             <div class="box-intro_desc">
-                                <p class="appearText">Secure high-impact funding through streamlined Key Opinion Leader investments.</p> 
+                                <p id="intro-text6" class="typed-text">Secure high-impact funding through streamlined Key Opinion Leader investments.</p> 
                             </div>
                             <div class="box-intro_img">
                                 <img src="./assets/image/intro/6.png" alt="" loading="lazy">
@@ -357,12 +349,83 @@
                 </div>
             </div>
         </section>
-        <!-- <script src="https://unpkg.com/lenis@1.2.3/dist/lenis.min.js"></script>  -->
-        <!-- <scripts src="./lenis.js"></script> -->
+        
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+              // Chọn tất cả các phần tử có class .typed-text
+              const elements = document.querySelectorAll(".typed-text");
+            
+              // Khởi tạo IntersectionObserver để kích hoạt hiệu ứng khi phần tử xuất hiện trong viewport
+              const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                  if (entry.isIntersecting) {
+                    const el = entry.target;
+          
+                    if (!el.classList.contains("animated")) {
+                      el.classList.add("animated");
+                      // Tách văn bản theo từ và thêm mỗi từ vào một span
+                      const words = el.textContent.split(" ");
+                      el.innerHTML = ""; // Xóa văn bản hiện tại
+          
+                      words.forEach((word, index) => {
+                        const span = document.createElement("span");
+                        span.textContent = word; // Thêm từ vào
+                        el.appendChild(span);
+          
+                        if (index < words.length - 1) {
+                          el.appendChild(document.createTextNode("\u00A0")); // Thêm khoảng trắng giữa các từ
+                        }
+                      });
+          
+                      const spans = el.querySelectorAll("span");
+                      spans.forEach((span, i) => {
+                        span.style.display = "inline-block";
+                        span.style.opacity = "0";
+                        span.style.transform = "translateY(10px)";
+                        span.style.transition = `all 0.5s linear ${i * 50}ms`; // Điều chỉnh độ trễ
+                      });
+          
+                      // Kích hoạt hiệu ứng
+                      requestAnimationFrame(() => {
+                        spans.forEach((span) => {
+                          span.style.opacity = "1";
+                          span.style.transform = "translateY(0)";
+                        });
+                      });
+          
+                      observer.unobserve(el); // Dừng theo dõi phần tử sau khi đã hiệu ứng
+                    }
+                  }
+                });
+              }, {
+                threshold: 0.5
+              });
+          
+              // Bắt đầu theo dõi tất cả các phần tử có class .typed-text
+              elements.forEach((el) => observer.observe(el));
+            
+              // Tạo hiệu ứng cho .appearText (chữ lẻ từ trên xuống, chữ chẵn từ dưới lên)
+              const appearElements = document.querySelectorAll(".appearText");
+              appearElements.forEach((el) => {
+                const chars = el.querySelectorAll('.char');
+                el.classList.add('animated');
+          
+                chars.forEach((char, index) => {
+                  const fromY = index % 2 === 0 ? 20 : -20; // chẵn: từ dưới lên, lẻ: từ trên xuống
+          
+                  // Sử dụng GSAP để hiển thị chữ
+                  gsap.fromTo(
+                    char,
+                    { opacity: 0, y: fromY },
+                    { opacity: 1, y: 0, duration: 0.6, delay: index * 0.05, ease: "power3.out" }
+                  );
+                });
+              });
+            });
+          </script>
+          
         <script src="./main.js"></script>
-        <script src="https://unpkg.com/gsap@3/dist/gsap.min.js"></script>
-        <script src="https://unpkg.com/gsap@3/dist/ScrollTrigger.min.js"></script>
-        <script src="./scroll-handler.js"></script>
-        <script src="./gsap.js"></script>
+        <script src="./src/scroll-handler.js"></script>
+        <script src="./src/gsap.js"></script>
     </body>
 </html>

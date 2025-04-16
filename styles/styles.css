@@ -55,11 +55,56 @@ section {
   -webkit-overflow-scrolling: touch; /* Cuộn mượt trên iOS */
 }
 
-.appearText {
-  animation: textAppear 1s forwards;
+.typed-text {
+  display: flex;
+  flex-wrap: wrap;
+  line-height: 1.6;
+  font-size: 24px;
+  color: var(--light-color);
+}
+.typed-text span {
+  display: inline-block;
   opacity: 0;
-  animation-delay: 0.4s;
-  display: block;
+  transform: translateY(-10px);
+  transition: all 0.5s linear;
+}
+.typed-text.animated span {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.typed-text {
+  display: inline-block;
+}
+.typed-text .char {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(10px);
+}
+.typed-text .animated .char {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Thêm phần hiệu ứng cho appearText */
+.appearText {
+  display: inline-block;
+}
+.appearText .char {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.appearText .odd {
+  transform: translateY(20px); /* Chữ lẻ sẽ bay từ trên xuống */
+}
+.appearText .even {
+  transform: translateY(-20px); /* Chữ chẵn sẽ bay từ dưới lên */
+}
+.appearText.animated .char {
+  opacity: 1;
+  transform: translateY(0); /* Chữ hiện lên tại vị trí ban đầu */
 }
 
 #section-banner {
@@ -161,6 +206,7 @@ section {
   margin: 0 auto;
   padding-right: 5rem;
   position: relative;
+  transition: all ease-in-out 0.7s;
 }
 #section-banner .banner .banner-content .banner-content_text p {
   max-width: 80%;
@@ -205,6 +251,7 @@ section {
   z-index: 10;
 }
 #section-about .about .about-title h1 {
+  width: 100%;
   font-weight: 700;
   font-size: 60px;
   text-align: center;
@@ -233,7 +280,7 @@ section {
   opacity: 0;
   pointer-events: none;
   transform: translateY(0);
-  transition: opacity 1.2s linear, transform 1s linear; /* Tăng lên 1s */
+  transition: opacity 1.2s linear, transform 1s linear;
   pointer-events: auto;
 }
 #section-about .about .about-container .about-container_box .box-img {
@@ -256,22 +303,29 @@ section {
 #section-about .about .about-container .about-container_box .box-content {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 4rem;
 }
-#section-about .about .about-container .about-container_box .box-content span {
+#section-about .about .about-container .about-container_box .box-content h4 {
   font-weight: 700;
   font-size: 36px;
   line-height: 100%;
   color: var(--green-color);
 }
 #section-about .about .about-container .about-container_box .box-content p {
-  transition: all 0.8s ease;
-  display: block;
-  font-weight: 400;
+  display: flex;
+  flex-wrap: wrap;
   font-size: 24px;
-  white-space: pre-line;
-  word-wrap: normal;
   color: var(--light-color);
+}
+#section-about .about .about-container .about-container_box .box-content p span {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: all 0.4s ease;
+}
+#section-about .about .about-container .about-container_box .box-content p.animated span {
+  opacity: 1;
+  transform: translateY(0);
 }
 #section-about .about .about-container .about-container_box:nth-child(1) {
   top: 0;
@@ -318,13 +372,14 @@ section {
 }
 #section-introduction .introduction .introduction-title h1 {
   font-weight: 700;
+  width: 100%;
   font-size: 60px;
   text-align: center;
   color: var(--light-color);
 }
 #section-introduction .introduction .introduction-content {
   display: flex;
-  gap: 1rem;
+  gap: 1.5rem;
   justify-content: center;
   flex-direction: column;
   align-items: center;
@@ -333,7 +388,7 @@ section {
 #section-introduction .introduction .introduction-content .introduction-content_top,
 #section-introduction .introduction .introduction-content .introduction-content_bot {
   display: flex;
-  gap: 1rem;
+  gap: 1.5rem;
   height: -webkit-fill-available;
   height: -moz-available;
   height: fill-available;
@@ -439,6 +494,7 @@ section {
   justify-content: center;
 }
 #section-profession .profession .profession-title h1 {
+  width: 100%;
   font-weight: 700;
   font-size: 60px;
   text-align: center;
@@ -538,6 +594,7 @@ section {
   width: 100%;
 }
 #section-community .community .community-container .community-container_title h1 {
+  width: 100%;
   font-weight: 700;
   font-size: 60px;
   text-align: center;
@@ -833,6 +890,15 @@ section {
   position: relative;
 }
 
+.appearText {
+  display: inline-block;
+}
+.appearText .char {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(10px);
+}
+
 @keyframes fromLeft {
   from {
     opacity: 0;
@@ -973,9 +1039,6 @@ section {
     display: flex;
     flex-direction: column;
     gap: 2rem;
-  }
-  #section-about .about .about-container .about-container_box .box-content p {
-    white-space: unset;
   }
   #section-about .about .about-container .active .box-img {
     max-width: 35rem;
@@ -1124,10 +1187,10 @@ section {
   #section-about .about .about-container .about-container_box .box-img img {
     max-width: 70%;
   }
-  #section-about .about .about-container .about-container_box .box-content span {
+  #section-about .about .about-container .about-container_box .box-content h4 {
     font-size: 3em;
   }
-  #section-about .about .about-container .about-container_box .box-content p {
+  #section-about .about .about-container .about-container_box .box-content span {
     font-size: 2em;
   }
   #section-about .about .about-container .about-container_box:nth-child(1) {
@@ -1251,10 +1314,10 @@ section {
   #section-about .about .about-container .about-container_box .box-content {
     gap: 1rem;
   }
-  #section-about .about .about-container .about-container_box .box-content span {
+  #section-about .about .about-container .about-container_box .box-content h4 {
     font-size: 2.6em;
   }
-  #section-about .about .about-container .about-container_box .box-content p {
+  #section-about .about .about-container .about-container_box .box-content span {
     font-size: 1.8em;
   }
   #section-about .about .about-container .about-container_box .box-img {
@@ -1461,10 +1524,10 @@ section {
   #section-about .about .about-container .about-container_box .box-img img {
     max-width: 70%;
   }
-  #section-about .about .about-container .about-container_box .box-content span {
+  #section-about .about .about-container .about-container_box .box-content h4 {
     font-size: 2.4em;
   }
-  #section-about .about .about-container .about-container_box .box-content p {
+  #section-about .about .about-container .about-container_box .box-content span {
     font-size: 1.6em;
   }
   #section-about .about .about-container .about-container_box:nth-child(2) {
@@ -1647,10 +1710,10 @@ section {
   #section-about .about .about-container .about-container_box .box-img img {
     max-width: 70%;
   }
-  #section-about .about .about-container .about-container_box .box-content span {
+  #section-about .about .about-container .about-container_box .box-content h4 {
     font-size: 2em !important;
   }
-  #section-about .about .about-container .about-container_box .box-content p {
+  #section-about .about .about-container .about-container_box .box-content span {
     font-size: 1.2em !important;
   }
   #section-about .about .about-container .about-container_box:nth-child(2) {
