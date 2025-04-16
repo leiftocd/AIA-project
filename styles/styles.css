@@ -65,46 +65,12 @@ section {
 .typed-text span {
   display: inline-block;
   opacity: 0;
-  transform: translateY(-10px);
+  transform: translateY(-5px);
   transition: all 0.5s linear;
 }
 .typed-text.animated span {
   opacity: 1;
   transform: translateY(0);
-}
-
-.typed-text {
-  display: inline-block;
-}
-.typed-text .char {
-  display: inline-block;
-  opacity: 0;
-  transform: translateY(10px);
-}
-.typed-text .animated .char {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* Thêm phần hiệu ứng cho appearText */
-.appearText {
-  display: inline-block;
-}
-.appearText .char {
-  display: inline-block;
-  opacity: 0;
-  transform: translateY(10px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
-}
-.appearText .odd {
-  transform: translateY(20px); /* Chữ lẻ sẽ bay từ trên xuống */
-}
-.appearText .even {
-  transform: translateY(-20px); /* Chữ chẵn sẽ bay từ dưới lên */
-}
-.appearText.animated .char {
-  opacity: 1;
-  transform: translateY(0); /* Chữ hiện lên tại vị trí ban đầu */
 }
 
 #section-banner {
@@ -206,7 +172,7 @@ section {
   margin: 0 auto;
   padding-right: 5rem;
   position: relative;
-  transition: all ease-in-out 0.7s;
+  transition: all ease-in-out 0.5s;
 }
 #section-banner .banner .banner-content .banner-content_text p {
   max-width: 80%;
@@ -251,7 +217,6 @@ section {
   z-index: 10;
 }
 #section-about .about .about-title h1 {
-  width: 100%;
   font-weight: 700;
   font-size: 60px;
   text-align: center;
@@ -372,14 +337,13 @@ section {
 }
 #section-introduction .introduction .introduction-title h1 {
   font-weight: 700;
-  width: 100%;
   font-size: 60px;
   text-align: center;
   color: var(--light-color);
 }
 #section-introduction .introduction .introduction-content {
   display: flex;
-  gap: 1.5rem;
+  gap: 1rem;
   justify-content: center;
   flex-direction: column;
   align-items: center;
@@ -388,7 +352,7 @@ section {
 #section-introduction .introduction .introduction-content .introduction-content_top,
 #section-introduction .introduction .introduction-content .introduction-content_bot {
   display: flex;
-  gap: 1.5rem;
+  gap: 1rem;
   height: -webkit-fill-available;
   height: -moz-available;
   height: fill-available;
@@ -494,7 +458,6 @@ section {
   justify-content: center;
 }
 #section-profession .profession .profession-title h1 {
-  width: 100%;
   font-weight: 700;
   font-size: 60px;
   text-align: center;
@@ -594,8 +557,8 @@ section {
   width: 100%;
 }
 #section-community .community .community-container .community-container_title h1 {
-  width: 100%;
   font-weight: 700;
+  width: 100%;
   font-size: 60px;
   text-align: center;
   color: var(--light-color);
@@ -829,6 +792,9 @@ section {
   align-items: center;
   justify-content: center;
 }
+#section-footer .footer .footer-content .footer-content_left span {
+  text-align: center;
+}
 #section-footer .footer .footer-content .footer-content_left,
 #section-footer .footer .footer-content .footer-content_mid {
   display: flex;
@@ -888,15 +854,6 @@ section {
   transition: opacity 0.3s ease;
   height: auto;
   position: relative;
-}
-
-.appearText {
-  display: inline-block;
-}
-.appearText .char {
-  display: inline-block;
-  opacity: 0;
-  transform: translateY(10px);
 }
 
 @keyframes fromLeft {
@@ -1040,12 +997,18 @@ section {
     flex-direction: column;
     gap: 2rem;
   }
+  #section-about .about .about-container .about-container_box .box-content span {
+    font-size: 2rem;
+  }
   #section-about .about .about-container .active .box-img {
     max-width: 35rem;
     max-height: 20rem;
   }
   #section-introduction .introduction .introduction-content .introduction-content_box {
     padding: 5rem 1.5rem;
+  }
+  #section-introduction .introduction .introduction-content .introduction-content_box .box-intro_desc p span {
+    font-size: 2rem;
   }
   #section-profession {
     padding: 6rem 0;
@@ -1188,10 +1151,10 @@ section {
     max-width: 70%;
   }
   #section-about .about .about-container .about-container_box .box-content h4 {
-    font-size: 3em;
+    font-size: 2.6em;
   }
-  #section-about .about .about-container .about-container_box .box-content span {
-    font-size: 2em;
+  #section-about .about .about-container .about-container_box .box-content p .animated span {
+    font-size: 1.8em;
   }
   #section-about .about .about-container .about-container_box:nth-child(1) {
     top: 0;
@@ -1228,6 +1191,10 @@ section {
   #section-introduction .introduction .introduction-content .introduction-content_top .introduction-content_box .box-intro_tit h2,
   #section-introduction .introduction .introduction-content .introduction-content_bot .introduction-content_box .box-intro_tit h2 {
     font-size: 2.8em;
+  }
+  #section-introduction .introduction .introduction-content .introduction-content_top .introduction-content_box .box-intro_desc span,
+  #section-introduction .introduction .introduction-content .introduction-content_bot .introduction-content_box .box-intro_desc span {
+    font-size: 1.8rem;
   }
   #section-community {
     padding: 3rem;
@@ -1317,8 +1284,8 @@ section {
   #section-about .about .about-container .about-container_box .box-content h4 {
     font-size: 2.6em;
   }
-  #section-about .about .about-container .about-container_box .box-content span {
-    font-size: 1.8em;
+  #section-about .about .about-container .about-container_box .box-content p .animated span {
+    font-size: 1.6em;
   }
   #section-about .about .about-container .about-container_box .box-img {
     max-width: 16rem;
@@ -1407,7 +1374,15 @@ section {
   #section-introduction .introduction .introduction-content .introduction-content_bot .introduction-content_box .box-intro_img p,
   #section-introduction .introduction .introduction-content .introduction-content_bot .introduction-content_box .box-intro_tit p {
     padding: 0;
-    font-size: 1.8rem;
+    font-size: 1.6rem;
+  }
+  #section-introduction .introduction .introduction-content .introduction-content_top .introduction-content_box .box-intro_desc p span,
+  #section-introduction .introduction .introduction-content .introduction-content_top .introduction-content_box .box-intro_img p span,
+  #section-introduction .introduction .introduction-content .introduction-content_top .introduction-content_box .box-intro_tit p span,
+  #section-introduction .introduction .introduction-content .introduction-content_bot .introduction-content_box .box-intro_desc p span,
+  #section-introduction .introduction .introduction-content .introduction-content_bot .introduction-content_box .box-intro_img p span,
+  #section-introduction .introduction .introduction-content .introduction-content_bot .introduction-content_box .box-intro_tit p span {
+    font-size: 1.6rem;
   }
   #section-introduction .introduction .introduction-content .introduction-content_top .introduction-content_box .box-intro_img,
   #section-introduction .introduction .introduction-content .introduction-content_bot .introduction-content_box .box-intro_img {
@@ -1525,10 +1500,13 @@ section {
     max-width: 70%;
   }
   #section-about .about .about-container .about-container_box .box-content h4 {
-    font-size: 2.4em;
+    font-size: 2.2em;
   }
-  #section-about .about .about-container .about-container_box .box-content span {
-    font-size: 1.6em;
+  #section-about .about .about-container .about-container_box .box-content p {
+    font-size: 1.4rem;
+  }
+  #section-about .about .about-container .about-container_box .box-content p span {
+    font-size: 1.4rem !important;
   }
   #section-about .about .about-container .about-container_box:nth-child(2) {
     top: 40%;
@@ -1704,7 +1682,7 @@ section {
     height: 100vh;
   }
   #section-about .about .about-container .about-container_box .box-img {
-    max-width: 10rem;
+    max-width: 13rem;
     max-height: 10rem;
   }
   #section-about .about .about-container .about-container_box .box-img img {
@@ -1717,16 +1695,16 @@ section {
     font-size: 1.2em !important;
   }
   #section-about .about .about-container .about-container_box:nth-child(2) {
-    top: 30%;
+    top: 40%;
     z-index: 99;
   }
   #section-about .about .about-container .about-container_box:nth-child(3) {
-    top: 60%;
+    top: 80%;
     z-index: 100 !important;
   }
   #section-about .about .about-container .active .box-img {
-    max-width: 13rem !important;
-    max-height: 10rem;
+    max-width: 15rem !important;
+    max-height: 13rem;
   }
   #section-introduction {
     padding: 1rem 1.5rem 1rem;
@@ -1744,21 +1722,22 @@ section {
   }
   #section-introduction .introduction .introduction-content .introduction-content_bot .introduction-content_box,
   #section-introduction .introduction .introduction-content .introduction-content_top .introduction-content_box {
+    justify-content: center;
     max-width: 100% !important;
     width: 100%;
-    padding: 2rem 1rem;
+    padding: 1.5rem 1rem;
   }
-  #section-introduction .introduction .introduction-content .introduction-content_bot .introduction-content_box .box-intro_desc span,
-  #section-introduction .introduction .introduction-content .introduction-content_bot .introduction-content_box .box-intro_tit span,
-  #section-introduction .introduction .introduction-content .introduction-content_top .introduction-content_box .box-intro_desc span,
-  #section-introduction .introduction .introduction-content .introduction-content_top .introduction-content_box .box-intro_tit span {
-    font-size: 1.5em !important;
+  #section-introduction .introduction .introduction-content .introduction-content_bot .introduction-content_box .box-intro_desc h2,
+  #section-introduction .introduction .introduction-content .introduction-content_bot .introduction-content_box .box-intro_tit h2,
+  #section-introduction .introduction .introduction-content .introduction-content_top .introduction-content_box .box-intro_desc h2,
+  #section-introduction .introduction .introduction-content .introduction-content_top .introduction-content_box .box-intro_tit h2 {
+    font-size: 1.6rem !important;
   }
-  #section-introduction .introduction .introduction-content .introduction-content_bot .introduction-content_box .box-intro_desc p,
-  #section-introduction .introduction .introduction-content .introduction-content_bot .introduction-content_box .box-intro_tit p,
-  #section-introduction .introduction .introduction-content .introduction-content_top .introduction-content_box .box-intro_desc p,
-  #section-introduction .introduction .introduction-content .introduction-content_top .introduction-content_box .box-intro_tit p {
-    font-size: 1.4em !important;
+  #section-introduction .introduction .introduction-content .introduction-content_bot .introduction-content_box .box-intro_desc p span,
+  #section-introduction .introduction .introduction-content .introduction-content_bot .introduction-content_box .box-intro_tit p span,
+  #section-introduction .introduction .introduction-content .introduction-content_top .introduction-content_box .box-intro_desc p span,
+  #section-introduction .introduction .introduction-content .introduction-content_top .introduction-content_box .box-intro_tit p span {
+    font-size: 1.3rem !important;
   }
   #section-introduction .introduction .introduction-content .introduction-content_bot .introduction-content_box .box-intro_img,
   #section-introduction .introduction .introduction-content .introduction-content_top .introduction-content_box .box-intro_img {
