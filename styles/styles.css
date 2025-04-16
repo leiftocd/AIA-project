@@ -28,7 +28,6 @@ html {
 body {
   display: flex;
   align-items: center;
-  scroll-behavior: smooth;
   flex-direction: column;
   min-height: 100vh;
   background-color: var(--home-bg);
@@ -52,24 +51,20 @@ section {
 }
 
 ::-webkit-scrollbar {
-  width: 10px;
+  width: 0;
   -webkit-overflow-scrolling: touch; /* Cuộn mượt trên iOS */
 }
 
-/* Track */
-::-webkit-scrollbar-track {
-  box-shadow: inset 0 0 5px grey;
-  border-radius: 10px;
-}
-
-/* Handle */
-::-webkit-scrollbar-thumb {
-  background: #145567;
-  border-radius: 10px;
+.appearText {
+  animation: textAppear 1s forwards;
+  opacity: 0;
+  animation-delay: 0.4s;
+  display: block;
 }
 
 #section-banner {
   padding: 2rem 0;
+  height: 100vh;
   margin-bottom: 12rem;
 }
 #section-banner .banner {
@@ -166,7 +161,6 @@ section {
   margin: 0 auto;
   padding-right: 5rem;
   position: relative;
-  animation: fromLeft 1s ease-in-out;
 }
 #section-banner .banner .banner-content .banner-content_text p {
   max-width: 80%;
@@ -177,13 +171,7 @@ section {
 }
 
 #section-about {
-  animation: ashow linear;
-  animation-timeline: view();
-  animation-range: entry 0% cover 30%;
   position: relative;
-  animation: fromBot linear;
-  animation-timeline: view();
-  animation-range: entry 0% cover 30%;
   height: 100vh;
   scroll-behavior: smooth;
   overflow: hidden;
@@ -200,7 +188,6 @@ section {
   top: 0;
   left: 0;
   width: 100%;
-  height: 100vh;
   z-index: 9999;
   background: white;
   overflow: hidden;
@@ -291,11 +278,11 @@ section {
   z-index: 88;
 }
 #section-about .about .about-container .about-container_box:nth-child(2) {
-  top: 10%;
+  top: 18%;
   z-index: 99;
 }
 #section-about .about .about-container .about-container_box:nth-child(3) {
-  top: 20%;
+  top: 36%;
   z-index: 100 !important;
 }
 #section-about .about .about-container .active {
@@ -309,21 +296,22 @@ section {
 
 #section-introduction {
   position: relative;
-  animation: ashow linear;
-  animation-timeline: view();
-  animation-range: entry 0% cover 30%;
-  max-width: 144rem;
+  max-width: 128rem;
   opacity: 1;
   visibility: visible;
   width: 100%;
-  transition: 0.5s all ease-in-out;
+  margin-bottom: 5rem;
+  padding: 6rem 10rem;
+  max-width: unset;
 }
 #section-introduction .introduction {
   display: flex;
   flex-direction: column;
   gap: 3rem;
+  animation: appear linear;
+  animation-timeline: view();
+  animation-range-end: 40%;
   position: relative;
-  margin-bottom: 5rem;
 }
 #section-introduction .introduction .introduction-title {
   width: 100%;
@@ -335,61 +323,77 @@ section {
   color: var(--light-color);
 }
 #section-introduction .introduction .introduction-content {
-  display: grid;
-  grid-template-columns: auto auto auto;
-  gap: 2rem;
+  display: flex;
+  gap: 1rem;
   justify-content: center;
+  flex-direction: column;
+  align-items: center;
   position: relative;
 }
-#section-introduction .introduction .introduction-content .box1 {
-  grid-area: 1/1;
+#section-introduction .introduction .introduction-content .introduction-content_top,
+#section-introduction .introduction .introduction-content .introduction-content_bot {
+  display: flex;
+  gap: 1rem;
+  height: -webkit-fill-available;
+  height: -moz-available;
+  height: fill-available;
 }
-#section-introduction .introduction .introduction-content .box2 {
-  grid-area: 1/2;
-  border-radius: 2rem;
+#section-introduction .introduction .introduction-content .introduction-content_top .introduction-content_box,
+#section-introduction .introduction .introduction-content .introduction-content_bot .introduction-content_box {
+  transition: all 0.3s ease;
   background-color: var(--intro-bg);
-}
-#section-introduction .introduction .introduction-content .box3 {
-  grid-area: 1/3;
-}
-#section-introduction .introduction .introduction-content .box4 {
-  grid-area: 2/1;
-  border-radius: 2rem;
-  background-color: var(--intro-bg);
-}
-#section-introduction .introduction .introduction-content .box5 {
-  grid-area: 2/2;
-}
-#section-introduction .introduction .introduction-content .box6 {
-  grid-area: 2/3;
-  border-radius: 2rem;
-  background-color: var(--intro-bg);
-}
-#section-introduction .introduction .introduction-content .introduction-content_box {
+  position: relative;
+  z-index: 1000;
   display: flex;
   flex-direction: column;
-  gap: 1rem;
-  padding: 6.4rem 1.5rem;
-  max-width: 40rem;
-  max-height: 38rem;
+  gap: 2rem;
+  border-radius: 2rem;
+  padding: 5rem 2rem 10rem;
+  max-width: 100%;
+  width: 100%;
+  max-height: 55rem;
+  flex: 1;
+  cursor: pointer;
 }
-#section-introduction .introduction .introduction-content .introduction-content_box span {
+#section-introduction .introduction .introduction-content .introduction-content_top .introduction-content_box .box-intro_tit h2,
+#section-introduction .introduction .introduction-content .introduction-content_bot .introduction-content_box .box-intro_tit h2 {
   font-weight: 700;
-  font-size: 36px;
+  font-size: 28px;
   line-height: 100%;
-  color: var(--green-color);
-}
-#section-introduction .introduction .introduction-content .introduction-content_box p {
-  font-weight: 400;
-  font-size: 24px;
   color: var(--light-color);
+  padding: 0 1.5rem;
+}
+#section-introduction .introduction .introduction-content .introduction-content_top .introduction-content_box .box-intro_desc p,
+#section-introduction .introduction .introduction-content .introduction-content_bot .introduction-content_box .box-intro_desc p {
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: #50fbc7;
+  padding: 0 1.5rem;
+}
+#section-introduction .introduction .introduction-content .introduction-content_top .introduction-content_box .box-intro_img img,
+#section-introduction .introduction .introduction-content .introduction-content_bot .introduction-content_box .box-intro_img img {
+  display: none;
+}
+#section-introduction .introduction .introduction-content .introduction-content_top .introduction-content_box:hover,
+#section-introduction .introduction .introduction-content .introduction-content_bot .introduction-content_box:hover {
+  flex: 2.5;
+  max-width: 70%;
+}
+#section-introduction .introduction .introduction-content .introduction-content_top .introduction-content_box:hover .box-intro_img,
+#section-introduction .introduction .introduction-content .introduction-content_bot .introduction-content_box:hover .box-intro_img {
+  padding: 0 1.5rem;
+}
+#section-introduction .introduction .introduction-content .introduction-content_top .introduction-content_box:hover .box-intro_img img,
+#section-introduction .introduction .introduction-content .introduction-content_bot .introduction-content_box:hover .box-intro_img img {
+  display: block;
+  width: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border-radius: 5px;
 }
 
 #section-profession {
   position: relative;
-  animation: ashow linear;
-  animation-timeline: view();
-  animation-range: entry 0% cover 30%;
   padding: 10rem 0;
   width: 100%;
   display: flex;
@@ -397,6 +401,10 @@ section {
   justify-content: center;
 }
 #section-profession .profession {
+  animation: appear linear;
+  animation-timeline: view();
+  animation-range-end: 30%;
+  position: relative;
   max-width: 144rem;
   display: flex;
   flex-direction: column;
@@ -412,12 +420,13 @@ section {
   transform: translate(0, -50%);
   z-index: -1;
   opacity: 1;
+  pointer-events: none;
 }
-#section-profession .profession .profession-ellipse svg {
+#section-profession .profession .profession-ellipse img {
   height: 100%;
   width: 100%;
   border-radius: 100%;
-  filter: blur(100px);
+  filter: blur(60px);
 }
 #section-profession .profession .profession-ellipse .mb {
   display: none;
@@ -448,7 +457,7 @@ section {
   gap: 3vw;
 }
 #section-profession .profession .profession-container .list .item {
-  max-width: 16%;
+  max-width: 13.5%;
   width: 100%;
   height: 6.4vw;
   cursor: pointer;
@@ -477,16 +486,41 @@ section {
 #section-profession .profession .profession-container .list .item a:hover img {
   filter: grayscale(0);
 }
+#section-profession .profession .profession-container .list .item a .ton-css {
+  filter: grayscale(100%);
+}
+#section-profession .profession .profession-container .list .item a .ton-css:hover {
+  filter: grayscale(0);
+}
+#section-profession .profession .profession-container .list .item a .pendle-css {
+  width: 100% !important;
+}
+#section-profession .profession .profession-container .list .item a .orderly-css {
+  filter: contrast(0);
+}
+#section-profession .profession .profession-container .list .item a .orderly-css:hover {
+  filter: contrast(1);
+}
+#section-profession .profession .profession-container .list .item a .plume-css {
+  filter: invert(100);
+}
+#section-profession .profession .profession-container .list .item a .moca-css {
+  width: 92% !important;
+}
+#section-profession .profession .profession-container .list .item a .mover-css {
+  width: 92% !important;
+}
 
 #section-community {
   max-width: 144rem;
   position: relative;
-  animation: ashow linear;
-  animation-timeline: view();
-  animation-range: entry 0% cover 20%;
   width: 100%;
 }
 #section-community .community {
+  animation: appear linear;
+  animation-timeline: view();
+  animation-range-end: 30%;
+  position: relative;
   display: flex;
   width: 100%;
   flex-direction: column;
@@ -519,10 +553,6 @@ section {
   gap: 3.2rem;
   display: flex;
   flex-direction: column;
-  animation: fromLeft ease-in-out;
-  position: relative;
-  animation-timeline: view();
-  animation-range: entry 0% cover 60%;
 }
 #section-community .community .community-container .community-container_content .left-content .left-content_title {
   display: flex;
@@ -549,10 +579,6 @@ section {
   flex-direction: column-reverse;
   max-width: 100%;
   gap: 2rem;
-  animation: fromRight linear;
-  position: relative;
-  animation-timeline: view();
-  animation-range: entry 0% cover 20%;
 }
 #section-community .community .community-container .community-container_content .right-content .right-content_text {
   display: flex;
@@ -633,13 +659,13 @@ section {
   animation-range-end: 50%;
   position: relative;
 }
-#section-community .community .community-img .b-icon1 {
-  left: 5%;
-  top: 7%;
+#section-community .community .community-img .m-icon4 {
+  left: 13%;
+  top: 10%;
 }
-#section-community .community .community-img .b-icon2 {
-  left: 46%;
-  top: 19%;
+#section-community .community .community-img .m-icon5 {
+  left: 48%;
+  top: 22%;
 }
 #section-community .community .community-img .b-icon3 {
   left: 75%;
@@ -684,14 +710,15 @@ section {
 
 #section-footer {
   position: relative;
-  animation: ashow linear;
-  animation-timeline: view();
-  animation-range: entry 0% cover 20%;
   padding: 6rem 12rem 10rem 12rem;
   max-width: 144rem;
   width: 100%;
 }
 #section-footer .footer {
+  animation: appear linear;
+  animation-timeline: view();
+  animation-range-end: 30%;
+  position: relative;
   display: flex;
   flex-direction: column;
   gap: 8rem;
@@ -802,7 +829,7 @@ section {
 #section-banner,
 #section-introduction {
   transition: opacity 0.3s ease;
-  height: auto; /* Đảm bảo chiều cao không bị mất đột ngột */
+  height: auto;
   position: relative;
 }
 
@@ -814,42 +841,6 @@ section {
   to {
     left: 0;
     opacity: 1;
-  }
-}
-@keyframes fromBot {
-  0% {
-    opacity: 0;
-    bottom: -15%;
-  }
-  40% {
-    bottom: -10;
-    opacity: 0;
-  }
-  100% {
-    bottom: 0;
-    opacity: 1;
-  }
-}
-@keyframes appearBox {
-  from {
-    opacity: 0;
-    -webkit-clip-path: inset(100% 100% 0 0);
-            clip-path: inset(100% 100% 0 0);
-  }
-  to {
-    opacity: 1;
-    -webkit-clip-path: inset(0 0 0 0);
-            clip-path: inset(0 0 0 0);
-  }
-}
-@keyframes fromRight {
-  from {
-    opacity: 0;
-    transform: translateX(50%);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0%);
   }
 }
 @keyframes scrollPicture {
@@ -872,16 +863,21 @@ section {
     transform: translateY(0);
   }
 }
-@keyframes ashow {
-  0% {
-    opacity: 0;
-    transform: translateY(20%);
+@keyframes textAppear {
+  from {
+    transform: translateY(30px);
   }
-  50% {
-    opacity: 0;
-    transform: translateY(10%);
+  to {
+    opacity: 1;
+    transform: none;
   }
-  100% {
+}
+@keyframes appear {
+  from {
+    opacity: 0;
+    transform: translateY(-50px);
+  }
+  to {
     opacity: 1;
     transform: translateY(0);
   }
@@ -916,13 +912,16 @@ section {
   #section-profession .profession .profession-container {
     display: flex;
     gap: 3.5rem;
-    padding: 0;
+    padding: 0 6rem;
   }
   #section-profession .profession .profession-container .profession-title {
     padding: 0;
   }
+  #section-profession .profession .profession-container .list {
+    gap: 3.5vw;
+  }
   #section-profession .profession .profession-container .list .item a img {
-    width: 70%;
+    width: 85%;
     -o-object-fit: cover;
        object-fit: cover;
   }
@@ -932,6 +931,18 @@ section {
   footer .footer-content {
     gap: 10.3rem;
     justify-content: unset;
+  }
+  #section-about .about .about-container .about-container_box:nth-child(1) {
+    top: 0;
+    z-index: 88;
+  }
+  #section-about .about .about-container .about-container_box:nth-child(2) {
+    top: 22%;
+    z-index: 99;
+  }
+  #section-about .about .about-container .about-container_box:nth-child(3) {
+    top: 44%;
+    z-index: 100 !important;
   }
 }
 @media (max-width: 1200px) {
@@ -969,12 +980,6 @@ section {
   #section-about .about .about-container .active .box-img {
     max-width: 35rem;
     max-height: 20rem;
-  }
-  #section-introduction span {
-    font-size: 3em !important;
-  }
-  #section-introduction p {
-    font-size: 2em !important;
   }
   #section-introduction .introduction .introduction-content .introduction-content_box {
     padding: 5rem 1.5rem;
@@ -1125,6 +1130,15 @@ section {
   #section-about .about .about-container .about-container_box .box-content p {
     font-size: 2em;
   }
+  #section-about .about .about-container .about-container_box:nth-child(1) {
+    top: 0;
+  }
+  #section-about .about .about-container .about-container_box:nth-child(2) {
+    top: 12%;
+  }
+  #section-about .about .about-container .about-container_box:nth-child(3) {
+    top: 20%;
+  }
   #section-about .about .about-container .active .box-img {
     max-width: 25rem;
     max-height: 15rem;
@@ -1132,14 +1146,25 @@ section {
   #section-about .about .about-container .active .box-img img {
     max-width: 50%;
   }
-  #section-introduction span {
-    font-size: 2.8em !important;
+  #section-introduction {
+    padding: 6rem 2.5rem;
   }
-  #section-introduction p {
-    font-size: 1.8em !important;
+  #section-introduction .introduction .introduction-content {
+    gap: 1rem;
   }
-  #section-introduction .introduction .introduction-content .introduction-content_box {
+  #section-introduction .introduction .introduction-content .introduction-content_top,
+  #section-introduction .introduction .introduction-content .introduction-content_bot {
+    gap: 1rem;
+  }
+  #section-introduction .introduction .introduction-content .introduction-content_top .introduction-content_box,
+  #section-introduction .introduction .introduction-content .introduction-content_bot .introduction-content_box {
     padding: 4rem 1.5rem;
+    max-height: 45rem !important;
+    flex: 0.8;
+  }
+  #section-introduction .introduction .introduction-content .introduction-content_top .introduction-content_box .box-intro_tit h2,
+  #section-introduction .introduction .introduction-content .introduction-content_bot .introduction-content_box .box-intro_tit h2 {
+    font-size: 2.8em;
   }
   #section-community {
     padding: 3rem;
@@ -1292,20 +1317,47 @@ section {
   #section-introduction .introduction .introduction-content {
     gap: 1rem;
   }
-  #section-introduction .introduction .introduction-content .introduction-content_box {
+  #section-introduction .introduction .introduction-content .introduction-content_top,
+  #section-introduction .introduction .introduction-content .introduction-content_bot {
     gap: 1rem;
-    padding: 4rem 1rem;
-    max-width: 40rem;
-    max-height: 38rem;
   }
-  #section-introduction .introduction .introduction-content .introduction-content_box span {
-    font-size: 2.8em !important;
+  #section-introduction .introduction .introduction-content .introduction-content_top .introduction-content_box,
+  #section-introduction .introduction .introduction-content .introduction-content_bot .introduction-content_box {
+    gap: 1rem;
+    padding: 4rem 1.5rem;
+    max-width: 30rem;
+    max-height: 50rem;
   }
-  #section-introduction .introduction .introduction-content .introduction-content_box p {
-    font-size: 1.8em !important;
+  #section-introduction .introduction .introduction-content .introduction-content_top .introduction-content_box .box-intro_desc h2,
+  #section-introduction .introduction .introduction-content .introduction-content_top .introduction-content_box .box-intro_img h2,
+  #section-introduction .introduction .introduction-content .introduction-content_top .introduction-content_box .box-intro_tit h2,
+  #section-introduction .introduction .introduction-content .introduction-content_bot .introduction-content_box .box-intro_desc h2,
+  #section-introduction .introduction .introduction-content .introduction-content_bot .introduction-content_box .box-intro_img h2,
+  #section-introduction .introduction .introduction-content .introduction-content_bot .introduction-content_box .box-intro_tit h2 {
+    padding: 0;
+    font-size: 2.4rem;
+  }
+  #section-introduction .introduction .introduction-content .introduction-content_top .introduction-content_box .box-intro_desc p,
+  #section-introduction .introduction .introduction-content .introduction-content_top .introduction-content_box .box-intro_img p,
+  #section-introduction .introduction .introduction-content .introduction-content_top .introduction-content_box .box-intro_tit p,
+  #section-introduction .introduction .introduction-content .introduction-content_bot .introduction-content_box .box-intro_desc p,
+  #section-introduction .introduction .introduction-content .introduction-content_bot .introduction-content_box .box-intro_img p,
+  #section-introduction .introduction .introduction-content .introduction-content_bot .introduction-content_box .box-intro_tit p {
+    padding: 0;
+    font-size: 1.8rem;
+  }
+  #section-introduction .introduction .introduction-content .introduction-content_top .introduction-content_box .box-intro_img,
+  #section-introduction .introduction .introduction-content .introduction-content_bot .introduction-content_box .box-intro_img {
+    padding: 0 !important;
   }
   #section-profession .profession {
     padding: 0 2rem;
+  }
+  #section-profession .profession .profession-container .list {
+    gap: 5vw;
+  }
+  #section-profession .profession .profession-container .list .item {
+    max-width: 20%;
   }
   #section-profession .profession .profession-title {
     padding: 0;
@@ -1362,14 +1414,17 @@ section {
     gap: 2rem;
     padding: 1rem 0;
   }
+  #section-profession .profession .profession-container {
+    padding: 0 4vw;
+  }
   #section-profession .profession .profession-container .list {
     margin-top: 8vw;
-    gap: 1.3rem;
-    padding: 5vw;
+    gap: 4vw;
   }
   #section-profession .profession .profession-container .list .item {
-    width: 25%;
+    width: 100%;
     max-width: 20%;
+    padding: 0 1vw;
   }
   #section-profession .profession .profession-container .list .item img {
     width: 13vw;
@@ -1413,10 +1468,10 @@ section {
     font-size: 1.6em;
   }
   #section-about .about .about-container .about-container_box:nth-child(2) {
-    top: 25%;
+    top: 40%;
   }
   #section-about .about .about-container .about-container_box:nth-child(3) {
-    top: 50%;
+    top: 80%;
   }
   #section-about .about .about-container .active .box-img {
     max-width: 20rem;
@@ -1439,8 +1494,6 @@ section {
     max-width: 85%;
     width: 100%;
     gap: 3rem;
-    animation: ashow linear;
-    animation-range: entry 0% cover 40%;
   }
   #section-community .community .community-container .community-container_content .right-content .right-content_text {
     justify-content: center;
@@ -1509,7 +1562,6 @@ section {
     font-weight: 700;
     font-size: 2.8em !important;
     text-transform: capitalize;
-    color: var(--light-color);
     text-align: center;
   }
   #section-footer .footer .footer-content .footer-content_right {
@@ -1521,7 +1573,7 @@ section {
     gap: 1.8rem;
   }
   #section-introduction {
-    padding: 4rem 2rem 4rem;
+    padding: 4rem 1.5rem 4rem;
     margin-top: 0;
     height: 95vh;
   }
@@ -1533,18 +1585,32 @@ section {
   #section-introduction .introduction .introduction-content {
     gap: 1rem;
   }
-  #section-introduction .introduction .introduction-content .introduction-content_box {
+  #section-introduction .introduction .introduction-content .introduction-content_bot .introduction-content_box,
+  #section-introduction .introduction .introduction-content .introduction-content_top .introduction-content_box {
     gap: 1.5rem;
     padding: 4rem 1rem;
   }
-  #section-introduction .introduction .introduction-content .introduction-content_box span {
-    font-size: 1.8em !important;
+  #section-introduction .introduction .introduction-content .introduction-content_bot .introduction-content_box .box-intro_desc p,
+  #section-introduction .introduction .introduction-content .introduction-content_bot .introduction-content_box .box-intro_img p,
+  #section-introduction .introduction .introduction-content .introduction-content_bot .introduction-content_box .box-intro_tit p,
+  #section-introduction .introduction .introduction-content .introduction-content_top .introduction-content_box .box-intro_desc p,
+  #section-introduction .introduction .introduction-content .introduction-content_top .introduction-content_box .box-intro_img p,
+  #section-introduction .introduction .introduction-content .introduction-content_top .introduction-content_box .box-intro_tit p {
+    font-size: 1.6rem;
   }
-  #section-introduction .introduction .introduction-content .introduction-content_box p {
-    font-size: 1.6em !important;
+  #section-introduction .introduction .introduction-content .introduction-content_bot .introduction-content_box .box-intro_desc h2,
+  #section-introduction .introduction .introduction-content .introduction-content_bot .introduction-content_box .box-intro_img h2,
+  #section-introduction .introduction .introduction-content .introduction-content_bot .introduction-content_box .box-intro_tit h2,
+  #section-introduction .introduction .introduction-content .introduction-content_top .introduction-content_box .box-intro_desc h2,
+  #section-introduction .introduction .introduction-content .introduction-content_top .introduction-content_box .box-intro_img h2,
+  #section-introduction .introduction .introduction-content .introduction-content_top .introduction-content_box .box-intro_tit h2 {
+    font-size: 2rem;
   }
 }
 @media (max-width: 450px) {
+  h1 {
+    font-size: 3.2rem !important;
+  }
   section {
     padding: 4.8rem 1.6rem;
   }
@@ -1600,24 +1666,45 @@ section {
     max-height: 10rem;
   }
   #section-introduction {
-    padding: 1rem 1.5rem 4rem;
+    padding: 1rem 1.5rem 1rem;
+    height: auto;
+    margin-bottom: 3rem;
   }
   #section-introduction .introduction {
     display: flex;
     flex-direction: column;
     gap: 4rem;
   }
-  #section-introduction .introduction .introduction-content {
-    gap: 1vw;
+  #section-introduction .introduction .introduction-content .introduction-content_bot,
+  #section-introduction .introduction .introduction-content .introduction-content_top {
+    flex-direction: column;
   }
-  #section-introduction .introduction .introduction-content .introduction-content_box {
-    padding: 4rem 0.6rem;
+  #section-introduction .introduction .introduction-content .introduction-content_bot .introduction-content_box,
+  #section-introduction .introduction .introduction-content .introduction-content_top .introduction-content_box {
+    max-width: 100% !important;
+    width: 100%;
+    padding: 2rem 1rem;
   }
-  #section-introduction .introduction .introduction-content .introduction-content_box span {
+  #section-introduction .introduction .introduction-content .introduction-content_bot .introduction-content_box .box-intro_desc span,
+  #section-introduction .introduction .introduction-content .introduction-content_bot .introduction-content_box .box-intro_tit span,
+  #section-introduction .introduction .introduction-content .introduction-content_top .introduction-content_box .box-intro_desc span,
+  #section-introduction .introduction .introduction-content .introduction-content_top .introduction-content_box .box-intro_tit span {
     font-size: 1.5em !important;
   }
-  #section-introduction .introduction .introduction-content .introduction-content_box p {
+  #section-introduction .introduction .introduction-content .introduction-content_bot .introduction-content_box .box-intro_desc p,
+  #section-introduction .introduction .introduction-content .introduction-content_bot .introduction-content_box .box-intro_tit p,
+  #section-introduction .introduction .introduction-content .introduction-content_top .introduction-content_box .box-intro_desc p,
+  #section-introduction .introduction .introduction-content .introduction-content_top .introduction-content_box .box-intro_tit p {
     font-size: 1.4em !important;
+  }
+  #section-introduction .introduction .introduction-content .introduction-content_bot .introduction-content_box .box-intro_img,
+  #section-introduction .introduction .introduction-content .introduction-content_top .introduction-content_box .box-intro_img {
+    padding: 0;
+  }
+  #section-introduction .introduction .introduction-content .introduction-content_bot .introduction-content_box:hover,
+  #section-introduction .introduction .introduction-content .introduction-content_top .introduction-content_box:hover {
+    flex: 2.5;
+    height: 100%;
   }
   #section-profession {
     padding: 4rem 0;
@@ -1634,6 +1721,9 @@ section {
   }
   #section-profession .profession .profession-container {
     justify-content: center;
+  }
+  #section-profession .profession .profession-container .list .item a img {
+    width: 92% !important;
   }
   #section-community {
     padding: 2rem 1.5rem;
@@ -1759,7 +1849,6 @@ section {
   }
   #section-introduction,
   #section-banner {
-    margin: 0 !important;
     padding: 0 1.5rem !important;
   }
   h1 {
