@@ -381,6 +381,9 @@ section{
                             border-radius: 5px;
                         }
                     }
+                    .show{
+                        display: block;
+                    }
                     @media (hover: hover) {
                         &:hover {
                           flex: 2.5;
@@ -1795,9 +1798,6 @@ section{
                     }
                     .box-intro_img{
                         margin-top: 1rem;
-                    }
-                    .show{
-                        display: block;
                     }
                 }
 

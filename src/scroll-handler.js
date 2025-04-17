@@ -1,5 +1,4 @@
 // scroll-handler.js
-
 export function setupTouchScrollHandler({
     handleScroll,
     aboutMode,
