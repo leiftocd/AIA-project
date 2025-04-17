@@ -206,58 +206,58 @@ document.addEventListener("DOMContentLoaded", () => {
 
     //////////
     const boxIntro = document.querySelectorAll('.introduction-content_box');
-let activeBox = null;
+    let activeBox = null;
 
-boxIntro.forEach((box) => {
-    box.addEventListener('mouseenter', () => {
-        if (isMobile || activeBox) return;
-
-        activeBox = box;
-        box.classList.add('active');
-
-        boxIntro.forEach((b) => {
-            if (b !== box) b.classList.add('hidden');
-        });
-
-        document.body.classList.add('no-scroll');
-        document.body.style.top = `-${window.scrollY}px`;
-    });
-
-    box.addEventListener('click', () => {
-        const isSameBox = activeBox === box;
-
-        if (isSameBox) {
-            // Click lại chính nó → reset
-            box.classList.remove('active', 'mbActive');
-            if (!isMobile) boxIntro.forEach((b) => b.classList.remove('hidden'));
-
-            activeBox = null;
-
-            const scrollY = document.body.style.top;
-            document.body.classList.remove('no-scroll');
-            document.body.style.top = '';
-            if (scrollY) window.scrollTo(0, Math.abs(parseInt(scrollY)));
-        } else {
-            // Click sang box khác
-            if (activeBox) {
-                activeBox.classList.remove('active', 'mbActive');
-                if (!isMobile) boxIntro.forEach((b) => b.classList.remove('hidden'));
-            }
+    boxIntro.forEach((box) => {
+        box.addEventListener('mouseenter', () => {
+            if (isMobile || activeBox) return;
 
             activeBox = box;
-            box.classList.add('active', 'mbActive');
+            box.classList.add('active');
 
-            if (!isMobile) {
-                boxIntro.forEach((b) => {
-                    if (b !== box) b.classList.add('hidden');
-                });
+            boxIntro.forEach((b) => {
+                if (b !== box) b.classList.add('hidden');
+            });
 
-                document.body.classList.add('no-scroll');
-                document.body.style.top = `-${window.scrollY}px`;
+            document.body.classList.add('no-scroll');
+            document.body.style.top = `-${window.scrollY}px`;
+        });
+
+        box.addEventListener('click', () => {
+            const isSameBox = activeBox === box;
+
+            if (isSameBox) {
+                // Click lại chính nó → reset
+                box.classList.remove('active', 'mbActive');
+                if (!isMobile) boxIntro.forEach((b) => b.classList.remove('hidden'));
+
+                activeBox = null;
+
+                const scrollY = document.body.style.top;
+                document.body.classList.remove('no-scroll');
+                document.body.style.top = '';
+                if (scrollY) window.scrollTo(0, Math.abs(parseInt(scrollY)));
+            } else {
+                // Click sang box khác
+                if (activeBox) {
+                    activeBox.classList.remove('active', 'mbActive');
+                    if (!isMobile) boxIntro.forEach((b) => b.classList.remove('hidden'));
+                }
+
+                activeBox = box;
+                box.classList.add('active', 'mbActive');
+
+                if (!isMobile) {
+                    boxIntro.forEach((b) => {
+                        if (b !== box) b.classList.add('hidden');
+                    });
+
+                    document.body.classList.add('no-scroll');
+                    document.body.style.top = `-${window.scrollY}px`;
+                }
             }
-        }
+        });
     });
-});
     
     // Khi hover ra khỏi toàn bộ .introduction-content → reset
     const introductionContent = document.querySelector('.introduction-content');
