@@ -1668,13 +1668,21 @@ section {
   #section-banner .banner .banner-title .banner-title_img {
     height: 5rem;
   }
+  #section-about {
+    height: 100vh;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  #section-about .about {
+    padding: 0 1.5rem;
+  }
   #section-about .about .about-container {
     margin-top: 4rem;
     height: 100vh;
   }
   #section-about .about .about-container .about-container_box .box-img {
-    max-width: 11rem;
-    max-height: 10rem;
+    max-width: 10rem;
+    max-height: 8rem;
   }
   #section-about .about .about-container .about-container_box .box-img img {
     max-width: 70%;
@@ -1694,8 +1702,8 @@ section {
     z-index: 100 !important;
   }
   #section-about .about .about-container .active .box-img {
-    max-width: 13rem !important;
-    max-height: 11rem;
+    max-width: 12rem !important;
+    max-height: 10rem;
   }
   #section-introduction {
     padding: 1rem 1.5rem 1rem;
@@ -1876,14 +1884,6 @@ section {
   }
   #section-footer .footer .footer-content .footer-content_left span {
     font-size: 2em !important;
-  }
-  #section-about {
-    height: 100vh;
-    margin: 0 !important;
-    padding: 0 !important;
-  }
-  #section-about .about {
-    padding: 0 1.5rem;
   }
   #section-introduction,
   #section-banner {

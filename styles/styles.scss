@@ -1836,15 +1836,20 @@ section{
         }
     }
     #section-about{
+        height: 100vh;
+        margin: 0 !important;
+        padding: 0 !important;
         .about{
+            padding: 0 1.5rem;
+
             .about-container{
                 // max-height: 23rem;
                 margin-top: 4rem;
                 height: 100vh;
                 .about-container_box{
                     .box-img{
-                        max-width: 11rem;
-                        max-height: 10rem;
+                        max-width: 10rem;
+                        max-height: 8rem;
                         img{
                             max-width: 70%;
                         }
@@ -1862,8 +1867,8 @@ section{
                 }
                 .active{
                     .box-img{
-                        max-width: 13rem !important;
-                        max-height: 11rem;
+                        max-width: 12rem !important;
+                        max-height: 10rem;
                     }
                 }
             }
@@ -2067,15 +2072,6 @@ section{
         }
                     
     }
-    #section-about{
-        height: 100vh;
-        margin: 0 !important;
-        padding: 0 !important;
-        .about{
-            padding: 0 1.5rem;
-        }
-    }
-    
     #section-introduction,
     #section-banner
     {
