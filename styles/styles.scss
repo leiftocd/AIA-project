@@ -11,7 +11,10 @@
     --intro-bg: rgba(80, 251, 199, 0.24);
     --green-color: #50fbc7;
     --dark-text: #145567;
+    --scroll-duration: 2s; /* Thời gian cuộn nhanh, giữ tốc độ 70-80% */
+    --scroll-easing: cubic-bezier(0.645, 0.045, 0.355, 1); /* easeInOutCubic */
 }
+
 text{
     display: none;
 }
@@ -21,6 +24,7 @@ html{
     scroll-behavior: smooth;
 }
 body{
+    transition: scroll-position var(--scroll-duration) var(--scroll-easing);
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -191,19 +195,16 @@ section{
       background: white;
       overflow: hidden;
     }
-  
     .about {
       width: 100%;
       height: 100%;
       display: flex;
       flex-direction: column;
-  
       .about-title {
         width: 100%;
         position: sticky;
         top: 0;
         z-index: 10;
-  
         h1 {
           font-weight: 700;
           font-size: 60px;
@@ -314,7 +315,8 @@ section{
     .introduction{
         display: flex;
         flex-direction: column;
-        gap: 3rem;
+        margin: 0;
+        gap: 4rem;
         animation: appear linear;
         animation-timeline: view();
         animation-range-end: 40%;
@@ -843,7 +845,6 @@ section{
 #section-banner,
 #section-introduction{
     transition: opacity 0.3s ease;
-    height: auto;
     position: relative;
 }
 //animations
