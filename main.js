@@ -155,16 +155,19 @@ document.addEventListener("DOMContentLoaded", () => {
     const boxIntro = document.querySelectorAll('.introduction-content_box');
 
     boxIntro.forEach((box) => {
-    box.addEventListener('click', () => {
+      box.addEventListener('click', () => {
         boxIntro.forEach((otherBox) => {
-        const img = otherBox.querySelector('.box-intro_img');
-        if (otherBox !== box) {
-            img.classList.remove('show'); 
-        }
+          const img = otherBox.querySelector('.box-intro_img');
+          if (otherBox !== box) {
+            img.style.display = 'none'; // ẩn các box khác
+          }
         });
+    
         const currentImg = box.querySelector('.box-intro_img');
-        currentImg.classList.toggle('show');
-    });
+        const isVisible = currentImg.style.display === 'block';
+    
+        currentImg.style.display = isVisible ? 'none' : 'block';
+      });
     });
     const paragraphs = document.querySelectorAll('.text-appear');
     const paragraphObserver = new IntersectionObserver((entries) => {

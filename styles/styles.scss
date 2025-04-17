@@ -374,30 +374,25 @@ section{
                             padding: 0 1.5rem;
                         }
                     }
-                    .box-intro_img{
+                    .box-intro_img {
+                        display: none;
                         width: 100%;
-                        img{
-                            display: none;
-                            border-radius: 6px;
-                            width: 100%;
-                            object-fit: cover;
+                        margin-top: 1rem;
+                        padding: 0 1.5rem;
+                      
+                        img {
+                          border-radius: 6px;
+                          width: 100%;
+                          object-fit: cover;
                         }
-                    }
-                    .show{
-                        img{
-                            display: block;
-                            margin-top: 1rem;
-                        }
-                    }
+                      }
                     @media (hover: hover) {
                         &:hover {
                           flex: 2.5;
                           max-width: 70%;
                           .box-intro_img {
                             padding: 0 1.5rem;
-                            img{
-                                display: block;
-                            }
+                            display: block;
                           }
                         }
                     }
@@ -1531,6 +1526,9 @@ section{
     }
 }
 @media (max-width: 640px) {
+    body{
+        transition: unset;
+    }
     :root{
         --height: 50px;
     }
@@ -1578,6 +1576,7 @@ section{
         .profession{
             gap: 2rem;
             padding: 1rem 0 ;
+            animation: unset;
             .profession-container{
                 padding: 0 4vw;
                 .list{
@@ -1601,7 +1600,7 @@ section{
                 .mb{
                     display: flex;
                     width: 100%;
-                    height: 100%;
+                    height: 1000px;
                     filter: blur(100px);
                 }
             }
@@ -1659,6 +1658,7 @@ section{
     }
     #section-community{
         .community{
+            animation: unset;
             .community-container{
                 .community-container_title{
                     h1{
@@ -1727,6 +1727,7 @@ section{
         .footer{
             display: flex;
             flex-direction: column;
+            animation: none;
             gap: 4rem;
             border-top: 1px solid rgba(204, 204, 204, 0.425);
             .footer-title{
@@ -1861,8 +1862,8 @@ section{
                             font-size: 1.2em !important;
                         }
                     }
-                    &:nth-child(2) { top: 40%; z-index: 99; }
-                    &:nth-child(3) { top: 80%; z-index: 100 !important; }
+                    &:nth-child(2) { top: 30%; z-index: 99; }
+                    &:nth-child(3) { top: 60%; z-index: 100 !important; }
                 }
                 .active{
                     .box-img{
@@ -1916,6 +1917,7 @@ section{
         justify-content: center;
         display: flex;
         align-items: center;
+        margin: 6rem 0;
         .profession{
             padding: 0;
             .profession-ellipse{
@@ -1992,6 +1994,11 @@ section{
                                 }
                             }
                         }
+                    }
+                }
+                .community-container_title{
+                    h1{
+                        font-size: 3.2rem !important;
                     }
                 }
             }
