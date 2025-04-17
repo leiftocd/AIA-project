@@ -393,7 +393,9 @@ section{
                           max-width: 70%;
                           .box-intro_img {
                             padding: 0 1.5rem;
-                            display: block;
+                            img{
+                                display: block;
+                            }
                           }
                         }
                     }

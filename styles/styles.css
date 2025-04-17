@@ -406,6 +406,9 @@ section {
   #section-introduction .introduction .introduction-content .introduction-content_top .introduction-content_box:hover .box-intro_img,
   #section-introduction .introduction .introduction-content .introduction-content_bot .introduction-content_box:hover .box-intro_img {
     padding: 0 1.5rem;
+  }
+  #section-introduction .introduction .introduction-content .introduction-content_top .introduction-content_box:hover .box-intro_img img,
+  #section-introduction .introduction .introduction-content .introduction-content_bot .introduction-content_box:hover .box-intro_img img {
     display: block;
   }
 }
