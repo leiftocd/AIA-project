@@ -380,29 +380,28 @@ section {
   color: #50fbc7;
   padding: 0 1.5rem;
 }
-#section-introduction .introduction .introduction-content .introduction-content_top .introduction-content_box .box-intro_img img,
-#section-introduction .introduction .introduction-content .introduction-content_bot .introduction-content_box .box-intro_img img {
+#section-introduction .introduction .introduction-content .introduction-content_top .introduction-content_box .box-intro_img,
+#section-introduction .introduction .introduction-content .introduction-content_bot .introduction-content_box .box-intro_img {
   display: none;
 }
-#section-introduction .introduction .introduction-content .introduction-content_top .introduction-content_box:hover,
-#section-introduction .introduction .introduction-content .introduction-content_bot .introduction-content_box:hover {
-  flex: 2.5;
-  max-width: 70%;
-}
-#section-introduction .introduction .introduction-content .introduction-content_top .introduction-content_box:hover .box-intro_img,
-#section-introduction .introduction .introduction-content .introduction-content_bot .introduction-content_box:hover .box-intro_img {
-  padding: 0 1.5rem;
-}
-#section-introduction .introduction .introduction-content .introduction-content_top .introduction-content_box:hover .box-intro_img img,
-#section-introduction .introduction .introduction-content .introduction-content_bot .introduction-content_box:hover .box-intro_img img {
-  display: block;
+#section-introduction .introduction .introduction-content .introduction-content_top .introduction-content_box .box-intro_img img,
+#section-introduction .introduction .introduction-content .introduction-content_bot .introduction-content_box .box-intro_img img {
   width: 100%;
   -o-object-fit: cover;
      object-fit: cover;
   border-radius: 5px;
 }
-#section-introduction .introduction .show {
-  display: block;
+@media (hover: hover) {
+  #section-introduction .introduction .introduction-content .introduction-content_top .introduction-content_box:hover,
+  #section-introduction .introduction .introduction-content .introduction-content_bot .introduction-content_box:hover {
+    flex: 2.5;
+    max-width: 70%;
+  }
+  #section-introduction .introduction .introduction-content .introduction-content_top .introduction-content_box:hover .box-intro_img,
+  #section-introduction .introduction .introduction-content .introduction-content_bot .introduction-content_box:hover .box-intro_img {
+    padding: 0 1.5rem;
+    display: block;
+  }
 }
 
 #section-profession {
@@ -1696,6 +1695,9 @@ section {
   #section-about .about .about-container .about-container_box .box-content span {
     font-size: 1.2em !important;
   }
+  #section-about .about .about-container .about-container_box .box-content p {
+    font-size: 1.2em !important;
+  }
   #section-about .about .about-container .about-container_box:nth-child(2) {
     top: 40%;
     z-index: 99;
@@ -1746,6 +1748,11 @@ section {
   #section-introduction .introduction .introduction-content .introduction-content_top .introduction-content_box .box-intro_img {
     padding: 0;
   }
+  #section-introduction .introduction .introduction-content .introduction-content_bot .introduction-content_box .show,
+  #section-introduction .introduction .introduction-content .introduction-content_top .introduction-content_box .show {
+    display: block;
+    margin-top: 1rem;
+  }
   #section-introduction .introduction .introduction-content .introduction-content_bot .introduction-content_box:hover,
   #section-introduction .introduction .introduction-content .introduction-content_top .introduction-content_box:hover {
     flex: 2.5;
@@ -1756,7 +1763,7 @@ section {
     margin-top: 1rem;
   }
   #section-profession {
-    padding: 4rem 0;
+    padding: 5rem 0;
     justify-content: center;
     display: flex;
     align-items: center;

@@ -374,29 +374,28 @@ section{
                         }
                     }
                     .box-intro_img{
+                        display: none;
                         img{
-                            display: none;
+                            width: 100%;
+                            object-fit: cover;
+                            border-radius: 5px;
                         }
                     }
-                    &:hover{
-                        flex: 2.5;
-                        max-width: 70%;
-                        .box-intro_img{
+                    @media (hover: hover) {
+                        &:hover {
+                          flex: 2.5;
+                          max-width: 70%;
+                    
+                          .box-intro_img {
                             padding: 0 1.5rem;
-                            img{
-                                display: block;
-                                width: 100%;
-                                object-fit: cover;
-                                border-radius: 5px;
-                            }
+                            display: block;
+                          }
                         }
                     }
                 }
             }
         }
-        .show{
-            display: block;
-        }
+
     }
 }
 #section-profession{
@@ -1843,7 +1842,6 @@ section{
         padding: 0 !important;
         .about{
             padding: 0 1.5rem;
-
             .about-container{
                 // max-height: 23rem;
                 margin-top: 4rem;
@@ -1861,6 +1859,9 @@ section{
                             font-size: 2em !important;
                         }
                         span{
+                            font-size: 1.2em !important;
+                        }
+                        p{
                             font-size: 1.2em !important;
                         }
                     }
@@ -1908,6 +1909,10 @@ section{
                     .box-intro_img{
                         padding: 0;
                     }
+                    .show{
+                        display: block;
+                        margin-top: 1rem;
+                    }
                     &:hover{
                         flex: 2.5 ;
                         height: 100%;
@@ -1922,7 +1927,7 @@ section{
         }
     }
     #section-profession{
-        padding: 4rem 0;
+        padding: 5rem 0;
         justify-content: center;
         display: flex;
         align-items: center;
