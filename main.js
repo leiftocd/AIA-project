@@ -42,10 +42,17 @@ document.addEventListener("DOMContentLoaded", () => {
         aboutMode = "entering";
         toggleSections(true);
         section.classList.add("fullscreen");
-
+    
+        // Tính offset của thanh scrollbar để tránh layout shift
         const scrollbarOffset = window.innerWidth - document.documentElement.clientWidth;
-        document.body.style.cssText = `overflow: hidden; padding-right: ${scrollbarOffset}px; touch-action: none;`;
-
+    
+        // Ghi nhớ vị trí cuộn hiện tại và thêm class no-scroll
+        const scrollY = window.scrollY;
+        document.body.style.top = `-${scrollY}px`;
+        document.body.classList.add("no-scroll");
+        document.body.style.paddingRight = `${scrollbarOffset}px`;
+        document.body.style.touchAction = "none";
+    
         currentBox = fromBelow && maxReachedBox === boxes.length - 1 ? boxes.length - 1 : 0;
         lastBoxScroll = false;
         showBox(currentBox);
@@ -56,13 +63,23 @@ document.addEventListener("DOMContentLoaded", () => {
             aboutMode = "in";
         }, 400);
     };
-
+    
     const exitAbout = (toTop) => {
         if (aboutMode !== "in") return;
         aboutMode = "exiting";
         toggleSections(false);
         section.classList.remove("fullscreen");
-        document.body.style.cssText = "";
+    
+        // Gỡ class no-scroll và khôi phục vị trí cuộn
+        const scrollY = parseInt(document.body.style.top || "0") * -1;
+        document.body.classList.remove("no-scroll");
+        document.body.style.top = "";
+        document.body.style.paddingRight = "";
+        document.body.style.touchAction = "";
+        document.body.style.overflow = "";
+    
+        window.scrollTo(0, scrollY);
+    
         scrollTo(toTop ? section.offsetTop - window.innerHeight : introduceSection.offsetTop);
         isAnimating = true;
         setTimeout(() => {
@@ -152,23 +169,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     showBox(currentBox);
 
-    const boxIntro = document.querySelectorAll('.introduction-content_box');
-
-    boxIntro.forEach((box) => {
-      box.addEventListener('click', () => {
-        boxIntro.forEach((otherBox) => {
-          const img = otherBox.querySelector('.box-intro_img');
-          if (otherBox !== box) {
-            img.style.display = 'none'; // ẩn các box khác
-          }
-        });
-    
-        const currentImg = box.querySelector('.box-intro_img');
-        const isVisible = currentImg.style.display === 'block';
-    
-        currentImg.style.display = isVisible ? 'none' : 'block';
-      });
-    });
     const paragraphs = document.querySelectorAll('.text-appear');
     const paragraphObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
@@ -203,4 +203,75 @@ document.addEventListener("DOMContentLoaded", () => {
     }, { threshold: 0.1 });
 
     headings.forEach(heading => headingObserver.observe(heading));
+
+    //////////
+    const boxIntro = document.querySelectorAll('.introduction-content_box');
+let activeBox = null;
+
+boxIntro.forEach((box) => {
+    box.addEventListener('mouseenter', () => {
+        if (isMobile || activeBox) return;
+
+        activeBox = box;
+        box.classList.add('active');
+
+        boxIntro.forEach((b) => {
+            if (b !== box) b.classList.add('hidden');
+        });
+
+        document.body.classList.add('no-scroll');
+        document.body.style.top = `-${window.scrollY}px`;
+    });
+
+    box.addEventListener('click', () => {
+        const isSameBox = activeBox === box;
+
+        if (isSameBox) {
+            // Click lại chính nó → reset
+            box.classList.remove('active', 'mbActive');
+            if (!isMobile) boxIntro.forEach((b) => b.classList.remove('hidden'));
+
+            activeBox = null;
+
+            const scrollY = document.body.style.top;
+            document.body.classList.remove('no-scroll');
+            document.body.style.top = '';
+            if (scrollY) window.scrollTo(0, Math.abs(parseInt(scrollY)));
+        } else {
+            // Click sang box khác
+            if (activeBox) {
+                activeBox.classList.remove('active', 'mbActive');
+                if (!isMobile) boxIntro.forEach((b) => b.classList.remove('hidden'));
+            }
+
+            activeBox = box;
+            box.classList.add('active', 'mbActive');
+
+            if (!isMobile) {
+                boxIntro.forEach((b) => {
+                    if (b !== box) b.classList.add('hidden');
+                });
+
+                document.body.classList.add('no-scroll');
+                document.body.style.top = `-${window.scrollY}px`;
+            }
+        }
+    });
+});
+    
+    // Khi hover ra khỏi toàn bộ .introduction-content → reset
+    const introductionContent = document.querySelector('.introduction-content');
+    introductionContent.addEventListener('mouseleave', () => {
+      if (activeBox) {
+        activeBox.classList.remove('active');
+        boxIntro.forEach((b) => b.classList.remove('hidden'));
+        activeBox = null;
+    
+        // Gỡ no-scroll và khôi phục vị trí scroll
+        const scrollY = document.body.style.top;
+        document.body.classList.remove('no-scroll');
+        document.body.style.top = '';
+        window.scrollTo(0, parseInt(scrollY || '0') * -1);
+      }
+    });
 });
