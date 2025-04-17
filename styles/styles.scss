@@ -1787,11 +1787,15 @@ section{
                     .box-intro_img,
                     .box-intro_tit{
                         p{
-                            font-size: 1.6rem;
+                            font-size: 1.4rem;
                         }
                         h2{
                             font-size: 2rem;
                         }
+                    }
+                    .show{
+                        display: block;
+                        margin-top: 1rem;
                     }
                 }
 
@@ -1908,18 +1912,6 @@ section{
                     }
                     .box-intro_img{
                         padding: 0;
-                    }
-                    .show{
-                        display: block;
-                        margin-top: 1rem;
-                    }
-                    &:hover{
-                        flex: 2.5 ;
-                        height: 100%;
-                        .box-intro_img{
-                            margin-top: 1rem;
-
-                        }
                     }
                 }
             }
