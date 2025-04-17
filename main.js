@@ -151,4 +151,19 @@ document.addEventListener("DOMContentLoaded", () => {
     new IntersectionObserver(([{ isIntersecting }]) => toggleSections(isIntersecting), { threshold: 0.5 }).observe(section);
 
     showBox(currentBox);
+
+    const boxIntro = document.querySelectorAll('.introduction-content_box');
+
+    boxIntro.forEach((box) => {
+    box.addEventListener('click', () => {
+        boxIntro.forEach((otherBox) => {
+        const img = otherBox.querySelector('.box-intro_img');
+        if (otherBox !== box) {
+            img.classList.remove('show'); 
+        }
+        });
+        const currentImg = box.querySelector('.box-intro_img');
+        currentImg.classList.toggle('show');
+    });
+    });
 });

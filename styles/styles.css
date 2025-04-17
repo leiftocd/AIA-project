@@ -247,7 +247,7 @@ section {
   opacity: 0;
   pointer-events: none;
   transform: translateY(0);
-  transition: opacity 1.2s linear, transform 1s linear;
+  transition: opacity 1s linear, transform 0.8s linear;
   pointer-events: auto;
 }
 #section-about .about .about-container .about-container_box .box-img {
@@ -400,6 +400,9 @@ section {
   -o-object-fit: cover;
      object-fit: cover;
   border-radius: 5px;
+}
+#section-introduction .introduction .show {
+  display: block;
 }
 
 #section-profession {

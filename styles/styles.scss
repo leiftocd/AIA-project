@@ -182,7 +182,6 @@ section{
     align-items: center;
     padding: 4rem 12rem 0;
     transition: all 0.5s ease;
-  
     .fullscreen {
       position: fixed;
       top: 0;
@@ -236,7 +235,7 @@ section{
           opacity: 0;
           pointer-events: none;
           transform: translateY(0);
-          transition: opacity 1.2s linear, transform 1s linear;
+          transition: opacity 1s linear, transform .8s linear;
           pointer-events: auto;
   
           .box-img {
@@ -394,6 +393,9 @@ section{
                     }
                 }
             }
+        }
+        .show{
+            display: block;
         }
     }
 }
