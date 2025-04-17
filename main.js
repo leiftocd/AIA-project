@@ -1,32 +1,22 @@
-// smooth-scroll-handler.js
-
-// Ensure page loads at top
-if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
-window.scrollTo(0, 0);
-
 document.addEventListener("DOMContentLoaded", () => {
-    const sectionAbout = document.querySelector("#section-about");
-    const sectionIntro = document.querySelector("#section-introduction");
-    const sectionProfession = document.querySelector("#section-profession");
-    const sectionCommunity = document.querySelector("#section-community");
-    const sectionFooter = document.querySelector("footer");
-    const fadeSections = document.querySelectorAll(".fade-section");
+    if ("scrollRestoration" in history) history.scrollRestoration = "manual";
+    window.scrollTo(0, 0);
+
+    const section = document.querySelector("#section-about");
     const boxes = document.querySelectorAll(".about-container_box");
+    const introduceSection = document.querySelector("#section-introduction");
+    const fadeSections = document.querySelectorAll(".fade-section");
 
     let currentBox = 0;
-    let aboutMode = "none"; // none, in, entering, exiting
     let isAnimating = false;
-    let isCustomScrolling = false;
-    let scrollAnimationId = null;
-    let targetScrollY = window.scrollY;
-    let currentScrollY = window.scrollY;
-    let initialScrollHandled = false;
-    let lastBoxScroll = false;
+    let aboutMode = "none";
     let maxReachedBox = 0;
+    let lastBoxScroll = false;
+    let touchStartY = 0;
 
     const isMobile = /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent);
-    const throttleDelay = isMobile ? 100 : 200;
-    const scrollThreshold = isMobile ? 5 : 5;
+    const throttleDelay = isMobile ? 100 : 200; // Giảm delay trên iOS cho vuốt mượt hơn
+    const scrollThreshold = isMobile ? 5 : 5; // Giảm ngưỡng để nhận diện vuốt nhẹ
 
     const scrollTo = (position) => window.scrollTo({ top: position, behavior: "smooth" });
 
@@ -51,7 +41,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (aboutMode !== "none") return;
         aboutMode = "entering";
         toggleSections(true);
-        sectionAbout.classList.add("fullscreen");
+        section.classList.add("fullscreen");
 
         const scrollbarOffset = window.innerWidth - document.documentElement.clientWidth;
         document.body.style.cssText = `overflow: hidden; padding-right: ${scrollbarOffset}px; touch-action: none;`;
@@ -59,8 +49,7 @@ document.addEventListener("DOMContentLoaded", () => {
         currentBox = fromBelow && maxReachedBox === boxes.length - 1 ? boxes.length - 1 : 0;
         lastBoxScroll = false;
         showBox(currentBox);
-        scrollTo(sectionAbout.offsetTop);
-
+        scrollTo(section.offsetTop);
         isAnimating = true;
         setTimeout(() => {
             isAnimating = false;
@@ -72,10 +61,9 @@ document.addEventListener("DOMContentLoaded", () => {
         if (aboutMode !== "in") return;
         aboutMode = "exiting";
         toggleSections(false);
-        sectionAbout.classList.remove("fullscreen");
+        section.classList.remove("fullscreen");
         document.body.style.cssText = "";
-        scrollTo(toTop ? sectionAbout.offsetTop - window.innerHeight : sectionIntro.offsetTop);
-
+        scrollTo(toTop ? section.offsetTop - window.innerHeight : introduceSection.offsetTop);
         isAnimating = true;
         setTimeout(() => {
             isAnimating = false;
@@ -84,11 +72,11 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     const handleScroll = (dir) => {
-        if (isAnimating || isCustomScrolling) return;
+        if (isAnimating) return;
         isAnimating = true;
         setTimeout(() => (isAnimating = false), throttleDelay);
 
-        const { top, bottom } = sectionAbout.getBoundingClientRect();
+        const { top, bottom } = section.getBoundingClientRect();
         const winH = window.innerHeight;
 
         if (aboutMode === "none") {
@@ -99,18 +87,18 @@ document.addEventListener("DOMContentLoaded", () => {
             if (dir === "down") {
                 if (currentBox < maxBoxIndex) {
                     showBox(++currentBox);
-                    scrollTo(sectionAbout.offsetTop);
+                    scrollTo(section.offsetTop);
                 } else if (currentBox === maxBoxIndex && !lastBoxScroll) {
                     lastBoxScroll = true;
-                    scrollTo(sectionAbout.offsetTop);
-                } else {
+                    scrollTo(section.offsetTop);
+                } else if (currentBox === maxBoxIndex && lastBoxScroll) {
                     exitAbout(false);
                 }
             } else if (dir === "up") {
                 if (currentBox > 0) {
                     showBox(--currentBox);
                     lastBoxScroll = false;
-                    scrollTo(sectionAbout.offsetTop);
+                    scrollTo(section.offsetTop);
                 } else {
                     exitAbout(true);
                 }
@@ -129,81 +117,38 @@ document.addEventListener("DOMContentLoaded", () => {
         };
     };
 
-    // Smooth scroll animation for custom scrolling
-    const smoothScrollAnimation = () => {
-        const delta = targetScrollY - currentScrollY;
-
-        // If the difference is very small, stop the animation
-        if (Math.abs(delta) < 0.5) {
-            currentScrollY = targetScrollY; // Ensure we reach the exact position
-            isCustomScrolling = false;
-            cancelAnimationFrame(scrollAnimationId); // Stop animation frames
-            scrollAnimationId = null;
-            return;
-        }
-
-        // Adjust scroll speed (lower multiplier = slower scroll)
-        currentScrollY += delta * 0.1; // This controls the speed of scrolling (smaller = slower)
-
-        // Scroll to the new position
-        window.scrollTo(0, currentScrollY);
-
-        // Continue the smooth scroll animation
-        scrollAnimationId = requestAnimationFrame(smoothScrollAnimation);
-    };
-
-    // WHEEL
+    // Wheel
     window.addEventListener(
         "wheel",
         throttle((e) => {
-            const dir = e.deltaY > 0 ? "down" : "up";
-
-            if (!initialScrollHandled && dir === "down" && window.scrollY === 0) {
-                initialScrollHandled = true;
-                isCustomScrolling = true;
-                targetScrollY = sectionAbout.offsetTop;
-                scrollAnimationId = requestAnimationFrame(smoothScrollAnimation);
-                setTimeout(() => { isCustomScrolling = false; }, 600);
-                e.preventDefault();
-                return;
-            }
-
-            handleScroll(dir);
+            handleScroll(e.deltaY > 0 ? "down" : "up");
             if (aboutMode !== "none") e.preventDefault();
         }, throttleDelay),
         { passive: false }
     );
 
-    // TOUCH
-    let touchStartY = 0;
+    // Touch
     window.addEventListener("touchstart", (e) => {
         touchStartY = e.touches[0].clientY;
     }, { passive: true });
 
-    window.addEventListener("touchmove", throttle((e) => {
-        const touchEndY = e.touches[0].clientY;
-        const deltaY = touchStartY - touchEndY;
-        const dir = deltaY > scrollThreshold ? "down" : deltaY < -scrollThreshold ? "up" : null;
+    window.addEventListener(
+        "touchmove",
+        throttle((e) => {
+            const touchEndY = e.touches[0].clientY;
+            const deltaY = touchStartY - touchEndY;
+            const dir = deltaY > scrollThreshold ? "down" : deltaY < -scrollThreshold ? "up" : null;
+            if (dir) {
+                handleScroll(dir);
+                touchStartY = touchEndY;
+                if (aboutMode !== "none") e.preventDefault();
+            }
+        }, throttleDelay),
+        { passive: false }
+    );
 
-        if (!initialScrollHandled && dir === "down" && window.scrollY === 0) {
-            initialScrollHandled = true;
-            isCustomScrolling = true;
-            targetScrollY = sectionAbout.offsetTop;
-            scrollAnimationId = requestAnimationFrame(smoothScrollAnimation);
-            setTimeout(() => { isCustomScrolling = false; }, 600);
-            e.preventDefault();
-            return;
-        }
-
-        if (dir) {
-            handleScroll(dir);
-            touchStartY = touchEndY;
-            if (aboutMode !== "none") e.preventDefault();
-        }
-    }, throttleDelay), { passive: false });
-
-    new IntersectionObserver(([entry]) => toggleSections(entry.isIntersecting), { threshold: 0.5 })
-        .observe(sectionAbout);
+    // IntersectionObserver
+    new IntersectionObserver(([{ isIntersecting }]) => toggleSections(isIntersecting), { threshold: 0.5 }).observe(section);
 
     showBox(currentBox);
 });
