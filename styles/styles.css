@@ -382,18 +382,20 @@ section {
 }
 #section-introduction .introduction .introduction-content .introduction-content_top .introduction-content_box .box-intro_img,
 #section-introduction .introduction .introduction-content .introduction-content_bot .introduction-content_box .box-intro_img {
-  display: none;
+  width: 100%;
 }
 #section-introduction .introduction .introduction-content .introduction-content_top .introduction-content_box .box-intro_img img,
 #section-introduction .introduction .introduction-content .introduction-content_bot .introduction-content_box .box-intro_img img {
+  display: none;
+  border-radius: 6px;
   width: 100%;
   -o-object-fit: cover;
      object-fit: cover;
-  border-radius: 5px;
 }
-#section-introduction .introduction .introduction-content .introduction-content_top .introduction-content_box .show,
-#section-introduction .introduction .introduction-content .introduction-content_bot .introduction-content_box .show {
+#section-introduction .introduction .introduction-content .introduction-content_top .introduction-content_box .show img,
+#section-introduction .introduction .introduction-content .introduction-content_bot .introduction-content_box .show img {
   display: block;
+  margin-top: 1rem;
 }
 @media (hover: hover) {
   #section-introduction .introduction .introduction-content .introduction-content_top .introduction-content_box:hover,
@@ -1644,10 +1646,6 @@ section {
   #section-introduction .introduction .introduction-content .introduction-content_top .introduction-content_box .box-intro_tit h2 {
     font-size: 2rem;
   }
-  #section-introduction .introduction .introduction-content .introduction-content_bot .introduction-content_box .box-intro_img,
-  #section-introduction .introduction .introduction-content .introduction-content_top .introduction-content_box .box-intro_img {
-    margin-top: 1rem;
-  }
 }
 @media (max-width: 450px) {
   h1 {
@@ -1731,13 +1729,14 @@ section {
   #section-introduction .introduction .introduction-content .introduction-content_bot,
   #section-introduction .introduction .introduction-content .introduction-content_top {
     flex-direction: column;
+    height: auto;
   }
   #section-introduction .introduction .introduction-content .introduction-content_bot .introduction-content_box,
   #section-introduction .introduction .introduction-content .introduction-content_top .introduction-content_box {
     justify-content: center;
     max-width: 100% !important;
     width: 100%;
-    padding: 1.5rem 1rem;
+    padding: 1.5rem;
     gap: 0;
   }
   #section-introduction .introduction .introduction-content .introduction-content_bot .introduction-content_box .box-intro_tit h2,

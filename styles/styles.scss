@@ -355,7 +355,6 @@ section{
                     max-height: 55rem;
                     flex: 1;    
                     cursor: pointer;
-
                     .box-intro_tit{
                         h2{
                             font-weight: 700;
@@ -374,21 +373,24 @@ section{
                         }
                     }
                     .box-intro_img{
-                        display: none;
+                        width: 100%;
                         img{
+                            display: none;
+                            border-radius: 6px;
                             width: 100%;
                             object-fit: cover;
-                            border-radius: 5px;
                         }
                     }
                     .show{
-                        display: block;
+                        img{
+                            display: block;
+                            margin-top: 1rem;
+                        }
                     }
                     @media (hover: hover) {
                         &:hover {
                           flex: 2.5;
                           max-width: 70%;
-                    
                           .box-intro_img {
                             padding: 0 1.5rem;
                             display: block;
@@ -971,18 +973,6 @@ section{
                     &:nth-child(1) { top: 0; z-index: 88; }
                     &:nth-child(2) { top: 22%; z-index: 99; }
                     &:nth-child(3) { top: 44%; z-index: 100 !important; }
-                }
-            }
-        }
-    }
-    #section-introduction{
-        .introduction{
-            .introduction-content{
-                .introduction-content_bot,
-                .introduction-content_top{
-                    .introduction-content_box{
-                        
-                    }
                 }
             }
         }
@@ -1796,9 +1786,6 @@ section{
                             font-size: 2rem;
                         }
                     }
-                    .box-intro_img{
-                        margin-top: 1rem;
-                    }
                 }
 
             }
@@ -1895,11 +1882,12 @@ section{
             .introduction-content_bot,
             .introduction-content_top{
                 flex-direction: column;
+                height: auto;
                 .introduction-content_box{
                     justify-content: center;
                     max-width: 100% !important;
                     width: 100%;
-                    padding: 1.5rem 1rem;
+                    padding: 1.5rem;
                     gap: 0;
                     .box-intro_tit{
                         h2{
