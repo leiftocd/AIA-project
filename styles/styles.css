@@ -374,14 +374,14 @@ section {
   font-weight: 700;
   font-size: 28px;
   line-height: 100%;
-  color: var(--light-color);
+  color: #50fbc7;
   padding: 0 1.5rem;
 }
 #section-introduction .introduction .introduction-content .introduction-content_top .introduction-content_box .box-intro_desc p,
 #section-introduction .introduction .introduction-content .introduction-content_bot .introduction-content_box .box-intro_desc p {
   font-size: 2.2rem;
-  font-weight: 700;
-  color: #50fbc7;
+  font-weight: 500;
+  color: var(--light-color);
   padding: 0 1.5rem;
 }
 #section-introduction .introduction .introduction-content .introduction-content_top .introduction-content_box .box-intro_img,
