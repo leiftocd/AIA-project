@@ -1640,10 +1640,13 @@ section {
   #section-introduction .introduction .introduction-content .introduction-content_top .introduction-content_box .box-intro_tit h2 {
     font-size: 2rem;
   }
+  #section-introduction .introduction .introduction-content .introduction-content_bot .introduction-content_box .box-intro_img,
+  #section-introduction .introduction .introduction-content .introduction-content_top .introduction-content_box .box-intro_img {
+    margin-top: 1rem;
+  }
   #section-introduction .introduction .introduction-content .introduction-content_bot .introduction-content_box .show,
   #section-introduction .introduction .introduction-content .introduction-content_top .introduction-content_box .show {
     display: block;
-    margin-top: 1rem;
   }
 }
 @media (max-width: 450px) {
