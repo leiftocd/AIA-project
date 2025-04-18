@@ -227,16 +227,15 @@ document.addEventListener("DOMContentLoaded", () => {
     
     boxIntro.forEach((box) => {
         box.addEventListener('mouseenter', () => {
-            if (activeBox) return;
-    
+            if (activeBox || 'ontouchstart' in window) return;
+
             activeBox = box;
             box.classList.add('active');
-    
+        
             boxIntro.forEach((b) => {
                 if (b !== box) b.classList.add('hidden');
             });
             document.body.classList.add('no-scroll');
-            document.body.style.top = `-${window.scrollY}px`;
         });
     
         box.addEventListener('click', () => {

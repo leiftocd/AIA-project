@@ -391,8 +391,8 @@ section {
 }
 #section-introduction .introduction .introduction-content .introduction-content_top .introduction-content_box.active,
 #section-introduction .introduction .introduction-content .introduction-content_bot .introduction-content_box.active {
-  max-height: 75rem;
-  height: 75rem;
+  max-height: 73rem;
+  height: 73rem;
   overflow: hidden;
   gap: 1.5rem;
   padding: 2rem 1rem;
@@ -439,7 +439,7 @@ section {
 #section-introduction .introduction .introduction-content .box1 .box-intro_img .intro-img,
 #section-introduction .introduction .introduction-content .box5 .box-intro_img .intro-img {
   height: 100%;
-  max-width: 80% !important;
+  max-width: 80%;
 }
 
 #section-profession {
@@ -1675,6 +1675,7 @@ section {
     max-width: unset;
     min-height: unset;
     padding: 3rem 1.5rem;
+    gap: 1rem !important;
   }
   #section-introduction .introduction .introduction-content .introduction-content_bot .introduction-content_box .box-intro_desc p,
   #section-introduction .introduction .introduction-content .introduction-content_bot .introduction-content_box .box-intro_img p,
@@ -1789,19 +1790,17 @@ section {
     max-width: 12rem !important;
     max-height: 10rem;
   }
-  #section-introduction .introduction .introduction-content .introduction-content_bot .introduction-content_box,
-  #section-introduction .introduction .introduction-content .introduction-content_top .introduction-content_box {
-    padding: 1.5rem 2rem;
+  #section-introduction {
     height: -moz-fit-content;
     height: fit-content;
+  }
+  #section-introduction .introduction .introduction-content .introduction-content_bot .introduction-content_box,
+  #section-introduction .introduction .introduction-content .introduction-content_top .introduction-content_box {
+    padding: 1.5rem 0.5rem;
   }
   #section-introduction .introduction .introduction-content .introduction-content_bot .introduction-content_box .box-intro_tit h2,
   #section-introduction .introduction .introduction-content .introduction-content_top .introduction-content_box .box-intro_tit h2 {
     font-size: 1.6rem !important;
-  }
-  #section-introduction .introduction .introduction-content .introduction-content_bot .introduction-content_box .box-intro_desc,
-  #section-introduction .introduction .introduction-content .introduction-content_top .introduction-content_box .box-intro_desc {
-    margin-top: 1rem;
   }
   #section-introduction .introduction .introduction-content .introduction-content_bot .introduction-content_box .box-intro_desc p,
   #section-introduction .introduction .introduction-content .introduction-content_top .introduction-content_box .box-intro_desc p {
@@ -1822,6 +1821,12 @@ section {
   #section-introduction .introduction .introduction-content .introduction-content_bot .introduction-content_box.active,
   #section-introduction .introduction .introduction-content .introduction-content_top .introduction-content_box.active {
     overflow: scroll;
+    padding: 1.5rem 0.5rem;
+    margin: 0;
+  }
+  #section-introduction .introduction .introduction-content .introduction-content_bot .introduction-content_box.active .box-intro_img,
+  #section-introduction .introduction .introduction-content .introduction-content_top .introduction-content_box.active .box-intro_img {
+    margin: 0;
   }
   #section-profession {
     padding: 5rem 0;
