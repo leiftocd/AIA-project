@@ -70,8 +70,6 @@ document.addEventListener("DOMContentLoaded", () => {
         toggleSections(false);
         section.classList.remove("fullscreen");
     
-        // Gỡ class no-scroll và khôi phục vị trí cuộn
-        const scrollY = parseInt(document.body.style.top || "0") * -1;
         document.body.classList.remove("no-scroll");
         document.body.style.top = "";
         document.body.style.paddingRight = "";
@@ -207,71 +205,68 @@ document.addEventListener("DOMContentLoaded", () => {
     //////////
     const boxIntro = document.querySelectorAll('.introduction-content_box');
     let activeBox = null;
-
-    boxIntro.forEach((box) => {
-        box.addEventListener('mouseenter', () => {
-            if (isMobile || activeBox) return;
-
-            activeBox = box;
-            box.classList.add('active');
-
-            boxIntro.forEach((b) => {
-                if (b !== box) b.classList.add('hidden');
-            });
-
-            document.body.classList.add('no-scroll');
-            document.body.style.top = `-${window.scrollY}px`;
-        });
-
-        box.addEventListener('click', () => {
-            const isSameBox = activeBox === box;
-
-            if (isSameBox) {
-                // Click lại chính nó → reset
-                box.classList.remove('active', 'mbActive');
-                if (!isMobile) boxIntro.forEach((b) => b.classList.remove('hidden'));
-
-                activeBox = null;
-
-                const scrollY = document.body.style.top;
-                document.body.classList.remove('no-scroll');
-                document.body.style.top = '';
-                if (scrollY) window.scrollTo(0, Math.abs(parseInt(scrollY)));
-            } else {
-                // Click sang box khác
-                if (activeBox) {
-                    activeBox.classList.remove('active', 'mbActive');
-                    if (!isMobile) boxIntro.forEach((b) => b.classList.remove('hidden'));
-                }
-
-                activeBox = box;
-                box.classList.add('active', 'mbActive');
-
-                if (!isMobile) {
-                    boxIntro.forEach((b) => {
-                        if (b !== box) b.classList.add('hidden');
-                    });
-
-                    document.body.classList.add('no-scroll');
-                    document.body.style.top = `-${window.scrollY}px`;
-                }
-            }
-        });
-    });
+    let leaveTimeout = null;
     
-    // Khi hover ra khỏi toàn bộ .introduction-content → reset
-    const introductionContent = document.querySelector('.introduction-content');
-    introductionContent.addEventListener('mouseleave', () => {
-      if (activeBox) {
+    function resetActiveBox() {
+        if (!activeBox) return;
+    
         activeBox.classList.remove('active');
         boxIntro.forEach((b) => b.classList.remove('hidden'));
-        activeBox = null;
     
-        // Gỡ no-scroll và khôi phục vị trí scroll
         const scrollY = document.body.style.top;
         document.body.classList.remove('no-scroll');
         document.body.style.top = '';
-        window.scrollTo(0, parseInt(scrollY || '0') * -1);
-      }
+    
+        if (scrollY) {
+            const scrollYValue = parseInt(scrollY, 10);
+            if (!isNaN(scrollYValue)) window.scrollTo(0, Math.abs(scrollYValue));
+        }
+    
+        activeBox = null;
+    }
+    
+    boxIntro.forEach((box) => {
+        box.addEventListener('mouseenter', () => {
+            if (activeBox) return;
+    
+            activeBox = box;
+            box.classList.add('active');
+    
+            boxIntro.forEach((b) => {
+                if (b !== box) b.classList.add('hidden');
+            });
+            document.body.classList.add('no-scroll');
+            document.body.style.top = `-${window.scrollY}px`;
+        });
+    
+        box.addEventListener('click', () => {
+            const isSameBox = activeBox === box;
+    
+            if (isSameBox) {
+                resetActiveBox();
+            } else {
+                if (activeBox) {
+                    activeBox.classList.remove('active');
+                    boxIntro.forEach((b) => b.classList.remove('hidden'));
+                }
+    
+                activeBox = box;
+                box.classList.add('active');
+    
+                boxIntro.forEach((b) => {
+                    if (b !== box) b.classList.add('hidden');
+                });
+    
+                document.body.style.top = `-${window.scrollY}px`;
+            }
+        });
+    
+        box.addEventListener('mouseleave', () => {
+            if (leaveTimeout) clearTimeout(leaveTimeout);
+            leaveTimeout = setTimeout(() => {
+                if (box.matches(':hover')) return;
+                if (activeBox === box) resetActiveBox();
+            }, 100);
+        });
     });
 });
