@@ -536,6 +536,9 @@ section {
 #section-profession .profession .profession-container .list .item a:hover img {
   filter: grayscale(0);
 }
+#section-profession .profession .profession-container .list .item a:hover .plume-css {
+  filter: invert(100%) !important;
+}
 #section-profession .profession .profession-container .list .item a .ton-css {
   filter: grayscale(100%);
 }
@@ -552,7 +555,7 @@ section {
   filter: contrast(1);
 }
 #section-profession .profession .profession-container .list .item a .plume-css {
-  filter: invert(100%);
+  filter: invert(50%);
 }
 #section-profession .profession .profession-container .list .item a .moca-css {
   width: 92% !important;

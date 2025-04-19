@@ -534,8 +534,10 @@ section{
                             img {
                                 filter: grayscale(0);
                             }
+                            .plume-css {
+                                filter: invert(100%) !important;
+                            }
                         }
-
                         .ton-css {
                             filter: grayscale(100%);
                             &:hover {
@@ -555,9 +557,8 @@ section{
                         }
 
                         .plume-css {
-                            filter: invert(100%);
+                            filter: invert(50%);
                         }
-
                         .moca-css {
                             width: 92% !important;
                         }
