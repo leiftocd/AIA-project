@@ -436,10 +436,13 @@ section {
 #section-introduction .introduction .introduction-content .box6 .box-intro_img .intro-img {
   height: 80%;
 }
+#section-introduction .introduction .introduction-content .box6 .box-intro_img .intro-img {
+  max-width: 55% !important;
+}
 #section-introduction .introduction .introduction-content .box1 .box-intro_img .intro-img,
 #section-introduction .introduction .introduction-content .box5 .box-intro_img .intro-img {
   height: 100%;
-  max-width: 80%;
+  max-width: 90% !important;
 }
 
 #section-profession {
@@ -1428,20 +1431,19 @@ section {
   #section-introduction .introduction .introduction-content .introduction-content_bot .introduction-content_box.active .box-intro_img .intro-img {
     max-width: 90%;
   }
+  #section-profession .profession {
+    padding: 0 2rem;
+  }
+  #section-profession .profession .profession-container .list {
+    gap: 5vw;
+  }
+  #section-profession .profession .profession-container .list .item {
+    max-width: 20%;
+  }
+  #section-profession .profession .profession-title {
+    padding: 0;
+  }
 }
-#section-profession .profession {
-  padding: 0 2rem;
-}
-#section-profession .profession .profession-container .list {
-  gap: 5vw;
-}
-#section-profession .profession .profession-container .list .item {
-  max-width: 20%;
-}
-#section-profession .profession .profession-title {
-  padding: 0;
-}
-
 @media (max-width: 640px) {
   body {
     transition: unset;
@@ -1506,7 +1508,7 @@ section {
   }
   #section-profession .profession .profession-container .list .item {
     width: 100%;
-    max-width: 20%;
+    max-width: 18%;
     padding: 0 1vw;
   }
   #section-profession .profession .profession-container .list .item img {

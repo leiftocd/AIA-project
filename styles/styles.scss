@@ -425,12 +425,19 @@ section{
                     }
                 }
             }
+            .box6{
+                .box-intro_img {
+                    .intro-img {
+                        max-width: 55% !important;
+                    }
+                }
+            }
             .box1,
             .box5 {
                 .box-intro_img {
                     .intro-img {
                         height: 100%;
-                        max-width: 80%;
+                        max-width: 90% !important;
                     }
                 }
             }
@@ -1580,7 +1587,6 @@ section{
                 }
             }
         }
-        }
     }
     #section-profession{
         .profession{
@@ -1598,6 +1604,8 @@ section{
             }
         }
     }
+}
+
 @media (max-width: 640px) {
     body{
         transition: unset;
@@ -1657,7 +1665,7 @@ section{
                     gap: 4vw;
                     .item{
                         width: 100%;
-                        max-width: 20%;
+                        max-width: 18%;
                         padding: 0 1vw;
                         img{
                             width: 13vw
