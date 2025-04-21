@@ -12,17 +12,22 @@ document.addEventListener("DOMContentLoaded", () => {
     let aboutMode = "none";
     let maxReachedBox = 0;
     let lastBoxScroll = false;
-    let touchStartY = 0;
+    let isInitialLoad = true; // Thêm biến kiểm soát load lần đầu
 
-    const isMobile = /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent);
-    const throttleDelay = isMobile ? 150 : 200;
-    const scrollThreshold = isMobile ? 20 : 5;
+    const throttleDelay = 200;
+    const throttleDelayBox = 500;
     const mediaQuery = window.matchMedia("(min-width: 641px)");
+
+    console.log("Number of boxes:", boxes.length); // Debug
 
     const scrollTo = (position) => window.scrollTo({ top: position, behavior: "smooth" });
 
     const showBox = (index) => {
         if (!mediaQuery.matches) return;
+        if (index < 0 || index >= boxes.length) {
+            console.error("Invalid box index:", index);
+            return;
+        }
         boxes.forEach((box, i) => {
             box.classList.remove("active");
             if (i === index) {
@@ -30,11 +35,12 @@ document.addEventListener("DOMContentLoaded", () => {
                 box.style.opacity = "1";
                 box.style.transform = "translateY(0)";
             } else {
-                box.style.opacity = "0"; 
-                 box.style.transform = i < index ? `translateY(-20%)` : `translateY(20%)`;
+                box.style.opacity = "0";
+                box.style.transform = i < index ? `translateY(-20%)` : `translateY(20%)`;
             }
         });
         maxReachedBox = Math.max(maxReachedBox, index);
+        console.log("showBox - currentBox:", index); // Debug
     };
 
     const toggleSections = (show) => fadeSections.forEach((sec) => (sec.style.opacity = show ? "0" : "1"));
@@ -44,7 +50,7 @@ document.addEventListener("DOMContentLoaded", () => {
         aboutMode = "entering";
         toggleSections(true);
         section.classList.add("fullscreen");
-    
+
         if (mediaQuery.matches) {
             const scrollbarOffset = window.innerWidth - document.documentElement.clientWidth;
             const scrollY = window.scrollY;
@@ -53,8 +59,10 @@ document.addEventListener("DOMContentLoaded", () => {
             document.body.style.paddingRight = `${scrollbarOffset}px`;
             document.body.style.touchAction = "none";
         }
-    
-        currentBox = fromBelow && maxReachedBox === boxes.length - 1 ? boxes.length - 1 : 0;
+
+        // Buộc box 1 active khi load trang lần đầu
+        currentBox = isInitialLoad ? 0 : fromBelow ? boxes.length - 1 : 0;
+        console.log("enterAbout - fromBelow:", fromBelow, "currentBox:", currentBox); // Debug
         lastBoxScroll = false;
         if (mediaQuery.matches) showBox(currentBox);
         scrollTo(section.offsetTop);
@@ -62,15 +70,16 @@ document.addEventListener("DOMContentLoaded", () => {
         setTimeout(() => {
             isAnimating = false;
             aboutMode = "in";
+            isInitialLoad = false; // Đặt lại sau khi load lần đầu
         }, 400);
     };
-    
+
     const exitAbout = (toTop) => {
         if (aboutMode !== "in") return;
         aboutMode = "exiting";
         toggleSections(false);
         section.classList.remove("fullscreen");
-    
+
         if (mediaQuery.matches) {
             document.body.classList.remove("no-scroll");
             document.body.style.top = "";
@@ -78,7 +87,7 @@ document.addEventListener("DOMContentLoaded", () => {
             document.body.style.touchAction = "";
             document.body.style.overflow = "";
         }
-    
+
         scrollTo(toTop ? section.offsetTop - window.innerHeight : introduceSection.offsetTop);
         isAnimating = true;
         setTimeout(() => {
@@ -90,14 +99,14 @@ document.addEventListener("DOMContentLoaded", () => {
     const handleScroll = (dir) => {
         if (isAnimating) return;
         isAnimating = true;
-        setTimeout(() => (isAnimating = false), throttleDelay);
+        setTimeout(() => (isAnimating = false), aboutMode === "in" ? throttleDelayBox : throttleDelay);
 
         const { top, bottom } = section.getBoundingClientRect();
         const winH = window.innerHeight;
 
         if (aboutMode === "none") {
-            if (dir === "down" && top < winH * 0.3 && top >= 0) enterAbout(false);
-            else if (dir === "up" && bottom > winH * 0.7 && bottom <= winH) enterAbout(true);
+            if (dir === "down" && top < winH && top >= 0) enterAbout(false);
+            else if (dir === "up" && bottom > 0 && bottom <= winH) enterAbout(true);
         } else if (aboutMode === "in" && mediaQuery.matches) {
             const maxBoxIndex = boxes.length - 1;
             if (dir === "down") {
@@ -133,43 +142,32 @@ document.addEventListener("DOMContentLoaded", () => {
         };
     };
 
-    // Wheel
     window.addEventListener(
         "wheel",
         throttle((e) => {
-            handleScroll(e.deltaY > 0 ? "down" : "up");
+            const dir = e.deltaY > 0 ? "down" : "up";
+            handleScroll(dir);
             if (aboutMode !== "none" && mediaQuery.matches) e.preventDefault();
         }, throttleDelay),
         { passive: false }
     );
 
-    // Touch
-    window.addEventListener("touchstart", (e) => {
-        touchStartY = e.touches[0].clientY;
-    }, { passive: true });
-
-    window.addEventListener(
-        "touchmove",
-        throttle((e) => {
-            const touchEndY = e.touches[0].clientY;
-            const deltaY = touchStartY - touchEndY;
-            const dir = deltaY > scrollThreshold ? "down" : deltaY < -scrollThreshold ? "up" : null;
-            if (dir) {
-                handleScroll(dir);
-                touchStartY = touchEndY;
-                if (aboutMode !== "none" && mediaQuery.matches) e.preventDefault();
-            }
-        }, throttleDelay),
-        { passive: false }
-    );
-
-    // IntersectionObserver
     new IntersectionObserver(
-        ([{ isIntersecting }]) => toggleSections(isIntersecting),
-        { threshold: 0.7 }
+        ([entry]) => {
+            if (entry.isIntersecting && aboutMode === "none") {
+                const fromBelow = entry.boundingClientRect.top <= 0;
+                console.log("IntersectionObserver - fromBelow:", fromBelow); // Debug
+                enterAbout(fromBelow);
+                toggleSections(true);
+            } else if (!entry.isIntersecting && aboutMode === "none") {
+                toggleSections(false);
+            }
+        },
+        { threshold: 0.01 }
     ).observe(section);
 
-    showBox(currentBox);
+    // Initialize with box 1 for initial load
+    showBox(0);
 
     const paragraphs = document.querySelectorAll('.text-appear');
     const paragraphObserver = new IntersectionObserver((entries) => {
@@ -182,7 +180,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     paragraphs.forEach(paragraph => paragraphObserver.observe(paragraph));
 
-    // Split headings into spans for animation
     document.querySelectorAll('.heading-fade-in').forEach(title => {
         const text = title.textContent.trim();
         title.textContent = '';
@@ -193,7 +190,6 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    // Observe headings for fade-in animation
     const headings = document.querySelectorAll('.heading-fade-in');
     const headingObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
@@ -206,18 +202,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
     headings.forEach(heading => headingObserver.observe(heading));
 
-    // Introduction box interactions
     const boxIntro = document.querySelectorAll('.introduction-content_box');
     let activeBox = null;
     let leaveTimeout = null;
-    
+
     function resetActiveBox() {
         if (!activeBox) return;
         activeBox.classList.remove('active');
         boxIntro.forEach((b) => b.classList.remove('hidden'));
         activeBox = null;
     }
-    
+
     boxIntro.forEach((box) => {
         box.addEventListener('mouseenter', () => {
             if (activeBox || 'ontouchstart' in window) return;
@@ -227,7 +222,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 if (b !== box) b.classList.add('hidden');
             });
         });
-    
+
         box.addEventListener('click', () => {
             const isSameBox = activeBox === box;
             if (isSameBox) {
@@ -244,7 +239,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 });
             }
         });
-    
+
         box.addEventListener('mouseleave', () => {
             if (leaveTimeout) clearTimeout(leaveTimeout);
             leaveTimeout = setTimeout(() => {

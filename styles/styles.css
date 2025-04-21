@@ -90,7 +90,7 @@ section {
   display: flex;
   flex-direction: column;
   position: relative;
-  gap: 4rem;
+  gap: 7rem;
 }
 #section-banner .banner .banner-ellipse {
   position: absolute;
@@ -248,7 +248,7 @@ section {
   transform: translateY(20px);
   pointer-events: auto;
   transition: opacity 0.8s ease, transform 1.5s ease;
-  will-change: opacity, transform;
+  will-change: opacity, transform, display;
 }
 #section-about .about .about-container .about-container_box .box-img {
   display: flex;

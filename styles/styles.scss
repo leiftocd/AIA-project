@@ -78,7 +78,7 @@ section{
         display: flex;
         flex-direction: column;
         position: relative;
-        gap: 4rem;
+        gap: 7rem;
         .banner-ellipse{
             position: absolute;
             right: 40rem;
@@ -230,7 +230,7 @@ section{
           transform: translateY(20px);
           pointer-events: auto;
           transition: opacity 0.8s ease, transform 1.5s ease;
-          will-change: opacity, transform;
+          will-change: opacity, transform, display;
           .box-img {
             display: flex;
             max-width: 25rem;
