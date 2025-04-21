@@ -30,11 +30,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 box.style.opacity = "1";
                 box.style.transform = "translateY(0)";
             } else {
-                box.style.opacity = isMobile ? "0.3" : "0"; 
-                const translateValue = isMobile ? "0" : "20%";
-                box.style.transform = i < index 
-                    ? `translateY(-${translateValue})` 
-                    : `translateY(${translateValue})`;
+                box.style.opacity = "0"; 
+                 box.style.transform = i < index ? `translateY(-20%)` : `translateY(20%)`;
             }
         });
         maxReachedBox = Math.max(maxReachedBox, index);

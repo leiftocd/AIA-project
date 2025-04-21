@@ -80,16 +80,6 @@ section {
   transform: translateY(0);
 }
 
-@keyframes fadeInUp {
-  0% {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
 #section-banner {
   padding: 4rem 0 0;
   margin-bottom: 0;
@@ -413,7 +403,7 @@ section {
 }
 #section-introduction .introduction .introduction-content .introduction-content_top .introduction-content_box.active .box-intro_img .intro-img,
 #section-introduction .introduction .introduction-content .introduction-content_bot .introduction-content_box.active .box-intro_img .intro-img {
-  max-width: 85%;
+  max-width: 95%;
   width: 100%;
   display: flex;
   justify-content: center;
@@ -901,15 +891,6 @@ section {
   to {
     opacity: 1;
     transform: translateY(0);
-  }
-}
-@keyframes textAppear {
-  from {
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: none;
   }
 }
 @keyframes appear {
@@ -1565,16 +1546,18 @@ section {
     justify-content: center;
     flex-direction: column;
     padding: 2rem 0;
+    gap: 3rem;
   }
   #section-about .about .about-container .about-container_box {
     transform: 0 !important;
     position: relative !important;
     opacity: 1 !important;
-    gap: 1.5rem;
+    gap: 2rem;
   }
   #section-about .about .about-container .about-container_box .box-img {
     max-width: 15rem;
     max-height: 12rem;
+    border: 1px solid #FFF;
     background: linear-gradient(180deg, #5BFFF4 0%, #081120 100%);
   }
   #section-about .about .about-container .about-container_box .box-img img {
@@ -1786,14 +1769,16 @@ section {
   #section-about .about {
     padding: 0 1.5rem;
     gap: 2rem;
+    margin: 3rem 0;
   }
   #section-about .about .about-container {
     margin-top: unset;
-    gap: 2.5rem;
+    gap: 3.5rem;
   }
   #section-about .about .about-container .about-container_box {
     opacity: 1;
     position: unset !important;
+    transform: unset !important;
   }
   #section-about .about .about-container .about-container_box .box-img {
     max-width: 14rem;

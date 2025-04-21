@@ -16,23 +16,4 @@ document.addEventListener('DOMContentLoaded', () => {
   document.addEventListener('wheel', function (e) {
     if (e.ctrlKey) e.preventDefault();
   }, { passive: false });
-
-  // Ngăn zoom bằng phím + / -
-  // document.addEventListener('keydown', function (e) {
-  //     if ((e.ctrlKey || e.metaKey) && (e.key === '+' || e.key === '-' || e.key === '=')) {
-  //         e.preventDefault();
-  //     }
-  // });
-
-  // // Ngăn zoom trên mobile bằng pinch gesture
-  // document.addEventListener('gesturestart', function (e) {
-  //     e.preventDefault();
-  // });
-  // document.addEventListener('gesturechange', function (e) {
-  //     e.preventDefault();
-  // });
-  // document.addEventListener('gestureend', function (e) {
-  //     e.preventDefault();
-  // });
-
 });
