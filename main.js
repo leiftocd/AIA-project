@@ -15,8 +15,8 @@ document.addEventListener("DOMContentLoaded", () => {
     let touchStartY = 0;
 
     const isMobile = /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent);
-    const throttleDelay = isMobile ? 100 : 200; // Giảm delay trên iOS cho vuốt mượt hơn
-    const scrollThreshold = isMobile ? 5 : 5; // Giảm ngưỡng để nhận diện vuốt nhẹ
+    const throttleDelay = isMobile ? 150 : 200; // Giảm delay trên iOS cho vuốt mượt hơn
+    const scrollThreshold = isMobile ? 20 : 5; // Giảm ngưỡng để nhận diện vuốt nhẹ
 
     const scrollTo = (position) => window.scrollTo({ top: position, behavior: "smooth" });
 
