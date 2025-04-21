@@ -11,10 +11,17 @@
     --intro-bg: rgba(80, 251, 199, 0.24);
     --green-color: #50fbc7;
     --dark-text: #145567;
-    --scroll-duration: 2s; /* Thời gian cuộn nhanh, giữ tốc độ 70-80% */
-    --scroll-easing: cubic-bezier(0.645, 0.045, 0.355, 1); /* easeInOutCubic */
+    --scroll-duration: 2s;
+    --scroll-easing: cubic-bezier(0.645, 0.045, 0.355, 1);
 }
-
+////////////
+.animate {
+    clip-path: inset(0 0 50% 0);
+    opacity: 0;
+    transform: translateY(20px);
+    will-change: transform, opacity, clip-path;
+}
+//////////////
 text{
     display: none;
 }
@@ -30,6 +37,7 @@ body{
     flex-direction: column;
     min-height: 100vh;
     background-color: var(--home-bg);
+    gap: 10rem;
     -webkit-overflow-scrolling: touch; /* Cuộn mượt trên iOS */
 }
 body.no-scroll {
@@ -37,7 +45,8 @@ body.no-scroll {
   }
 section{
     transition: opacity 0.5s linear;
-    padding: 6rem 12rem;
+    padding: 0rem 12rem;
+    max-width: 144rem;
     -webkit-overflow-scrolling: touch; /* Cuộn mượt trên iOS */
 }
 .fade-section {
@@ -55,7 +64,7 @@ section{
 .text-appear {
     opacity: 0;
     transform: translateY(20px);
-    transition: opacity 4s ease, transform 1.2s ease;
+    transition: opacity 1s ease, transform .8s ease;
     
     &.visible {
       opacity: 1;
@@ -73,9 +82,9 @@ section{
     }
 }
 #section-banner{
-    padding: 2rem 0;
-    height: 100vh;
+    padding: 4rem 0 0;
     margin-bottom: 0;
+    max-width: 100%;
     .banner{
         width: 100%;
         display: flex;
@@ -179,16 +188,13 @@ section{
 }
 #section-about {
     position: relative;
-    height: 100vh;
-    scroll-behavior: smooth;
+    height: 80rem;
     overflow: hidden;
-    max-width: 144rem;
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 4rem 12rem 0;
-    transition: all 0.5s ease;
     .fullscreen {
       position: fixed;
       top: 0;
@@ -215,7 +221,6 @@ section{
           color: var(--light-color);
         }
       }
-  
       .about-container {
         position: relative;
         width: 100%;
@@ -223,10 +228,7 @@ section{
         display: flex;
         flex-direction: column;
         gap: 3rem;
-  
         .about-container_box {
-          transition: transform 0.5s ease, opacity 0.3s ease;
-          will-change: transform, opacity;
           position: absolute;
           top: 0;
           left: 0;
@@ -237,13 +239,10 @@ section{
           gap: 4.5rem;
           cursor: pointer;
           opacity: 0;
-          pointer-events: none;
-          transform: translateY(0);
-          transition: opacity 1s linear, transform .8s linear;
+          transform: translateY(20px);
           pointer-events: auto;
-  
+          transition: opacity 0.8s ease, transform 1.5s ease; 
           .box-img {
-            transition: all 0.8s linear;
             display: flex;
             max-width: 25rem;
             width: 100%;
@@ -255,49 +254,43 @@ section{
             flex-shrink: 0;
             border: 1px solid rgba(255, 255, 255, 0.3);
             border-radius: 19.069px;
-            backdrop-filter: blur(4px);
-            background: #001621;
+            background: rgba(0, 22, 33, 0.5);
           }
-  
           .box-content {
             display: flex;
             flex-direction: column;
             gap: 4rem;
-  
             h4 {
               font-weight: 700;
               font-size: 36px;
               line-height: 100%;
               color: var(--green-color);
             }
-  
             p {
-                display: flex;
-                flex-wrap: wrap;
-                font-size: 24px;
-                color: var(--light-color);
+              display: flex;
+              flex-wrap: wrap;
+              font-size: 24px;
+              color: var(--light-color);
             }
           }
-  
           &:nth-child(1) {
             top: 0;
             z-index: 88;
           }
-  
           &:nth-child(2) {
-            top: 18%;
+            top: 25%;
             z-index: 99;
           }
-  
           &:nth-child(3) {
-            top: 36%;
-            z-index: 100 !important;
+            top: 50%;
+            z-index: 100;
           }
         }
-  
         .active {
           opacity: 1;
-  
+          transform: translateY(0);
+          transition: opacity 0.8s ease, transform 1.5s ease; 
+
           .box-img {
             max-width: 40rem;
             border: 1px solid #FFF;
@@ -306,21 +299,23 @@ section{
         }
       }
     }
-}
-#section-introduction {
+  }
+  #section-introduction {
     position: relative;
-    max-width: 124rem;
     opacity: 1;
     visibility: visible;
     width: 100%;
-    margin-bottom: 5rem;
+    display: flex;
+    justify-content: center;
     padding: 6rem 10rem;
+    max-width: 128rem;
     .introduction {
         display: flex;
         flex-direction: column;
         margin: 0;
         gap: 4rem;
         position: relative;
+        width: 100%;
         .introduction-title {
             width: 100%;
             h1 {
@@ -381,8 +376,8 @@ section{
                     }
 
                     &.active {
-                        max-height: 73rem; 
-                        height: 73rem;
+                        max-height: 61rem; 
+                        height: 61rem;
                         overflow: hidden; 
                         gap: 1.5rem;
                         padding: 2rem 1rem;
@@ -395,14 +390,14 @@ section{
                             gap: 1.5rem;
                             height: 100%;
                             .intro-img {
-                                height: fit-content;
-                                max-width: 50%;
+                                max-width: 85%;
                                 width: 100%;
                                 display: flex;
                                 justify-content: center;
                                 align-items: center;
                                 img {
                                     max-width: 100%;
+                                    height: 100%;
                                     object-fit: cover;
                                     border-radius: 6px;
                                 }
@@ -416,46 +411,18 @@ section{
                     
                 }
             }
-            .box4,
-            .box6 {
-                .box-intro_img {
-                    flex-wrap: wrap;
-                    .intro-img {
-                        height: 80%;
-                    }
-                }
-            }
-            .box6{
-                .box-intro_img {
-                    .intro-img {
-                        max-width: 55% !important;
-                    }
-                }
-            }
-            .box1,
-            .box5 {
-                .box-intro_img {
-                    .intro-img {
-                        height: 100%;
-                        max-width: 90% !important;
-                    }
-                }
-            }
         }
     }
 }
-
 #section-profession {
     position: relative;
-    margin: 5rem 0 8rem;
-    max-width: 144rem;
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
+    max-width: 144rem;
     .profession {
         position: relative;
-        max-width: 144rem;
         display: flex;
         flex-direction: column;
         gap: 10rem;
@@ -505,15 +472,14 @@ section{
                 flex-wrap: wrap;
                 align-items: center;
                 justify-content: center;
-                gap: 3vw;
-
+                gap: 3%;
                 .item {
-                    max-width: 15%;
+                    max-width: 14.5%;
                     width: 100%;
                     height: 6.4vw;
                     cursor: pointer;
                     position: relative;
-
+                    margin-bottom: 3%;
                     a {
                         display: flex;
                         align-items: center;
@@ -521,7 +487,7 @@ section{
                         width: 100%;
                         height: 100%;
                         img {
-                            width: 80%;
+                            width: 70%;
                             object-fit: cover;
                             filter: grayscale(90%);
                         }
@@ -536,7 +502,7 @@ section{
                                 filter: grayscale(0);
                             }
                             .plume-css {
-                                filter: invert(100%) !important;
+                                filter: invert(0) !important;
                             }
                         }
                         .ton-css {
@@ -552,13 +518,9 @@ section{
 
                         .orderly-css {
                             filter: contrast(0);
-                            &:hover {
-                                filter: contrast(1);
-                            }
                         }
-
                         .plume-css {
-                            filter: invert(50%);
+                            filter: invert(100%) sepia(100%) saturate(0%) brightness(300%);
                         }
                         .moca-css {
                             width: 92% !important;
@@ -574,13 +536,9 @@ section{
     }
 }
 #section-community{
-    max-width: 144rem;
     position: relative;
     width: 100%;
     .community{
-        animation: appear linear;
-        animation-timeline: view();
-        animation-range-end: 30%;
         position: relative;
         display: flex;
         width: 100%;
@@ -671,7 +629,7 @@ section{
                         .average{
                             padding-left: 1.5rem;
                             display: flex;
-                            width: 110%;
+                            width: 100%;
                             align-items: center;
                             gap: 1rem;
                             background: linear-gradient(90deg, #fff 0%, var(--green-color) 42.5%, #010f20 100%);
@@ -771,7 +729,7 @@ section{
 #section-footer{
     position: relative;
     padding: 6rem 12rem 10rem 12rem;
-    max-width: 144rem;
+    padding: 0 12rem 10rem;
     width: 100%;
     .footer{
         animation: appear linear;
@@ -885,10 +843,6 @@ section{
         }
     }
 }
-.about, .community, .introduction, .footer{
-    max-width: 124rem;
-    margin: 6rem auto;
-}
 #section-banner,
 #section-introduction{
     transition: opacity 0.3s ease;
@@ -946,6 +900,9 @@ section{
 }
 
 @media (max-width: 1440px){
+    body{
+        gap: 8rem;
+    }
     #section-banner{
         margin: 0;
         .banner{
@@ -1018,13 +975,7 @@ section{
     }
     #section-about{
         .about{
-            .about-container{
-                .about-container_box{
-                    &:nth-child(1) { top: 0; z-index: 88; }
-                    &:nth-child(2) { top: 22%; z-index: 99; }
-                    &:nth-child(3) { top: 44%; z-index: 100 !important; }
-                }
-            }
+
         }
     }
     #section-introduction{
@@ -1048,6 +999,9 @@ section{
     }
 }
 @media (max-width: 1200px){
+    body{
+        gap: 7rem;
+    }
     h1{
         font-size: 4.8em !important;
     }
@@ -1238,10 +1192,14 @@ section{
     }
 }
 @media (max-width: 990px) {
+    body{
+        gap: 7rem;
+    }
     h1{
         font-size: 4em !important;
     }
     #section-banner{
+        padding: 3rem 0 0;
         .banner{
             .banner-content{
                 .banner-content_text{
@@ -1268,7 +1226,9 @@ section{
 
     }
     #section-about{
+        padding: 4rem 2rem 2rem !important;
         .about{
+            gap: 4rem;
             .about-title{
                 width: 100%;
                 h1{
@@ -1277,40 +1237,55 @@ section{
                 }
             }
             .about-container{
+                margin-top: unset;
+                padding: 1rem 0;
+                gap: 1.5rem;
                 .about-container_box{
                     gap: 3rem;
-                    .box-img{
-                        max-width: 18rem;
-                        max-height: 15rem;
-                        img{
-                            max-width: 70%;
-                        }
-                    }
-                    .box-content{
-                        h4{
-                            font-size: 2.6em;
-                        }
-                        p{
-                            .animated{
-                                span{
-                                    font-size: 1.8em;
-                                }
-                            }
-                            
-                        }
-                    }
-                    &:nth-child(1) { top: 0; }
-                    &:nth-child(2) { top: 12%; }
-                    &:nth-child(3) { top: 20%;  }
-                }
-                .active{
-                    .box-img{
-                        max-width: 25rem;
-                        max-height: 15rem;
+                    opacity: .1 !important;
+                    // position: unset !important;
+                    // transform: unset !important;
+                    // top: unset !important;
+                    .box-img {
+                        max-width: 30rem;
+                        max-height: 16rem;
+                        border: 1px solid #FFF;
+                        background: var(--dark-text);
                         img{
                             max-width: 50%;
                         }
                     }
+                    .box-content{
+                        h4{
+                            font-size: 3rem;
+                        }
+                        p{
+                            font-size: 2rem;
+                        }
+                    }
+                    .active {
+                        opacity: 1 !important;
+                        transform: translateY(0);
+                        transition: opacity 0.8s ease, transform 1.5s ease; 
+              
+                        .box-img {
+                          max-width: 40rem;
+                          border: 1px solid #FFF;
+                          background: linear-gradient(180deg, #5BFFF4 0%, #081120 100%);
+                        }
+                    }
+                    &:nth-child(1) {
+                        top: 0;
+                        z-index: 88;
+                      }
+                      &:nth-child(2) {
+                        top: 25%;
+                        z-index: 99;
+                      }
+                      &:nth-child(3) {
+                        top: 50%;
+                        z-index: 100;
+                      }
                 }
             }
         }
@@ -1390,7 +1365,7 @@ section{
         }
     }
     #section-profession{
-        padding: 8rem 0 10rem;
+        padding: 4rem 0;
         .profession{
             gap: 6rem;
             padding: 0 3rem;
@@ -1436,6 +1411,9 @@ section{
     
 }
 @media (max-width: 768px) {
+    body{
+        gap: 6rem;
+    }
     h1{
         font-size: 3.4em !important;
     }
@@ -1475,15 +1453,6 @@ section{
                     .box-img{
                         max-width: 16rem;
                         max-height: 15rem;
-                    }
-                }
-                .active{
-                    .box-img{
-                        max-width: 22rem;
-                        max-height: 15rem;
-                        img{
-                            max-width: 50%;
-                        }
                     }
                 }
             }
@@ -1541,7 +1510,7 @@ section{
         }
     }
     #section-introduction{
-        padding: 8rem 2rem 4rem;
+        padding: 4rem 2rem;
         .introduction{
             display: flex;
             flex-direction: column;
@@ -1611,6 +1580,7 @@ section{
 @media (max-width: 640px) {
     body{
         transition: unset;
+        gap: 4rem;
     }
     :root{
         --height: 50px;
@@ -1698,9 +1668,9 @@ section{
                 padding: 0;
             }
             .about-container{
-                max-height: 25rem;
                 .about-container_box{
                     gap: 1.5rem;
+                    opacity: 1 !important; 
                     .box-img{
                         max-width: 15rem;
                         max-height: 12rem;
@@ -1909,8 +1879,8 @@ section{
     #section-banner{
         .banner{
             gap: 4rem !important;
+            margin: 0;
             .banner-content{
-
                 .banner-content_text{
                     padding: 0 5%;
                     p{
@@ -1936,15 +1906,12 @@ section{
         }
     }
     #section-about{
-        height: 100vh;
         margin: 0 !important;
         padding: 0 !important;
         .about{
             padding: 0 1.5rem;
             .about-container{
-                // max-height: 23rem;
-                margin-top: 4rem;
-                height: 100vh;
+                margin-top: unset;
                 .about-container_box{
                     .box-img{
                         max-width: 10rem;
