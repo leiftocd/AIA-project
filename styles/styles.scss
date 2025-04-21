@@ -239,7 +239,8 @@ section{
           opacity: 0;
           transform: translateY(20px);
           pointer-events: auto;
-          transition: opacity 0.8s ease, transform 1.5s ease; 
+          transition: opacity 0.8s ease, transform 1.5s ease;
+          will-change: opacity, transform;
           .box-img {
             display: flex;
             max-width: 25rem;
@@ -1235,7 +1236,7 @@ section{
         padding: 4rem 2rem 2rem !important;
         max-height: 75rem;
         .about{
-            gap: 6rem;
+            gap: 10rem;
             .about-title{
                 width: 100%;
                 h1{
@@ -1458,6 +1459,27 @@ section{
                         max-width: 16rem;
                         max-height: 15rem;
                     }
+                    &:nth-child(1) {
+                        top: 0;
+                        z-index: 88;
+                      }
+                      &:nth-child(2) {
+                        top: 25%;
+                        z-index: 99;
+                      }
+                      &:nth-child(3) {
+                        top: 50%;
+                        z-index: 100;
+                      }
+                }
+                .active{
+                    .box-img{
+                        max-width: 20rem ;
+                        max-height: 15rem ;
+                        img{
+                            max-width: 50%;
+                        }
+                    }
                 }
             }
         }
@@ -1664,27 +1686,38 @@ section{
         }
     }
     #section-about{
-        height: 95vh;
-        max-height: 95vh;
+        height: fit-content;
+        max-height: unset;
         padding: 0 1.5rem;
         .about{
-            margin: 6rem auto 0;
+            margin: 2rem auto 0;
             gap: 4rem;
             .about-title{
                 padding: 0;
             }
             .about-container{
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex-direction: column;
+                padding: 2rem 0;
                 .about-container_box{
-                    transform: translate(0) !important;
+                    transform: 0 !important;
+                    position: relative !important;
+                    opacity: 1 !important;
                     gap: 1.5rem;
                     .box-img{
                         max-width: 15rem;
                         max-height: 12rem;
+                        background: linear-gradient(180deg, #5BFFF4 0%, #081120 100%);
                         img{
                             max-width: 70%;
                         }
                     }
                     .box-content{
+                        p{
+                            opacity: 1 !important;
+                        }
                         h4{
                             font-size: 2.2em;
                         }
@@ -1695,28 +1728,7 @@ section{
                             }
                         }
                     }
-                    &:nth-child(1) {
-                        top: 0;
-                        z-index: 88;
-                      }
-                      &:nth-child(2) {
-                        top: 22%;
-                        z-index: 99;
-                      }
-                      &:nth-child(3) {
-                        top: 45%;
-                        z-index: 100;
-                      }
-                    }
-                    .active{
-                        .box-img{
-                            max-width: 20rem;
-                            max-height: 15rem;
-                            img{
-                                max-width: 50%;
-                            }
-                        }
-                    }
+                }
             }
         }
     }
@@ -1831,50 +1843,50 @@ section{
     }
     #section-introduction{
         .introduction{
-        .introduction-content{
-            gap: 1rem;
-            .introduction-content_bot,
-            .introduction-content_top{
-                flex-direction: column;
-                width: 100%;
-                .introduction-content_box{
-                    max-width: unset;
-                    min-height: unset;
-                    padding: 3rem 1.5rem;
-                    gap: 1rem !important;
-                    .box-intro_desc,
-                    .box-intro_img,
-                    .box-intro_tit{
-                        p{
-                            font-size: 1.4rem;
-                        }
-                        h2{
-                            font-size: 2rem;
-                        }
-                    }
-                    .box-intro_img{
-                        padding: 0;
-                        flex-direction: column;
-                        .intro-img{
-                            height: fit-content;
-                        }
-                    }
-                    &.active{
-                        height: fit-content;
-                        overflow: scroll;
-                        .box-intro_img{
-                            .intro-img{
-                                max-width: 90%;
+            .introduction-content{
+                gap: 1rem;
+                .introduction-content_bot,
+                .introduction-content_top{
+                    flex-direction: column;
+                    width: 100%;
+                    .introduction-content_box{
+                        max-width: unset;
+                        min-height: unset;
+                        padding: 2rem 1.5rem;
+                        gap: 1rem !important;
+                        .box-intro_desc,
+                        .box-intro_img,
+                        .box-intro_tit{
+                            p{
+                                font-size: 1.4rem;
+                            }
+                            h2{
+                                font-size: 2rem;
                             }
                         }
+                        .box-intro_img{
+                            padding: 0;
+                            flex-direction: column;
+                            .intro-img{
+                                height: fit-content;
+                            }
+                        }
+                        &.active{
+                            height: fit-content;
+                            overflow: scroll;
+                            .box-intro_img{
+                                .intro-img{
+                                    max-width: 90%;
+                                }
+                            }
+                        }
+                        &.hidden{
+                            display: flex !important;
+                        }
                     }
-                    &.hidden{
-                        display: flex !important;
-                    }
-                }
 
+                }
             }
-        }
         }
     }
     body.no-scroll{
@@ -1920,17 +1932,17 @@ section{
     #section-about{
         margin: 0 !important;
         padding: 0 !important;
-        height: 94vh !important;
         opacity: 1 !important;
         max-height: unset;
         .about{
             padding: 0 1.5rem;
+            gap: 2rem;
             .about-container{
                 margin-top: unset;
+                gap: 2.5rem;
                 .about-container_box{
                     opacity: 1;
                     position: unset !important;
-                    // height: 100%;
                     .box-img{
                         max-width: 14rem;
                         max-height: 10rem;
@@ -1950,13 +1962,16 @@ section{
                             font-size: 1.2em !important;
                         }
                     }
+                    &:nth-child(2){
+                        flex-direction: row-reverse;
+                    }
                 }
-                }
-
+            }
             }
         }
     #section-introduction{
         height: fit-content;
+        padding: 1rem 1.5rem;
         .introduction{
         .introduction-content{
             .introduction-content_bot,
@@ -1996,7 +2011,7 @@ section{
     }
 
     #section-profession{
-        padding: 5rem 0;
+        padding: 3rem 0 2rem;
         justify-content: center;
         display: flex;
         align-items: center;

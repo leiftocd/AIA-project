@@ -258,6 +258,7 @@ section {
   transform: translateY(20px);
   pointer-events: auto;
   transition: opacity 0.8s ease, transform 1.5s ease;
+  will-change: opacity, transform;
 }
 #section-about .about .about-container .about-container_box .box-img {
   display: flex;
@@ -1172,7 +1173,7 @@ section {
     max-height: 75rem;
   }
   #section-about .about {
-    gap: 6rem;
+    gap: 10rem;
   }
   #section-about .about .about-title {
     width: 100%;
@@ -1344,6 +1345,25 @@ section {
   #section-about .about .about-container .about-container_box .box-img {
     max-width: 16rem;
     max-height: 15rem;
+  }
+  #section-about .about .about-container .about-container_box:nth-child(1) {
+    top: 0;
+    z-index: 88;
+  }
+  #section-about .about .about-container .about-container_box:nth-child(2) {
+    top: 25%;
+    z-index: 99;
+  }
+  #section-about .about .about-container .about-container_box:nth-child(3) {
+    top: 50%;
+    z-index: 100;
+  }
+  #section-about .about .about-container .active .box-img {
+    max-width: 20rem;
+    max-height: 15rem;
+  }
+  #section-about .about .about-container .active .box-img img {
+    max-width: 50%;
   }
   #section-community {
     padding: 0 3rem;
@@ -1527,27 +1547,41 @@ section {
     filter: blur(100px);
   }
   #section-about {
-    height: 95vh;
-    max-height: 95vh;
+    height: -moz-fit-content;
+    height: fit-content;
+    max-height: unset;
     padding: 0 1.5rem;
   }
   #section-about .about {
-    margin: 6rem auto 0;
+    margin: 2rem auto 0;
     gap: 4rem;
   }
   #section-about .about .about-title {
     padding: 0;
   }
+  #section-about .about .about-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 2rem 0;
+  }
   #section-about .about .about-container .about-container_box {
-    transform: translate(0) !important;
+    transform: 0 !important;
+    position: relative !important;
+    opacity: 1 !important;
     gap: 1.5rem;
   }
   #section-about .about .about-container .about-container_box .box-img {
     max-width: 15rem;
     max-height: 12rem;
+    background: linear-gradient(180deg, #5BFFF4 0%, #081120 100%);
   }
   #section-about .about .about-container .about-container_box .box-img img {
     max-width: 70%;
+  }
+  #section-about .about .about-container .about-container_box .box-content p {
+    opacity: 1 !important;
   }
   #section-about .about .about-container .about-container_box .box-content h4 {
     font-size: 2.2em;
@@ -1557,25 +1591,6 @@ section {
   }
   #section-about .about .about-container .about-container_box .box-content p span {
     font-size: 1.4rem !important;
-  }
-  #section-about .about .about-container .about-container_box:nth-child(1) {
-    top: 0;
-    z-index: 88;
-  }
-  #section-about .about .about-container .about-container_box:nth-child(2) {
-    top: 22%;
-    z-index: 99;
-  }
-  #section-about .about .about-container .about-container_box:nth-child(3) {
-    top: 45%;
-    z-index: 100;
-  }
-  #section-about .about .about-container .active .box-img {
-    max-width: 20rem;
-    max-height: 15rem;
-  }
-  #section-about .about .about-container .active .box-img img {
-    max-width: 50%;
   }
   #section-community .community {
     animation: unset;
@@ -1685,7 +1700,7 @@ section {
   #section-introduction .introduction .introduction-content .introduction-content_top .introduction-content_box {
     max-width: unset;
     min-height: unset;
-    padding: 3rem 1.5rem;
+    padding: 2rem 1.5rem;
     gap: 1rem !important;
   }
   #section-introduction .introduction .introduction-content .introduction-content_bot .introduction-content_box .box-intro_desc p,
@@ -1765,15 +1780,16 @@ section {
   #section-about {
     margin: 0 !important;
     padding: 0 !important;
-    height: 94vh !important;
     opacity: 1 !important;
     max-height: unset;
   }
   #section-about .about {
     padding: 0 1.5rem;
+    gap: 2rem;
   }
   #section-about .about .about-container {
     margin-top: unset;
+    gap: 2.5rem;
   }
   #section-about .about .about-container .about-container_box {
     opacity: 1;
@@ -1798,9 +1814,13 @@ section {
   #section-about .about .about-container .about-container_box .box-content p {
     font-size: 1.2em !important;
   }
+  #section-about .about .about-container .about-container_box:nth-child(2) {
+    flex-direction: row-reverse;
+  }
   #section-introduction {
     height: -moz-fit-content;
     height: fit-content;
+    padding: 1rem 1.5rem;
   }
   #section-introduction .introduction .introduction-content .introduction-content_bot .introduction-content_box,
   #section-introduction .introduction .introduction-content .introduction-content_top .introduction-content_box {
@@ -1837,7 +1857,7 @@ section {
     margin: 0;
   }
   #section-profession {
-    padding: 5rem 0;
+    padding: 3rem 0 2rem;
     justify-content: center;
     display: flex;
     align-items: center;

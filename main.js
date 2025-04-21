@@ -15,12 +15,14 @@ document.addEventListener("DOMContentLoaded", () => {
     let touchStartY = 0;
 
     const isMobile = /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent);
-    const throttleDelay = isMobile ? 150 : 200; // Giảm delay trên iOS cho vuốt mượt hơn
-    const scrollThreshold = isMobile ? 20 : 5; // Giảm ngưỡng để nhận diện vuốt nhẹ
+    const throttleDelay = isMobile ? 150 : 200;
+    const scrollThreshold = isMobile ? 20 : 5;
+    const mediaQuery = window.matchMedia("(min-width: 641px)");
 
     const scrollTo = (position) => window.scrollTo({ top: position, behavior: "smooth" });
 
     const showBox = (index) => {
+        if (!mediaQuery.matches) return;
         boxes.forEach((box, i) => {
             box.classList.remove("active");
             if (i === index) {
@@ -29,7 +31,10 @@ document.addEventListener("DOMContentLoaded", () => {
                 box.style.transform = "translateY(0)";
             } else {
                 box.style.opacity = isMobile ? "0.3" : "0"; 
-                box.style.transform = i < index ? `translateY(-20%)` : `translateY(-20%)`;
+                const translateValue = isMobile ? "0" : "20%";
+                box.style.transform = i < index 
+                    ? `translateY(-${translateValue})` 
+                    : `translateY(${translateValue})`;
             }
         });
         maxReachedBox = Math.max(maxReachedBox, index);
@@ -43,19 +48,18 @@ document.addEventListener("DOMContentLoaded", () => {
         toggleSections(true);
         section.classList.add("fullscreen");
     
-        // Tính offset của thanh scrollbar để tránh layout shift
-        const scrollbarOffset = window.innerWidth - document.documentElement.clientWidth;
-    
-        // Ghi nhớ vị trí cuộn hiện tại và thêm class no-scroll
-        const scrollY = window.scrollY;
-        document.body.style.top = `-${scrollY}px`;
-        document.body.classList.add("no-scroll");
-        document.body.style.paddingRight = `${scrollbarOffset}px`;
-        document.body.style.touchAction = "none";
+        if (mediaQuery.matches) {
+            const scrollbarOffset = window.innerWidth - document.documentElement.clientWidth;
+            const scrollY = window.scrollY;
+            document.body.style.top = `-${scrollY}px`;
+            document.body.classList.add("no-scroll");
+            document.body.style.paddingRight = `${scrollbarOffset}px`;
+            document.body.style.touchAction = "none";
+        }
     
         currentBox = fromBelow && maxReachedBox === boxes.length - 1 ? boxes.length - 1 : 0;
         lastBoxScroll = false;
-        showBox(currentBox);
+        if (mediaQuery.matches) showBox(currentBox);
         scrollTo(section.offsetTop);
         isAnimating = true;
         setTimeout(() => {
@@ -70,13 +74,13 @@ document.addEventListener("DOMContentLoaded", () => {
         toggleSections(false);
         section.classList.remove("fullscreen");
     
-        document.body.classList.remove("no-scroll");
-        document.body.style.top = "";
-        document.body.style.paddingRight = "";
-        document.body.style.touchAction = "";
-        document.body.style.overflow = "";
-    
-        // window.scrollTo(0, scrollY);
+        if (mediaQuery.matches) {
+            document.body.classList.remove("no-scroll");
+            document.body.style.top = "";
+            document.body.style.paddingRight = "";
+            document.body.style.touchAction = "";
+            document.body.style.overflow = "";
+        }
     
         scrollTo(toTop ? section.offsetTop - window.innerHeight : introduceSection.offsetTop);
         isAnimating = true;
@@ -95,9 +99,9 @@ document.addEventListener("DOMContentLoaded", () => {
         const winH = window.innerHeight;
 
         if (aboutMode === "none") {
-            if (dir === "down" && top < winH && top >= 0) enterAbout(false);
-            else if (dir === "up" && bottom > 0 && bottom <= winH) enterAbout(true);
-        } else if (aboutMode === "in") {
+            if (dir === "down" && top < winH * 0.3 && top >= 0) enterAbout(false);
+            else if (dir === "up" && bottom > winH * 0.7 && bottom <= winH) enterAbout(true);
+        } else if (aboutMode === "in" && mediaQuery.matches) {
             const maxBoxIndex = boxes.length - 1;
             if (dir === "down") {
                 if (currentBox < maxBoxIndex) {
@@ -137,7 +141,7 @@ document.addEventListener("DOMContentLoaded", () => {
         "wheel",
         throttle((e) => {
             handleScroll(e.deltaY > 0 ? "down" : "up");
-            if (aboutMode !== "none") e.preventDefault();
+            if (aboutMode !== "none" && mediaQuery.matches) e.preventDefault();
         }, throttleDelay),
         { passive: false }
     );
@@ -156,14 +160,17 @@ document.addEventListener("DOMContentLoaded", () => {
             if (dir) {
                 handleScroll(dir);
                 touchStartY = touchEndY;
-                if (aboutMode !== "none") e.preventDefault();
+                if (aboutMode !== "none" && mediaQuery.matches) e.preventDefault();
             }
         }, throttleDelay),
         { passive: false }
     );
 
     // IntersectionObserver
-    new IntersectionObserver(([{ isIntersecting }]) => toggleSections(isIntersecting), { threshold: 0.5 }).observe(section);
+    new IntersectionObserver(
+        ([{ isIntersecting }]) => toggleSections(isIntersecting),
+        { threshold: 0.7 }
+    ).observe(section);
 
     showBox(currentBox);
 
@@ -195,42 +202,30 @@ document.addEventListener("DOMContentLoaded", () => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('fade-in-visible');
-                headingObserver.unobserve(entry.target); // Stop observing after animation is triggered
+                headingObserver.unobserve(entry.target);
             }
         });
     }, { threshold: 0.1 });
 
     headings.forEach(heading => headingObserver.observe(heading));
 
-    //////////
+    // Introduction box interactions
     const boxIntro = document.querySelectorAll('.introduction-content_box');
     let activeBox = null;
     let leaveTimeout = null;
     
     function resetActiveBox() {
         if (!activeBox) return;
-    
         activeBox.classList.remove('active');
         boxIntro.forEach((b) => b.classList.remove('hidden'));
-    
-        const scrollY = document.body.style.top;
-        document.body.classList.remove('no-scroll');
-        document.body.style.top = '';
-    
-        if (scrollY) {
-            const scrollYValue = parseInt(scrollY, 10);
-            if (!isNaN(scrollYValue)) window.scrollTo(0, Math.abs(scrollYValue));
-        }
         activeBox = null;
     }
     
     boxIntro.forEach((box) => {
         box.addEventListener('mouseenter', () => {
             if (activeBox || 'ontouchstart' in window) return;
-
             activeBox = box;
             box.classList.add('active');
-        
             boxIntro.forEach((b) => {
                 if (b !== box) b.classList.add('hidden');
             });
@@ -238,7 +233,6 @@ document.addEventListener("DOMContentLoaded", () => {
     
         box.addEventListener('click', () => {
             const isSameBox = activeBox === box;
-    
             if (isSameBox) {
                 resetActiveBox();
             } else {
@@ -246,15 +240,11 @@ document.addEventListener("DOMContentLoaded", () => {
                     activeBox.classList.remove('active');
                     boxIntro.forEach((b) => b.classList.remove('hidden'));
                 }
-    
                 activeBox = box;
                 box.classList.add('active');
-    
                 boxIntro.forEach((b) => {
                     if (b !== box) b.classList.add('hidden');
                 });
-    
-                document.body.style.top = `-${window.scrollY}px`;
             }
         });
     
