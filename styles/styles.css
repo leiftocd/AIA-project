@@ -13,8 +13,6 @@
   --intro-bg: rgba(80, 251, 199, 0.24);
   --green-color: #50fbc7;
   --dark-text: #145567;
-  --scroll-duration: 1s;
-  --scroll-easing: cubic-bezier(0.645, 0.045, 0.355, 1);
 }
 
 .animate {
@@ -36,7 +34,7 @@ html {
 }
 
 body {
-  transition: scroll-position var(--scroll-duration) var(--scroll-easing);
+  scroll-behavior: smooth;
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -1165,10 +1163,10 @@ section {
   }
   #section-about {
     padding: 4rem 2rem 2rem !important;
-    min-height: 65rem;
+    max-height: 75rem;
   }
   #section-about .about {
-    gap: 4rem;
+    gap: 6rem;
   }
   #section-about .about .about-title {
     width: 100%;
@@ -1184,6 +1182,7 @@ section {
   }
   #section-about .about .about-container .about-container_box {
     gap: 3rem;
+    height: auto;
   }
   #section-about .about .about-container .about-container_box .box-img {
     background: linear-gradient(180deg, #003835 0%, #000 100%);
@@ -1204,12 +1203,15 @@ section {
     z-index: 88;
   }
   #section-about .about .about-container .about-container_box:nth-child(2) {
-    top: 20%;
+    top: 30%;
     z-index: 99;
   }
   #section-about .about .about-container .about-container_box:nth-child(3) {
-    top: 40%;
+    top: 60%;
     z-index: 100;
+  }
+  #section-about .about .about-container .active {
+    transform: translateY(-20%) !important;
   }
   #section-about .about .about-container .active .box-content p {
     opacity: 1 !important;
@@ -1519,6 +1521,8 @@ section {
     filter: blur(100px);
   }
   #section-about {
+    height: 95vh;
+    max-height: 95vh;
     padding: 0 1.5rem;
   }
   #section-about .about {
@@ -1529,8 +1533,8 @@ section {
     padding: 0;
   }
   #section-about .about .about-container .about-container_box {
+    transform: translate(0) !important;
     gap: 1.5rem;
-    opacity: 1 !important;
   }
   #section-about .about .about-container .about-container_box .box-img {
     max-width: 15rem;
@@ -1548,11 +1552,17 @@ section {
   #section-about .about .about-container .about-container_box .box-content p span {
     font-size: 1.4rem !important;
   }
+  #section-about .about .about-container .about-container_box:nth-child(1) {
+    top: 0;
+    z-index: 88;
+  }
   #section-about .about .about-container .about-container_box:nth-child(2) {
-    top: 40%;
+    top: 22%;
+    z-index: 99;
   }
   #section-about .about .about-container .about-container_box:nth-child(3) {
-    top: 80%;
+    top: 45%;
+    z-index: 100;
   }
   #section-about .about .about-container .active .box-img {
     max-width: 20rem;
@@ -1749,6 +1759,9 @@ section {
   #section-about {
     margin: 0 !important;
     padding: 0 !important;
+    height: 94vh !important;
+    opacity: 1 !important;
+    max-height: unset;
   }
   #section-about .about {
     padding: 0 1.5rem;
@@ -1756,12 +1769,19 @@ section {
   #section-about .about .about-container {
     margin-top: unset;
   }
+  #section-about .about .about-container .about-container_box {
+    opacity: 1;
+    position: unset !important;
+  }
   #section-about .about .about-container .about-container_box .box-img {
-    max-width: 10rem;
-    max-height: 8rem;
+    max-width: 14rem;
+    max-height: 10rem;
   }
   #section-about .about .about-container .about-container_box .box-img img {
     max-width: 70%;
+  }
+  #section-about .about .about-container .about-container_box .box-content {
+    opacity: 1 !important;
   }
   #section-about .about .about-container .about-container_box .box-content h4 {
     font-size: 2em !important;
@@ -1771,18 +1791,6 @@ section {
   }
   #section-about .about .about-container .about-container_box .box-content p {
     font-size: 1.2em !important;
-  }
-  #section-about .about .about-container .about-container_box:nth-child(2) {
-    top: 30%;
-    z-index: 99;
-  }
-  #section-about .about .about-container .about-container_box:nth-child(3) {
-    top: 60%;
-    z-index: 100 !important;
-  }
-  #section-about .about .about-container .active .box-img {
-    max-width: 12rem !important;
-    max-height: 10rem;
   }
   #section-introduction {
     height: -moz-fit-content;
@@ -1827,7 +1835,7 @@ section {
     justify-content: center;
     display: flex;
     align-items: center;
-    margin: 6rem 0;
+    margin: 0;
   }
   #section-profession .profession {
     padding: 0;

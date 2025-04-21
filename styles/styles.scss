@@ -11,8 +11,6 @@
     --intro-bg: rgba(80, 251, 199, 0.24);
     --green-color: #50fbc7;
     --dark-text: #145567;
-    --scroll-duration: 1s;
-    --scroll-easing: cubic-bezier(0.645, 0.045, 0.355, 1);
 }
 ////////////
 .animate {
@@ -31,7 +29,7 @@ html{
     scroll-behavior: smooth;
 }
 body{
-    transition: scroll-position var(--scroll-duration) var(--scroll-easing);
+    scroll-behavior: smooth;
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -1228,9 +1226,9 @@ section{
     }
     #section-about{
         padding: 4rem 2rem 2rem !important;
-        min-height: 65rem;
+        max-height: 75rem;
         .about{
-            gap: 4rem;
+            gap: 6rem;
             .about-title{
                 width: 100%;
                 h1{
@@ -1244,14 +1242,8 @@ section{
                 gap: 1.5rem;
                 .about-container_box{
                     gap: 3rem;
-                    // opacity: .1 !important;
-                    // position: unset !important;
-                    // transform: unset !important;
-                    // top: unset !important;
+                    height: auto;
                     .box-img {
-                        // max-width: 30rem;
-                        // max-height: 16rem;
-                        // border: 1px solid #FFF;
                         background: linear-gradient(180deg, #003835 0%, #000 100%);
                         border: none;
                         img{
@@ -1267,32 +1259,21 @@ section{
                             opacity: 0 !important;
                         }
                     }
-                    // .active {
-                    //     opacity: 1 !important;
-                    //     transform: translateY(0);
-                    //     transition: opacity 0.8s ease, transform 1.5s ease; 
-              
-                    //     .box-img {
-                    //       max-width: 40rem;
-                    //       border: 1px solid #FFF;
-                    //       background: linear-gradient(180deg, #5BFFF4 0%, #081120 100%);
-                    //     }
-                    // }
                     &:nth-child(1) {
                         top: 0;
                         z-index: 88;
                       }
                       &:nth-child(2) {
-                        top: 20%;
+                        top: 30%;
                         z-index: 99;
                       }
                       &:nth-child(3) {
-                        top: 40%;
+                        top: 60%;
                         z-index: 100;
                       }
-    
                     }
                     .active{
+                        transform: translateY(-20%) !important;
                         .box-content{
                             p{
                                 opacity: 1 !important;
@@ -1301,9 +1282,8 @@ section{
                         .box-img{
                             border: 1px solid #FFF !important;
                             background: linear-gradient(180deg, #5BFFF4 0%, #081120 100%) !important;
-
                         }
-                      }
+                    }                 
             }
         }
     }
@@ -1677,6 +1657,8 @@ section{
         }
     }
     #section-about{
+        height: 95vh;
+        max-height: 95vh;
         padding: 0 1.5rem;
         .about{
             margin: 6rem auto 0;
@@ -1686,8 +1668,8 @@ section{
             }
             .about-container{
                 .about-container_box{
+                    transform: translate(0) !important;
                     gap: 1.5rem;
-                    opacity: 1 !important; 
                     .box-img{
                         max-width: 15rem;
                         max-height: 12rem;
@@ -1706,22 +1688,28 @@ section{
                             }
                         }
                     }
-                    &:nth-child(2){
-                        top: 40%;
+                    &:nth-child(1) {
+                        top: 0;
+                        z-index: 88;
+                      }
+                      &:nth-child(2) {
+                        top: 22%;
+                        z-index: 99;
+                      }
+                      &:nth-child(3) {
+                        top: 45%;
+                        z-index: 100;
+                      }
                     }
-                    &:nth-child(3){
-                        top: 80%;
-                    }
-                }
-                .active{
-                    .box-img{
-                        max-width: 20rem;
-                        max-height: 15rem;
-                        img{
-                            max-width: 50%;
+                    .active{
+                        .box-img{
+                            max-width: 20rem;
+                            max-height: 15rem;
+                            img{
+                                max-width: 50%;
+                            }
                         }
                     }
-                }
             }
         }
     }
@@ -1925,19 +1913,26 @@ section{
     #section-about{
         margin: 0 !important;
         padding: 0 !important;
+        height: 94vh !important;
+        opacity: 1 !important;
+        max-height: unset;
         .about{
             padding: 0 1.5rem;
             .about-container{
                 margin-top: unset;
                 .about-container_box{
+                    opacity: 1;
+                    position: unset !important;
+                    // height: 100%;
                     .box-img{
-                        max-width: 10rem;
-                        max-height: 8rem;
+                        max-width: 14rem;
+                        max-height: 10rem;
                         img{
                             max-width: 70%;
                         }
                     }
                     .box-content{
+                        opacity: 1 !important;
                         h4{
                             font-size: 2em !important;
                         }
@@ -1948,18 +1943,11 @@ section{
                             font-size: 1.2em !important;
                         }
                     }
-                    &:nth-child(2) { top: 30%; z-index: 99; }
-                    &:nth-child(3) { top: 60%; z-index: 100 !important; }
                 }
-                .active{
-                    .box-img{
-                        max-width: 12rem !important;
-                        max-height: 10rem;
-                    }
                 }
+
             }
         }
-    }
     #section-introduction{
         height: fit-content;
         .introduction{
@@ -2005,7 +1993,7 @@ section{
         justify-content: center;
         display: flex;
         align-items: center;
-        margin: 6rem 0;
+        margin: 0;
         .profession{
             padding: 0;
             .profession-ellipse{

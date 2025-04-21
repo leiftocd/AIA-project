@@ -28,8 +28,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 box.style.opacity = "1";
                 box.style.transform = "translateY(0)";
             } else {
-                box.style.opacity = isMobile ? "0.5" : "0"; 
-                box.style.transform = i < index ? `translateY(-20%)` : `translateY(20%)`;
+                box.style.opacity = isMobile ? "0.3" : "0"; 
+                box.style.transform = i < index ? `translateY(-20%)` : `translateY(-20%)`;
             }
         });
         maxReachedBox = Math.max(maxReachedBox, index);
@@ -76,7 +76,7 @@ document.addEventListener("DOMContentLoaded", () => {
         document.body.style.touchAction = "";
         document.body.style.overflow = "";
     
-        window.scrollTo(0, scrollY);
+        // window.scrollTo(0, scrollY);
     
         scrollTo(toTop ? section.offsetTop - window.innerHeight : introduceSection.offsetTop);
         isAnimating = true;
@@ -221,7 +221,6 @@ document.addEventListener("DOMContentLoaded", () => {
             const scrollYValue = parseInt(scrollY, 10);
             if (!isNaN(scrollYValue)) window.scrollTo(0, Math.abs(scrollYValue));
         }
-    
         activeBox = null;
     }
     
