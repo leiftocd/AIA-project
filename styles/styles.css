@@ -13,7 +13,7 @@
   --intro-bg: rgba(80, 251, 199, 0.24);
   --green-color: #50fbc7;
   --dark-text: #145567;
-  --scroll-duration: 2s;
+  --scroll-duration: 1s;
   --scroll-easing: cubic-bezier(0.645, 0.045, 0.355, 1);
 }
 
@@ -203,7 +203,7 @@ section {
 
 #section-about {
   position: relative;
-  height: 80rem;
+  height: 90rem;
   overflow: hidden;
   width: 100%;
   display: flex;
@@ -967,6 +967,9 @@ section {
     gap: 10.3rem;
     justify-content: unset;
   }
+  #section-about {
+    max-height: 85rem;
+  }
   #section-introduction {
     padding: 4rem 10rem;
   }
@@ -1162,6 +1165,7 @@ section {
   }
   #section-about {
     padding: 4rem 2rem 2rem !important;
+    min-height: 65rem;
   }
   #section-about .about {
     gap: 4rem;
@@ -1180,13 +1184,10 @@ section {
   }
   #section-about .about .about-container .about-container_box {
     gap: 3rem;
-    opacity: 0.1 !important;
   }
   #section-about .about .about-container .about-container_box .box-img {
-    max-width: 30rem;
-    max-height: 16rem;
-    border: 1px solid #FFF;
-    background: var(--dark-text);
+    background: linear-gradient(180deg, #003835 0%, #000 100%);
+    border: none;
   }
   #section-about .about .about-container .about-container_box .box-img img {
     max-width: 50%;
@@ -1196,28 +1197,26 @@ section {
   }
   #section-about .about .about-container .about-container_box .box-content p {
     font-size: 2rem;
-  }
-  #section-about .about .about-container .about-container_box .active {
-    opacity: 1 !important;
-    transform: translateY(0);
-    transition: opacity 0.8s ease, transform 1.5s ease;
-  }
-  #section-about .about .about-container .about-container_box .active .box-img {
-    max-width: 40rem;
-    border: 1px solid #FFF;
-    background: linear-gradient(180deg, #5BFFF4 0%, #081120 100%);
+    opacity: 0 !important;
   }
   #section-about .about .about-container .about-container_box:nth-child(1) {
     top: 0;
     z-index: 88;
   }
   #section-about .about .about-container .about-container_box:nth-child(2) {
-    top: 25%;
+    top: 20%;
     z-index: 99;
   }
   #section-about .about .about-container .about-container_box:nth-child(3) {
-    top: 50%;
+    top: 40%;
     z-index: 100;
+  }
+  #section-about .about .about-container .active .box-content p {
+    opacity: 1 !important;
+  }
+  #section-about .about .about-container .active .box-img {
+    border: 1px solid #FFF !important;
+    background: linear-gradient(180deg, #5BFFF4 0%, #081120 100%) !important;
   }
   #section-introduction {
     margin-bottom: 0;

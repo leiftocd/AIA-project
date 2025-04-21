@@ -28,7 +28,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 box.style.opacity = "1";
                 box.style.transform = "translateY(0)";
             } else {
-                box.style.opacity = "0";
+                box.style.opacity = isMobile ? "0.5" : "0"; 
                 box.style.transform = i < index ? `translateY(-20%)` : `translateY(20%)`;
             }
         });
@@ -235,7 +235,6 @@ document.addEventListener("DOMContentLoaded", () => {
             boxIntro.forEach((b) => {
                 if (b !== box) b.classList.add('hidden');
             });
-            document.body.classList.add('no-scroll');
         });
     
         box.addEventListener('click', () => {
