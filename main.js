@@ -7,168 +7,200 @@ document.addEventListener("DOMContentLoaded", () => {
     const introduceSection = document.querySelector("#section-introduction");
     const fadeSections = document.querySelectorAll(".fade-section");
 
-    let currentBox = 0;
-    let isAnimating = false;
-    let aboutMode = "none";
-    let maxReachedBox = 0;
-    let lastBoxScroll = false;
-    let isInitialLoad = true; // Thêm biến kiểm soát load lần đầu
-
-    const throttleDelay = 200;
-    const throttleDelayBox = 500;
     const mediaQuery = window.matchMedia("(min-width: 641px)");
 
-    console.log("Number of boxes:", boxes.length); // Debug
+    // Only apply about section logic for desktop (viewport > 640px)
+    if (mediaQuery.matches) {
+        let currentBox = 0;
+        let isAnimating = false;
+        let aboutMode = "none";
+        let maxReachedBox = 0;
+        let lastBoxScroll = false;
+        let isInitialLoad = true;
 
-    const scrollTo = (position) => window.scrollTo({ top: position, behavior: "smooth" });
+        const throttleDelay = 200;
+        const throttleDelayBox = 500;
 
-    const showBox = (index) => {
-        if (!mediaQuery.matches) return;
-        if (index < 0 || index >= boxes.length) {
-            console.error("Invalid box index:", index);
-            return;
-        }
-        boxes.forEach((box, i) => {
-            box.classList.remove("active");
-            if (i === index) {
-                box.classList.add("active");
-                box.style.opacity = "1";
-                box.style.transform = "translateY(0)";
-            } else {
-                box.style.opacity = "0";
-                box.style.transform = i < index ? `translateY(-20%)` : `translateY(20%)`;
+        console.log("Number of boxes:", boxes.length);
+
+        const scrollTo = (position) => window.scrollTo({ top: position, behavior: "smooth" });
+
+        const showBox = (index) => {
+            if (index < 0 || index >= boxes.length) {
+                console.error("Invalid box index:", index);
+                return;
             }
-        });
-        maxReachedBox = Math.max(maxReachedBox, index);
-        console.log("showBox - currentBox:", index); // Debug
-    };
+            boxes.forEach((box, i) => {
+                box.classList.remove("active");
+                if (i === index) {
+                    box.classList.add("active");
+                    box.style.opacity = "1";
+                    box.style.transform = "translateY(0)";
+                } else {
+                    box.style.opacity = "0";
+                    box.style.transform = i < index ? `translateY(-20%)` : `translateY(20%)`;
+                }
+            });
+            maxReachedBox = Math.max(maxReachedBox, index);
+            console.log("showBox - currentBox:", index);
+        };
 
-    const toggleSections = (show) => fadeSections.forEach((sec) => (sec.style.opacity = show ? "0" : "1"));
+        const toggleSections = (show) => fadeSections.forEach((sec) => (sec.style.opacity = show ? "0" : "1"));
 
-    const enterAbout = (fromBelow) => {
-        if (aboutMode !== "none") return;
-        aboutMode = "entering";
-        toggleSections(true);
-        section.classList.add("fullscreen");
+        const enterAbout = (fromBelow) => {
+            if (aboutMode !== "none") return;
+            aboutMode = "entering";
+            toggleSections(true);
+            section.classList.add("fullscreen");
 
-        if (mediaQuery.matches) {
             const scrollbarOffset = window.innerWidth - document.documentElement.clientWidth;
             const scrollY = window.scrollY;
             document.body.style.top = `-${scrollY}px`;
             document.body.classList.add("no-scroll");
             document.body.style.paddingRight = `${scrollbarOffset}px`;
             document.body.style.touchAction = "none";
-        }
 
-        // Buộc box 1 active khi load trang lần đầu
-        currentBox = isInitialLoad ? 0 : fromBelow ? boxes.length - 1 : 0;
-        console.log("enterAbout - fromBelow:", fromBelow, "currentBox:", currentBox); // Debug
-        lastBoxScroll = false;
-        if (mediaQuery.matches) showBox(currentBox);
-        scrollTo(section.offsetTop);
-        isAnimating = true;
-        setTimeout(() => {
-            isAnimating = false;
-            aboutMode = "in";
-            isInitialLoad = false; // Đặt lại sau khi load lần đầu
-        }, 400);
-    };
+            currentBox = isInitialLoad ? 0 : fromBelow ? boxes.length - 1 : 0;
+            console.log("enterAbout - fromBelow:", fromBelow, "currentBox:", currentBox);
+            lastBoxScroll = false;
+            showBox(currentBox);
+            scrollTo(section.offsetTop);
+            isAnimating = true;
+            setTimeout(() => {
+                isAnimating = false;
+                aboutMode = "in";
+                isInitialLoad = false;
+            }, 400);
+        };
 
-    const exitAbout = (toTop) => {
-        if (aboutMode !== "in") return;
-        aboutMode = "exiting";
-        toggleSections(false);
-        section.classList.remove("fullscreen");
+        const exitAbout = (toTop) => {
+            if (aboutMode !== "in") return;
+            aboutMode = "exiting";
+            toggleSections(false);
+            section.classList.remove("fullscreen");
 
-        if (mediaQuery.matches) {
             document.body.classList.remove("no-scroll");
             document.body.style.top = "";
             document.body.style.paddingRight = "";
             document.body.style.touchAction = "";
             document.body.style.overflow = "";
-        }
 
-        scrollTo(toTop ? section.offsetTop - window.innerHeight : introduceSection.offsetTop);
-        isAnimating = true;
-        setTimeout(() => {
-            isAnimating = false;
-            aboutMode = "none";
-        }, 100);
-    };
+            scrollTo(toTop ? section.offsetTop - window.innerHeight : introduceSection.offsetTop);
+            isAnimating = true;
+            setTimeout(() => {
+                isAnimating = false;
+                aboutMode = "none";
+            }, 100);
+        };
 
-    const handleScroll = (dir) => {
-        if (isAnimating) return;
-        isAnimating = true;
-        setTimeout(() => (isAnimating = false), aboutMode === "in" ? throttleDelayBox : throttleDelay);
+        const handleScroll = (dir) => {
+            if (isAnimating) return;
+            isAnimating = true;
+            setTimeout(() => (isAnimating = false), aboutMode === "in" ? throttleDelayBox : throttleDelay);
 
-        const { top, bottom } = section.getBoundingClientRect();
-        const winH = window.innerHeight;
+            const { top, bottom } = section.getBoundingClientRect();
+            const winH = window.innerHeight;
 
-        if (aboutMode === "none") {
-            if (dir === "down" && top < winH && top >= 0) enterAbout(false);
-            else if (dir === "up" && bottom > 0 && bottom <= winH) enterAbout(true);
-        } else if (aboutMode === "in" && mediaQuery.matches) {
-            const maxBoxIndex = boxes.length - 1;
-            if (dir === "down") {
-                if (currentBox < maxBoxIndex) {
-                    showBox(++currentBox);
-                    scrollTo(section.offsetTop);
-                } else if (currentBox === maxBoxIndex && !lastBoxScroll) {
-                    lastBoxScroll = true;
-                    scrollTo(section.offsetTop);
-                } else if (currentBox === maxBoxIndex && lastBoxScroll) {
-                    exitAbout(false);
+            if (aboutMode === "none") {
+                if (dir === "down" && top < winH && top >= 0) enterAbout(false);
+                else if (dir === "up" && bottom > 0 && bottom <= winH) enterAbout(true);
+            } else if (aboutMode === "in") {
+                const maxBoxIndex = boxes.length - 1;
+                if (dir === "down") {
+                    if (currentBox < maxBoxIndex) {
+                        showBox(++currentBox);
+                        scrollTo(section.offsetTop);
+                    } else if (currentBox === maxBoxIndex && !lastBoxScroll) {
+                        lastBoxScroll = true;
+                        scrollTo(section.offsetTop);
+                    } else if (currentBox === maxBoxIndex && lastBoxScroll) {
+                        exitAbout(false);
+                    }
+                } else if (dir === "up") {
+                    if (currentBox > 0) {
+                        showBox(--currentBox);
+                        lastBoxScroll = false;
+                        scrollTo(section.offsetTop);
+                    } else {
+                        exitAbout(true);
+                    }
                 }
-            } else if (dir === "up") {
-                if (currentBox > 0) {
-                    showBox(--currentBox);
-                    lastBoxScroll = false;
-                    scrollTo(section.offsetTop);
-                } else {
-                    exitAbout(true);
-                }
-            }
-        }
-    };
-
-    const throttle = (fn, delay) => {
-        let last = 0;
-        return (...args) => {
-            const now = Date.now();
-            if (now - last >= delay) {
-                last = now;
-                return fn(...args);
             }
         };
-    };
 
-    window.addEventListener(
-        "wheel",
-        throttle((e) => {
-            const dir = e.deltaY > 0 ? "down" : "up";
-            handleScroll(dir);
-            if (aboutMode !== "none" && mediaQuery.matches) e.preventDefault();
-        }, throttleDelay),
-        { passive: false }
-    );
+        const throttle = (fn, delay) => {
+            let last = 0;
+            return (...args) => {
+                const now = Date.now();
+                if (now - last >= delay) {
+                    last = now;
+                    return fn(...args);
+                }
+            };
+        };
 
-    new IntersectionObserver(
-        ([entry]) => {
-            if (entry.isIntersecting && aboutMode === "none") {
-                const fromBelow = entry.boundingClientRect.top <= 0;
-                console.log("IntersectionObserver - fromBelow:", fromBelow); // Debug
-                enterAbout(fromBelow);
-                toggleSections(true);
-            } else if (!entry.isIntersecting && aboutMode === "none") {
-                toggleSections(false);
-            }
-        },
-        { threshold: 0.01 }
-    ).observe(section);
+        window.addEventListener(
+            "wheel",
+            throttle((e) => {
+                const dir = e.deltaY > 0 ? "down" : "up";
+                handleScroll(dir);
+                if (aboutMode !== "none") e.preventDefault();
+            }, throttleDelay),
+            { passive: false }
+        );
 
-    // Initialize with box 1 for initial load
-    showBox(0);
+        new IntersectionObserver(
+            ([entry]) => {
+                if (entry.isIntersecting && aboutMode === "none") {
+                    const fromBelow = entry.boundingClientRect.top <= 0;
+                    console.log("IntersectionObserver - fromBelow:", fromBelow);
+                    enterAbout(fromBelow);
+                    toggleSections(true);
+                } else if (!entry.isIntersecting && aboutMode === "none") {
+                    toggleSections(false);
+                }
+            },
+            { threshold: 0.01 }
+        ).observe(section);
 
+        // Initialize with box 1 for desktop
+        showBox(0);
+    } else {
+        const observerOptions = {
+            threshold: 0.6, // Tùy chỉnh mức độ box cần vào view để kích hoạt
+        };
+    
+        const mobileBoxObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    // Thêm 'activeM' chỉ khi phần tử chưa có lớp này
+                    if (!entry.target.classList.contains('activeM')) {
+                        entry.target.classList.add('activeM');
+                        entry.target.classList.remove('exiting');
+                        entry.target.style.transition = "opacity 0.5s ease, transform 0.5s ease"; // Hiệu ứng mượt mà
+                        entry.target.style.opacity = "1";
+                        entry.target.style.transform = "translateY(0)";
+                    }
+                } else {
+                    // Thêm 'exiting' chỉ khi phần tử chưa có lớp này
+                    if (!entry.target.classList.contains('exiting')) {
+                        entry.target.classList.add('exiting');
+                        entry.target.classList.remove('activeM');
+                        entry.target.style.transition = "opacity 0.5s ease, transform 0.5s ease"; // Hiệu ứng mượt mà
+                        entry.target.style.opacity = "0";
+                        entry.target.style.transform = "translateY(20%)"; // Hoặc một hiệu ứng bạn muốn khi phần tử biến mất
+                    }
+                }
+            });
+        }, observerOptions);
+    
+        // Theo dõi tất cả các box
+        boxes.forEach(box => {
+            mobileBoxObserver.observe(box);
+        });
+    }
+
+    // Other sections (unchanged)
     const paragraphs = document.querySelectorAll('.text-appear');
     const paragraphObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
