@@ -17,9 +17,11 @@ document.addEventListener("DOMContentLoaded", () => {
         let maxReachedBox = 0;
         let lastBoxScroll = false;
         let isInitialLoad = true;
+        let isLocked = false; 
 
         const throttleDelay = 200;
         const throttleDelayBox = 500;
+        const lockDuration = 300; 
 
         console.log("Number of boxes:", boxes.length);
 
@@ -66,10 +68,14 @@ document.addEventListener("DOMContentLoaded", () => {
             showBox(currentBox);
             scrollTo(section.offsetTop);
             isAnimating = true;
+            isLocked = true; // Khóa chuyển đổi box
             setTimeout(() => {
                 isAnimating = false;
                 aboutMode = "in";
                 isInitialLoad = false;
+                setTimeout(() => {
+                    isLocked = false; // Mở khóa sau lockDuration
+                }, lockDuration);
             }, 400);
         };
 
@@ -94,7 +100,7 @@ document.addEventListener("DOMContentLoaded", () => {
         };
 
         const handleScroll = (dir) => {
-            if (isAnimating) return;
+            if (isAnimating || isLocked) return; // Ngăn chuyển box khi khóa
             isAnimating = true;
             setTimeout(() => (isAnimating = false), aboutMode === "in" ? throttleDelayBox : throttleDelay);
 
@@ -102,8 +108,11 @@ document.addEventListener("DOMContentLoaded", () => {
             const winH = window.innerHeight;
 
             if (aboutMode === "none") {
-                if (dir === "down" && top < winH && top >= 0) enterAbout(false);
-                else if (dir === "up" && bottom > 0 && bottom <= winH) enterAbout(true);
+                if (dir === "down" && top < winH * 0.8 && top >= 0) { // Chỉ kích hoạt khi section gần đầy khung nhìn
+                    enterAbout(false);
+                } else if (dir === "up" && bottom > 0 && bottom <= winH) {
+                    enterAbout(true);
+                }
             } else if (aboutMode === "in") {
                 const maxBoxIndex = boxes.length - 1;
                 if (dir === "down") {
@@ -160,12 +169,13 @@ document.addEventListener("DOMContentLoaded", () => {
                     toggleSections(false);
                 }
             },
-            { threshold: 0.01 }
+            { threshold: 0.3 } // Tăng threshold để kích hoạt khi section hiển thị nhiều hơn
         ).observe(section);
 
         // Initialize with box 1 for desktop
         showBox(0);
-    } else {
+    }
+    else {
         const observerOptions = {
             threshold: 0.6, // Tùy chỉnh mức độ box cần vào view để kích hoạt
         };
